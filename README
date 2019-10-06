@@ -1,0 +1,93 @@
+To compile:
+
+    g++ -std=c++17 client.cpp -lpthread -o client
+    g++ -std=c++17 tsamvgroup20.cpp -lpthread -o server
+
+To run (on same machine):
+
+    ./server 10000
+    ./client 127.0.0.1 10000
+
+
+Commands on client:
+
+CONNECT <name>   : Connect to server as <name>
+WHO              : Show connections to server
+MSG <name> <message> : Send message to name
+MSG ALL <message>    : Send message to all connected
+
+
+GitHub
+8 To get access to the project on your own computer you can use Terminal for Mac and Linux or Command Promt/Git Bash for windows. Go to the directory where you want to store the project and type in the following command: 9
+
+
+    $ git clone git@github.com:ArnarArnar/Project3.git
+
+List of common git commands:
+Creates and moves you to a new branch.
+
+    $ git checkout -b <Name of branch>
+shows which files have been updated since the last pull.
+
+    $ git status
+First step of adding the new changes to GitHub.
+
+    $ git add <Name of file>
+Second step is to commit the changes to the local repoitory.
+
+    $ git commit -m ”Good explanation of what was changed ”
+Third step is to push the changes to the master branch
+
+    $ git push: Updates the changes to GitHub.
+Gets the newest updates of code from GitHub.
+
+    $ git pull
+
+# From lecture:
+Sample code. Dose show us how to use Select() to get messages on several different sockets, how to read from those sockets, how to send messages between the server to a client
+
+##### Might be useful to use on the server: Message_peek
+Definition
+basic_socket::message_peek
+What it dose:
+Inherited from socket_base.
+Peek at incoming data without removing it from the input queue.
+	static const int message_peek = implementation_defined;
+
+(from lecture cont.)
+Very useful option (message_peek) for receiving a message on a socket. Allows us to read the message without removing it from the queue.
+The reason this is useful is that we are asked to make our own message segmentation. The way we are asked to used to do it is to have a start and an end character. That means there are two problems that have to be resolved.
+	1. Bitstuffing
+	2. The other is that when the network gets bigger and there is more traffic there may become a time where we only get a part of the message. We are either going to have to continue to read until the whole message is completed. Or just tu use message peak, look at the message buffer and wait until we´ve got the whole message and read that and only that.
+
+We can send messages with information that other servers can use. We have to resolve these problems.
+
+##### Some problems we could encounter when connecting servers on the school network
+We can run the servers on out own network. The problem we then have to solve is how we are going to get messages to others. Within the campus, we are able to connect to each other if  we are on different WIFI segments (NOT THE SAME). There is an restriction, if we are on the same wifi, we can't connect to the another laptop.
+
+
+##### If we use select for connections on our server (instead of a thread)
+If we use select: Pool all our servers, see if there is a message, then read it.
+
+##### Basic command flow for server
+	Read a message
+	Process that message
+	Deal with any side effect of that message.
+		Easy message: Just put it in the mailbox for that group
+		Hard message: Send another message in return
+And round and round.
+
+##### What we might want to do periodicity.
+	Check the mail boxes, see if there is anything for your client
+	Or rely on the client to request these messages
+		-Nothing stopping the server to do that automatically
+		
+##### If we get a list servers command
+We are have to reply with a list of the servers
+
+We need to know which group is on which socket and what mailboxes they have. Have to track that.
+
+#### How to start:
+	1. Get the server to successfully read and respond to a client
+	2. The server is able to connect to another server
+        Is able to replies to that server with the list servers command 

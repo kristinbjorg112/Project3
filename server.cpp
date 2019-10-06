@@ -29,10 +29,14 @@
 #include <unistd.h>
 
 // fix SOCK_NONBLOCK for OSX
-#ifndef SOCK_NONBLOCK
-#include <fcntl.h>
-#define SOCK_NONBLOCK O_NONBLOCK
-#endif
+// #ifndef SOCK_NONBLOCK
+// #include <fcntl.h>
+// #define SOCK_NONBLOCK O_NONBLOCK
+// #endif
+
+//Added includes
+#include <ifaddrs.h>
+#include <net/if.h>
 
 #define BACKLOG 5 // Allowed length of queue of waiting connections
 int maxfds;       // Passed to select() as max fd in set
@@ -63,20 +67,11 @@ public:
 
     ~Server() {} // Virtual destructor defined for base class
 };
-// Note: map is not necessarily the most efficient method to use here,
-// especially for a server with large numbers of simulataneous connections,
-// where performance is also expected to be an issue.
-//
-// Quite often a simple array can be used as a lookup table,
-// (indexed on socket no.) sacrificing memory for speed.
-
 std::map<int, Client *> clients; // Lookup table for per Client information
-std::map<int, Server *> servers; // Lookup table for per Client information
-
+std::map<int, Server *> servers; // Lookup table for per Server information
 // Open socket for specified port.
 //
 // Returns -1 if unable to create the socket for any reason.
-
 int sendCommand(int clientSocket, std::string msg)
 {
     int n = msg.length();
@@ -88,14 +83,12 @@ int sendCommand(int clientSocket, std::string msg)
     buffer[0] = 0x01;
     buffer[n + 1] = 0x04;
     std::cout << "send messega";
-
-    send(clientSocket, buffer, sizeof(buffer), 0);
+    //if unable to send it will return -1
+    return send(clientSocket, buffer, sizeof(buffer), 0);
 }
 //Added, based on main's client.cpp
 void ConnectionToServers(std::string stringIpAddress, std::string stringPort, int clientSocket, fd_set *openSocekts)
 {
-    //std::cout << "From ConnectionToServers" << ipAddress << std::endl;
-
     struct addrinfo hints, *svr;    // Network host entry for server
     struct sockaddr_in server_addr; // Socket address for server
     int serverSocket;               // Socket used for server
@@ -126,13 +119,13 @@ void ConnectionToServers(std::string stringIpAddress, std::string stringPort, in
 
     if (setsockopt(serverSocket, SOL_SOCKET, SO_REUSEADDR, &set, sizeof(set)) < 0)
     {
-        printf("Failed to set SO_REUSEADDR for port %s\n", "10009");
+        printf("Failed to set SO_REUSEADDR for port %s\n", port);
         perror("setsockopt failed: ");
     }
 
     if (connect(serverSocket, svr->ai_addr, svr->ai_addrlen) < 0)
     {
-        printf("From the client within: Failed to open socket to server: %s\n", "127.0.0.1");
+        printf("From the client within: Failed to open socket to server: %s\n", ipAddress);
         perror("Connect failed: ");
         printf("Please check that the server is running and try again");
     }
@@ -146,9 +139,13 @@ void ConnectionToServers(std::string stringIpAddress, std::string stringPort, in
     FD_SET(serverSocket, openSocekts);
     // And update the maximum file descriptor
     maxfds = std::max(maxfds, serverSocket);
-    sendCommand(serverSocket, msg);
+    nwrite = sendCommand(serverSocket, msg);
+    if (nwrite == -1)
+    {
+        perror("send() to server failed: ");
+        //finished = true;
+    }
 }
-
 int open_socket(int portno)
 {
     struct sockaddr_in sk_addr; // address settings for bind()
@@ -179,7 +176,7 @@ int open_socket(int portno)
 
     // Bind to socket to listen for connections from clients
 
-    if (bind(sock, (struct sockaddr *)&sk_addr, sizeof(sk_addr)) < 0)
+    if (bind(sock, (sockaddr *)&sk_addr, sizeof(sk_addr)) < 0)
     {
         perror("Failed to bind to socket:");
         return (-1);
@@ -189,19 +186,15 @@ int open_socket(int portno)
         return (sock);
     }
 }
-
 // Close a client's connection, remove it from the client list, and
 // tidy up select sockets afterwards.
-
 void closeClient(int clientSocket, fd_set *openSockets, int *maxfds)
 {
     // Remove client from the clients list
     clients.erase(clientSocket);
-
     // If this client's socket is maxfds then the next lowest
     // one has to be determined. Socket fd's can be reused by the Kernel,
     // so there aren't any nice ways to do this.
-
     if (*maxfds == clientSocket)
     {
         for (auto const &p : clients)
@@ -209,14 +202,28 @@ void closeClient(int clientSocket, fd_set *openSockets, int *maxfds)
             *maxfds = std::max(*maxfds, p.second->sock);
         }
     }
-
     // And remove from the list of open sockets.
-
     FD_CLR(clientSocket, openSockets);
 }
-
+///Hope this works. Please check if this makes sense
+void closeServer(int serverSocket, fd_set *openSockets, int *maxfds)
+{
+    // Remove Server from the Server list
+    clients.erase(serverSocket);
+    // If this client's socket is maxfds then the next lowest
+    // one has to be determined. Socket fd's can be reused by the Kernel,
+    // so there aren't any nice ways to do this.
+    if (*maxfds == serverSocket)
+    {
+        for (auto const &p : servers)
+        {
+            *maxfds = std::max(*maxfds, p.second->sock);
+        }
+    }
+    // And remove from the list of open sockets.
+    FD_CLR(serverSocket, openSockets);
+}
 // Process command from client on the server
-
 void clientCommand(int clientSocket, fd_set *openSockets, int *maxfds,
                    char *buffer)
 {
@@ -319,21 +326,20 @@ int main(int argc, char *argv[])
         printf("Usage: chat_server <ip port>\n");
         exit(0);
     }
-
     // Setup socket for server to listen to
-    listenSSock = open_socket(atoi(argv[1]));
-    listenCSock = open_socket(9000);
-    printf("Listening for serves on port: %d\n", atoi(argv[1]));
-    printf("Listening for clients on port: %d\n", 9000);
+    listenCSock = open_socket(atoi(argv[1]));
+    listenSSock = open_socket(atoi(argv[1]) + 1);
+    printf("Listening for clients on port: %d\n", atoi(argv[1]));
+    printf("Listening for servers on port: %d\n", (atoi(argv[1]) + 1));
 
-    if (listen(listenSSock, BACKLOG) < 0)
+    if (listen(listenCSock, BACKLOG) < 0)
     {
-        printf("Listen failed on port %s\n", argv[1]);
+        printf("Listen failed on client port %s\n", (argv[1]));
         exit(0);
     }
-    else if (listen(listenCSock, BACKLOG) < 0)
+    else if (listen(listenSSock, BACKLOG) < 0)
     {
-        printf("Listen failed on port %s\n", "9000");
+        printf("Listen failed on server port %s\n", ((argv[1]) + 1));
         exit(0);
     }
     else
@@ -344,15 +350,12 @@ int main(int argc, char *argv[])
         FD_SET(listenSSock, &openSockets);
         maxfds = std::max(listenCSock, listenSSock);
     }
-
     finished = false;
-
     while (!finished)
     {
         // Get modifiable copy of readSockets
         readSockets = exceptSockets = openSockets;
         memset(buffer, 0, sizeof(buffer));
-
         // Look at sockets and see which ones have something to be read()
         int n = select(maxfds + 1, &readSockets, NULL, &exceptSockets, NULL);
 
@@ -368,7 +371,7 @@ int main(int argc, char *argv[])
             {
                 clientSock = accept(listenCSock, (struct sockaddr *)&client,
                                     &clientLen);
-                printf("accept***\n");
+                printf("accept on client socket***\n");
                 // Add new client to the list of open sockets
                 FD_SET(clientSock, &openSockets);
 
@@ -387,14 +390,14 @@ int main(int argc, char *argv[])
             {
                 serverSock = accept(listenSSock, (struct sockaddr *)&server,
                                     &serverLen);
-                printf("accept***\n");
-                // Add new client to the list of open sockets
+                printf("accept on server socket***\n");
+                // Add new server to the list of open sockets
                 FD_SET(serverSock, &openSockets);
 
                 // And update the maximum file descriptor  //Pæla þarf ég að tékka á öll??
                 maxfds = std::max(maxfds, serverSock);
 
-                // create a new client to store information.
+                // create a new server to store information.
                 servers[serverSock] = new Server(serverSock);
 
                 // Decrement the number of sockets waiting to be dealt with
@@ -436,10 +439,10 @@ int main(int argc, char *argv[])
                         // recv() == 0 means client has closed connection
                         if (recv(server->sock, buffer, sizeof(buffer), MSG_DONTWAIT) == 0)
                         {
-                            printf("Client closed connection: %d", server->sock);
+                            printf("Server closed connection: %d", server->sock);
                             close(server->sock);
 
-                            //closeClient(client->sock, &openSockets, &maxfds);
+                            closeServer(server->sock, &openSockets, &maxfds);
                         }
                         std::cout << buffer << std::endl;
                         // We don't check for -1 (nothing received) because select()

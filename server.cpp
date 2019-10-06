@@ -82,7 +82,7 @@ int sendCommand(int clientSocket, std::string msg)
     memmove(buffer + 1, buffer, sizeof(buffer));
     buffer[0] = 0x01;
     buffer[n + 1] = 0x04;
-    std::cout << "send messega";
+    std::cout << "sending message\n";
     //if unable to send it will return -1
     return send(clientSocket, buffer, sizeof(buffer), 0);
 }
@@ -223,6 +223,38 @@ void closeServer(int serverSocket, fd_set *openSockets, int *maxfds)
     // And remove from the list of open sockets.
     FD_CLR(serverSocket, openSockets);
 }
+void listClients()
+{
+    std::cout << "Listing servers: " << std::endl;
+    for (auto const &x : clients)
+    {
+        std::cout << "Key: "
+                  << x.first // string (key)
+                  << ", Name: "
+                  << x.second->name // string's value
+                  << ", Socket: "
+                  << x.second->sock // string's value
+                  << std::endl;
+    }
+}
+void listServers()
+{
+    std::cout << "Listing servers connected to this one: " << std::endl;
+    for (auto const &x : servers)
+    {
+        std::cout << "Key: "
+                  << x.first // string (key)
+                  << ", groupID: "
+                  << x.second->groupID // string's value
+                  << ", IP: "
+                  << x.second->IP // string's value
+                  << ", Port: "
+                  << x.second->port // string's value
+                  << ", Socket: "
+                  << x.second->sock // string's value
+                  << std::endl;
+    }
+}
 // Process command from client on the server
 void clientCommand(int clientSocket, fd_set *openSockets, int *maxfds,
                    char *buffer)
@@ -296,6 +328,28 @@ void clientCommand(int clientSocket, fd_set *openSockets, int *maxfds,
         std::string ipAddress = tokens[1];
         std::string port = tokens[2];
         ConnectionToServers(ipAddress, port, clientSocket, openSockets);
+    }
+    else if (tokens[0].compare("SM") == 0)
+    {
+        std::cout << "Comes to SM, the buffer is " << buffer << std::endl;
+
+        //send(, buffer, sizeof(buffer), 0);
+    }
+    else if (tokens[0].compare("GROUP") == 0)
+    {
+        //Made so we dont get "Unknown command from client:" each time
+        //we connect
+    }
+    else if (tokens[0].compare("LIST") == 0)
+    {
+        if (tokens[1].compare("SERVERS") == 0)
+        {
+            listServers();
+        }
+        else if (tokens[1].compare("CLIENTS") == 0)
+        {
+            listClients();
+        }
     }
     else
     {
@@ -424,7 +478,7 @@ int main(int argc, char *argv[])
                         }
                         else
                         {
-                            std::cout << buffer << std::endl;
+                            std::cout << "Client buffer: " << buffer << std::endl;
                             clientCommand(client->sock, &openSockets, &maxfds,
                                           buffer);
                         }
@@ -444,7 +498,8 @@ int main(int argc, char *argv[])
 
                             closeServer(server->sock, &openSockets, &maxfds);
                         }
-                        std::cout << buffer << std::endl;
+                        std::cout << "\nServer buffer: " << buffer << std::endl;
+                        //clientCommand(server->sock, &openSockets, &maxfds, buffer);
                         // We don't check for -1 (nothing received) because select()
                         // only triggers if there is something on the socket for us.
                     }

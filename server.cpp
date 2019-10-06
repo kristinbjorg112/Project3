@@ -87,6 +87,7 @@ int sendCommand(int clientSocket, std::string msg)
     memmove(buffer + 1, buffer, sizeof(buffer));
     buffer[0] = 0x01;
     buffer[n + 1] = 0x04;
+    std::cout << "send messega";
 
     send(clientSocket, buffer, sizeof(buffer), 0);
 }
@@ -141,7 +142,6 @@ void ConnectionToServers(std::string stringIpAddress, std::string stringPort, in
     nServer->port = port;
     servers.emplace(serverSocket, nServer);
     std::string msg;
-    ;
     msg = "GROUP 20";
     FD_SET(serverSocket, openSocekts);
     // And update the maximum file descriptor
@@ -322,9 +322,9 @@ int main(int argc, char *argv[])
 
     // Setup socket for server to listen to
     listenSSock = open_socket(atoi(argv[1]));
-    listenCSock = open_socket(10010);
+    listenCSock = open_socket(9000);
     printf("Listening for serves on port: %d\n", atoi(argv[1]));
-    printf("Listening for clients on port: %d\n", 10010);
+    printf("Listening for clients on port: %d\n", 9000);
 
     if (listen(listenSSock, BACKLOG) < 0)
     {
@@ -333,7 +333,7 @@ int main(int argc, char *argv[])
     }
     else if (listen(listenCSock, BACKLOG) < 0)
     {
-        printf("Listen failed on port %s\n", "10010");
+        printf("Listen failed on port %s\n", "9000");
         exit(0);
     }
     else
@@ -441,6 +441,7 @@ int main(int argc, char *argv[])
 
                             //closeClient(client->sock, &openSockets, &maxfds);
                         }
+                        std::cout << buffer << std::endl;
                         // We don't check for -1 (nothing received) because select()
                         // only triggers if there is something on the socket for us.
                     }

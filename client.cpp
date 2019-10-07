@@ -116,9 +116,9 @@ int main(int argc, char *argv[])
     printf("LEAVE                 : Close connection to client\n");
     printf("WHO                   : Show connections to server\n");
     printf("MSG <name> <message>  : Send message to name\n");
-    printf("MSG ALL <message>     : Send message to all connected\n");
-    printf("IP                    : Get ip from to all connected\n");
+    //printf("MSG ALL <message>     : Send message to all connected\n");
     printf("SC <IPaddress> <port> : Connect to server through the server\n");
+    printf("LIST <CLIENTS>/<SERVERS>: Lists connected clients/servers\n");
 
     while (!finished)
     {

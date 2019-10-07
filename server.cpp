@@ -37,9 +37,16 @@
 //Added includes
 #include <ifaddrs.h>
 #include <net/if.h>
+#include <fstream>
+#include <iostream>
+#include <stdio.h>
+#include <dirent.h>
 
 #define BACKLOG 5 // Allowed length of queue of waiting connections
 int maxfds;       // Passed to select() as max fd in set
+
+//
+std::string viewFiles();
 
 // Simple class for handling connections from clients.
 //
@@ -74,18 +81,52 @@ std::map<int, Server *> servers; // Lookup table for per Server information
 // Returns -1 if unable to create the socket for any reason.
 int sendCommand(int clientSocket, std::string msg)
 {
-    int n = msg.length();
+    // int n = msg.length();
 
-    char buffer[n + 2];
-    memset(buffer, 0, sizeof(buffer));
-    strcpy(buffer, msg.c_str());
-    memmove(buffer + 1, buffer, sizeof(buffer));
-    buffer[0] = 0x01;
-    buffer[n + 1] = 0x04;
-    std::cout << "sending message\n";
-    //if unable to send it will return -1
-    return send(clientSocket, buffer, sizeof(buffer), 0);
+    // char buffer[n + 2];
+    // memset(buffer, 0, sizeof(buffer));
+    // strcpy(buffer, msg.c_str());
+    // memmove(buffer + 1, buffer, sizeof(buffer));
+    // buffer[0] = 0x01;
+    // buffer[n + 1] = 0x04;
+    // std::cout << "sending message\n";
+    // //if unable to send it will return -1
+    // return send(clientSocket, buffer, sizeof(buffer), 0);
+    return send(clientSocket, msg.c_str(), msg.size(), 0);
 }
+int writeToFile(char *buffer)
+{
+    std::ofstream file;
+    //Creates a new text file, in the future with each group name
+    file.open("./data/GROUPNAME.txt", std::ios::in | std::ios::app | std::ios::out);
+    std::time_t t = std::time(0); // Get current time
+    std::tm *now = std::localtime(&t);
+    file << "\n"
+         << (now->tm_year + 1900) << '/'
+         << (now->tm_mon + 1) << '/'
+         << now->tm_mday << '/'
+         << now->tm_hour << '-'
+         << now->tm_min << '-'
+         << now->tm_sec << ": ";
+    file << buffer;
+    file.close();
+}
+void readFromFile()
+{
+    std::string line;
+    std::ifstream myfile("./data/TEST.txt");
+    if (myfile.is_open())
+    {
+        while (getline(myfile, line))
+        {
+            std::cout << line << '\n';
+        }
+        myfile.close();
+    }
+    else
+        std::cout << "Unable to open file";
+}
+
 //Added, based on main's client.cpp
 void ConnectionToServers(std::string stringIpAddress, std::string stringPort, int clientSocket, fd_set *openSocekts)
 {
@@ -223,36 +264,62 @@ void closeServer(int serverSocket, fd_set *openSockets, int *maxfds)
     // And remove from the list of open sockets.
     FD_CLR(serverSocket, openSockets);
 }
-void listClients()
+std::string listClients()
 {
-    std::cout << "Listing servers: " << std::endl;
-    for (auto const &x : clients)
+    std::string msg;
+    if (clients.empty())
     {
-        std::cout << "Key: "
-                  << x.first // string (key)
-                  << ", Name: "
-                  << x.second->name // string's value
-                  << ", Socket: "
-                  << x.second->sock // string's value
-                  << std::endl;
+        std::cout << "No clients registered on this server" << std::endl;
+        return msg = ("No clients registered on this server");
     }
+    else
+    {
+        std::cout << "Listing clients: " << std::endl;
+        msg = ("Listing clients: \n");
+        for (auto const &x : clients)
+        {
+            std::cout << "Key: "
+                      << x.first
+                      << ", Name: "
+                      << x.second->name
+                      << ", Socket: "
+                      << x.second->sock
+                      << std::endl;
+            // msg = msg + ("Key: " + x.first);
+            // msg = msg + (", Name: " + x.second->name);
+            // msg = msg + (", Socket: " + x.second->sock);
+
+            std::ostringstream oss;
+            oss << ("Key: " + x.first) << (", Name: " + x.second->name) << (", Socket: " + x.second->sock);
+            msg = oss.str();
+        }
+    }
+    std::cout << "Printing msg: " << msg << std::endl;
+    return msg;
 }
 void listServers()
 {
-    std::cout << "Listing servers connected to this one: " << std::endl;
-    for (auto const &x : servers)
+    if (servers.empty())
     {
-        std::cout << "Key: "
-                  << x.first // string (key)
-                  << ", groupID: "
-                  << x.second->groupID // string's value
-                  << ", IP: "
-                  << x.second->IP // string's value
-                  << ", Port: "
-                  << x.second->port // string's value
-                  << ", Socket: "
-                  << x.second->sock // string's value
-                  << std::endl;
+        std::cout << "No servers connected to this server" << std::endl;
+    }
+    else
+    {
+        std::cout << "Listing servers connected to this one: " << std::endl;
+        for (auto const &x : servers)
+        {
+            std::cout << "Key: "
+                      << x.first // string (key)
+                      << ", groupID: "
+                      << x.second->groupID // string's value
+                      << ", IP: "
+                      << x.second->IP // string's value
+                      << ", Port: "
+                      << x.second->port // string's value
+                      << ", Socket: "
+                      << x.second->sock // string's value
+                      << std::endl;
+        }
     }
 }
 // Process command from client on the server
@@ -270,57 +337,85 @@ void clientCommand(int clientSocket, fd_set *openSockets, int *maxfds,
 
     if ((tokens[0].compare("CONNECT") == 0) && (tokens.size() == 2))
     {
-        clients[clientSocket]->name = tokens[1];
+        if (clients.empty())
+        {
+            std::cout << "There are no registered clients on this server" << std::endl;
+        }
+        else
+        {
+            clients[clientSocket]->name = tokens[1];
+        }
     }
     else if (tokens[0].compare("LEAVE") == 0)
     {
-        // Close the socket, and leave the socket handling
-        // code to deal with tidying up clients etc. when
-        // select() detects the OS has torn down the connection.
+        if (clients.empty())
+        {
+            std::cout << "There are no registered clients on this server" << std::endl;
+        }
+        else
+        {
+            // Close the socket, and leave the socket handling
+            // code to deal with tidying up clients etc. when
+            // select() detects the OS has torn down the connection.
 
-        closeClient(clientSocket, openSockets, maxfds);
+            closeClient(clientSocket, openSockets, maxfds);
+        }
     }
     else if (tokens[0].compare("WHO") == 0)
     {
         std::cout << "Who is logged on" << std::endl;
         std::string msg;
-
-        for (auto const &names : clients)
+        if (!clients.empty())
         {
-            msg += names.second->name + ",";
+            for (auto const &names : clients)
+            {
+                msg += names.second->name + ",";
+            }
+            // Reducing the msg length by 1 loses the excess "," - which
+            // granted is totally cheating.
+            send(clientSocket, msg.c_str(), msg.length() - 1, 0);
         }
-        // Reducing the msg length by 1 loses the excess "," - which
-        // granted is totally cheating.
-        send(clientSocket, msg.c_str(), msg.length() - 1, 0);
     }
     // This is slightly fragile, since it's relying on the order
     // of evaluation of the if statement.
     else if ((tokens[0].compare("MSG") == 0) && (tokens[1].compare("ALL") == 0))
     {
-        std::string msg;
-        for (auto i = tokens.begin() + 2; i != tokens.end(); i++)
+        if (!clients.empty())
         {
-            msg += *i + " ";
-        }
 
-        for (auto const &pair : clients)
+            std::string msg;
+            for (auto i = tokens.begin() + 2; i != tokens.end(); i++)
+            {
+                msg += *i + " ";
+            }
+
+            for (auto const &pair : clients)
+            {
+                send(pair.second->sock, msg.c_str(), msg.length(), 0);
+            }
+        }
+        else
         {
-            send(pair.second->sock, msg.c_str(), msg.length(), 0);
+            std::cout << "There are no registered clients on this server" << std::endl;
         }
     }
     else if (tokens[0].compare("MSG") == 0)
     {
-        for (auto const &pair : clients)
+        if (!clients.empty())
         {
-            if (pair.second->name.compare(tokens[1]) == 0)
+            for (auto const &pair : clients)
             {
-                std::string msg;
-                for (auto i = tokens.begin() + 2; i != tokens.end(); i++)
+                if (pair.second->name.compare(tokens[1]) == 0)
                 {
-                    msg += *i + " ";
+                    std::string msg;
+                    for (auto i = tokens.begin() + 2; i != tokens.end(); i++)
+                    {
+                        msg += *i + " ";
+                    }
+                    send(pair.second->sock, msg.c_str(), msg.length(), 0);
                 }
-                send(pair.second->sock, msg.c_str(), msg.length(), 0);
             }
+            std::cout << "There are no registered clients on this server" << std::endl;
         }
     }
     else if (tokens[0].compare("SC") == 0)
@@ -331,14 +426,40 @@ void clientCommand(int clientSocket, fd_set *openSockets, int *maxfds,
     }
     else if (tokens[0].compare("SM") == 0)
     {
-        std::cout << "Comes to SM, the buffer is " << buffer << std::endl;
+        if (!servers.empty())
+        {
+            std::cout << "Sending message to all connected servers " << std::endl;
+            std::string msg;
+            for (auto i = tokens.begin() + 1; i != tokens.end(); i++)
+            {
+                msg += *i + " ";
+            }
 
-        //send(, buffer, sizeof(buffer), 0);
+            for (auto const &pair : servers)
+            {
+                send(pair.second->sock, msg.c_str(), msg.length(), 0);
+                //sendCommand(pair.second->sock, msg);
+            }
+        }
+        else
+        {
+            std::cout << "There are servers connected to this server to recive this message" << std::endl;
+        }
     }
     else if (tokens[0].compare("GROUP") == 0)
     {
         //Made so we dont get "Unknown command from client:" each time
         //we connect
+    }
+    else if (tokens[0].compare("DIR") == 0)
+    {
+        std::string dircontent;
+        dircontent = viewFiles();
+        std::cout << dircontent << std::endl;
+    }
+    else if (tokens[0].compare("QC") == 0) //Quick connect to 127.0.0.1 10003
+    {
+        ConnectionToServers("127.0.0.1", "10003", clientSocket, openSockets);
     }
     else if (tokens[0].compare("LIST") == 0)
     {
@@ -348,8 +469,17 @@ void clientCommand(int clientSocket, fd_set *openSockets, int *maxfds,
         }
         else if (tokens[1].compare("CLIENTS") == 0)
         {
-            listClients();
+            for (auto const &pair : clients)
+            {
+                std::string msg;
+                msg = listClients();
+                send(pair.second->sock, msg.c_str(), msg.length(), 0);
+            }
         }
+    }
+    else if (tokens[0].compare("READ") == 0)
+    {
+        readFromFile();
     }
     else
     {
@@ -499,7 +629,8 @@ int main(int argc, char *argv[])
                             closeServer(server->sock, &openSockets, &maxfds);
                         }
                         std::cout << "\nServer buffer: " << buffer << std::endl;
-                        //clientCommand(server->sock, &openSockets, &maxfds, buffer);
+                        writeToFile(buffer);
+                        clientCommand(server->sock, &openSockets, &maxfds, buffer);
                         // We don't check for -1 (nothing received) because select()
                         // only triggers if there is something on the socket for us.
                     }
@@ -507,4 +638,23 @@ int main(int argc, char *argv[])
             }
         }
     }
+}
+std::string viewFiles()
+{
+    std::string filesInDir;
+    struct dirent *de; // Pointer for directory entry
+    // opendir() returns a pointer of DIR type.
+    DIR *dr = opendir("./data");
+    if (dr == NULL) // opendir returns NULL if couldn't open directory
+    {
+        filesInDir = ("Could not open current directory");
+    }
+    while ((de = readdir(dr)) != NULL)
+    {
+        //std::cout << de->d_name << std::endl;
+        //files << (de->d_name + '\n');
+        filesInDir = filesInDir + de->d_name + ' ';
+    }
+    closedir(dr);
+    return filesInDir;
 }

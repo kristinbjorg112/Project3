@@ -91,3 +91,26 @@ We need to know which group is on which socket and what mailboxes they have. Hav
 	1. Get the server to successfully read and respond to a client
 	2. The server is able to connect to another server
         Is able to replies to that server with the list servers command 
+
+# TO Do
+
+Message related:
+	Find some way to see new messages.
+	Mabey we just keep track of all messages that go through the server and send that file,
+	that way we don't have to keep track of "new" messages, we just have to go through all
+	the files to see if something has changed
+
+From the poject desciption:
+	"GET MSG,<GROUP ID> Get messages for the specied group. This may be for your
+	own group, or another group." Should be fairly easy to implement
+
+	We need to make a message check function that checks all incoming messages. Need to check
+	if they have SOH and EOT
+	if SOH and EOT, then remove that from the message
+	Then find out what kind of a message it is.
+		A command
+		message
+		connection from server and so on.
+	Also, we can't implement a send function that adds 0x01 and 0x03 to all outgoing messages
+	before we implement the receiving function or we get an "segment fault"
+

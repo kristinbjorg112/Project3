@@ -347,7 +347,7 @@ void clientCommand(int clientSocket, fd_set *openSockets, int *maxfds,
     if (str.find(",") != std::string::npos)
     {
         std::cout << "Found , in the command";
-        for(int i = 0, i < buffer.)
+        //call function to take out the , from the buffer
     } 
 
     // Split command from client into tokens for parsing

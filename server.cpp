@@ -83,19 +83,30 @@ std::map<int, Server *> servers; // Lookup table for per Server information
 // Returns -1 if unable to create the socket for any reason.
 int sendCommand(int clientSocket, std::string msg)
 {
-    // int n = msg.length();
-
-    // char buffer[n + 2];
-    // memset(buffer, 0, sizeof(buffer));
-    // strcpy(buffer, msg.c_str());
-    // memmove(buffer + 1, buffer, sizeof(buffer));
-    // buffer[0] = 0x01;
-    // buffer[n + 1] = 0x04;
-    // std::cout << "sending message\n";
-    // //if unable to send it will return -1
-    // return send(clientSocket, buffer, sizeof(buffer), 0);
-    return send(clientSocket, msg.c_str(), msg.size(), 0);
+    int n = msg.length();
+    char buffer[n + 2];
+    memset(buffer, 0, sizeof(buffer));
+    strcpy(buffer, msg.c_str());
+    memmove(buffer + 1, buffer, sizeof(buffer));
+    buffer[0] = 0x01;
+    buffer[n + 1] = 0x04;
+    std::cout << "sending message\n";
+    return send(clientSocket, buffer, sizeof(buffer), 0);
 }
+std::string removePadding(std::string msg)
+{
+    int i;
+    std::string removePadding;
+    int n = msg.length();
+    char newBuffer[n - 2];
+    memset(newBuffer, 0, sizeof(newBuffer));
+    for (i = 0; i < sizeof(newBuffer); i++)
+    {
+        newBuffer[i] = +msg[i + 1];
+    }
+    return removePadding = newBuffer;
+}
+
 int writeToFile(char *buffer)
 {
     std::ofstream file;
@@ -113,6 +124,7 @@ int writeToFile(char *buffer)
     file << buffer;
     file.close();
 }
+
 void readFromFile()
 {
     std::string line;
@@ -128,7 +140,6 @@ void readFromFile()
     else
         std::cout << "Unable to open file";
 }
-
 //Added, based on main's client.cpp
 void ConnectionToServers(std::string stringIpAddress, std::string stringPort, int clientSocket, fd_set *openSocekts)
 {
@@ -288,7 +299,7 @@ std::string listClients()
                       << ", Socket: "
                       << x.second->sock
                       << std::endl;
-            // msg = msg + ("Key: " + x.first);
+            // msg = msg + ("Key: " + x.first); //dose not work
             // msg = msg + (", Name: " + x.second->name);
             // msg = msg + (", Socket: " + x.second->sock);
 

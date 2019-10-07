@@ -44,6 +44,8 @@
 
 #define BACKLOG 5 // Allowed length of queue of waiting connections
 int maxfds;       // Passed to select() as max fd in set
+std::string serverName = "V_GROUP_20";
+std::string serverPort;
 
 //
 std::string viewFiles();
@@ -174,6 +176,7 @@ void ConnectionToServers(std::string stringIpAddress, std::string stringPort, in
     Server *nServer = new Server(serverSocket);
     nServer->IP = ipAddress;
     nServer->port = port;
+    nServer->groupID = "V_GROUP_0";
     servers.emplace(serverSocket, nServer);
     std::string msg;
     msg = "GROUP 20";
@@ -306,20 +309,20 @@ void listServers()
     else
     {
         std::cout << "Listing servers connected to this one: " << std::endl;
-        for (auto const &x : servers)
-        {
-            std::cout << "Key: "
-                      << x.first // string (key)
-                      << ", groupID: "
-                      << x.second->groupID // string's value
-                      << ", IP: "
-                      << x.second->IP // string's value
-                      << ", Port: "
-                      << x.second->port // string's value
-                      << ", Socket: "
-                      << x.second->sock // string's value
-                      << std::endl;
-        }
+         for (auto const &x : servers)
+         {
+             std::cout << "Key: "
+                       << x.first // string (key)
+                       << ", groupID: "
+                       << x.second->groupID // string's value
+                       << ", IP: "
+                       << x.second->IP // string's value
+                       << ", Port: "
+                       << x.second->port // string's value
+                       << ", Socket: "
+                       << x.second->sock // string's value
+                       << std::endl;
+         }
     }
 }
 // Process command from client on the server
@@ -328,6 +331,13 @@ void clientCommand(int clientSocket, fd_set *openSockets, int *maxfds,
 {
     std::vector<std::string> tokens;
     std::string token;
+
+    std::string str(buffer);
+    if (str.find(",") != std::string::npos)
+    {
+        std::cout << "Found , in the command";
+        for(int i = 0, i < buffer.)
+    } 
 
     // Split command from client into tokens for parsing
     std::stringstream stream(buffer);
@@ -481,6 +491,21 @@ void clientCommand(int clientSocket, fd_set *openSockets, int *maxfds,
     {
         readFromFile();
     }
+    else if (tokens[0].compare("LEAVE") == 0)
+    {
+        if (!servers.empty())
+        {
+            for (auto const &pair : servers)
+            {
+                if ((pair.second->IP.compare(tokens[1])&&pair.second->port.compare(tokens[2]) )== 0)
+                { 
+                    close(pair.second->sock);
+                }
+            }
+            std::cout << "There are no registered clients on this server" << std::endl;
+        }
+
+    }
     else
     {
         std::cout << "Unknown command from client:" << buffer << std::endl;
@@ -504,6 +529,7 @@ int main(int argc, char *argv[])
     struct sockaddr_in server;
     socklen_t serverLen;
     char buffer[1025]; // buffer for reading from clients
+    serverPort = argv[1];
 
     if (argc != 2)
     {
@@ -511,19 +537,19 @@ int main(int argc, char *argv[])
         exit(0);
     }
     // Setup socket for server to listen to
-    listenCSock = open_socket(atoi(argv[1]));
-    listenSSock = open_socket(atoi(argv[1]) + 1);
-    printf("Listening for clients on port: %d\n", atoi(argv[1]));
-    printf("Listening for servers on port: %d\n", (atoi(argv[1]) + 1));
+    listenCSock = open_socket(atoi(argv[1])+1);
+    listenSSock = open_socket(atoi(argv[1]));
+    printf("Listening for clients on port: %d\n", (atoi(argv[1])+1));
+    printf("Listening for servers on port: %d\n", atoi(argv[1]));
 
     if (listen(listenCSock, BACKLOG) < 0)
     {
-        printf("Listen failed on client port %s\n", (argv[1]));
+        printf("Listen failed on client port %s\n", (argv[1])+1);
         exit(0);
     }
     else if (listen(listenSSock, BACKLOG) < 0)
     {
-        printf("Listen failed on server port %s\n", ((argv[1]) + 1));
+        printf("Listen failed on server port %s\n", ((argv[1])));
         exit(0);
     }
     else
@@ -658,3 +684,4 @@ std::string viewFiles()
     closedir(dr);
     return filesInDir;
 }
+

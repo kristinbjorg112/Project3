@@ -49,6 +49,7 @@ std::string serverPort;
 
 //
 std::string viewFiles();
+std::string constructCommand(std::string str);
 
 // Simple class for handling connections from clients.
 //
@@ -347,11 +348,11 @@ void clientCommand(int clientSocket, fd_set *openSockets, int *maxfds,
     if (str.find(",") != std::string::npos)
     {
         std::cout << "Found , in the command";
-        //call function to take out the , from the buffer
+        str = constructCommand(str);
     } 
-
+   
     // Split command from client into tokens for parsing
-    std::stringstream stream(buffer);
+    std::stringstream stream(str);
 
     while (stream >> token)
         tokens.push_back(token);
@@ -694,5 +695,18 @@ std::string viewFiles()
     }
     closedir(dr);
     return filesInDir;
+}
+
+std::string constructCommand(std::string str)
+{
+    
+    for(char& c : str)
+    {
+        if(c == ',')
+        {
+            c = ' ';
+        }
+    }
+    return str;
 }
 

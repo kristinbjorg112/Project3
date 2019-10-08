@@ -92,35 +92,35 @@ int sendCommand(int clientSocket, std::string msg)
     buffer[0] = 0x01;
     buffer[n + 1] = 0x04;
     std::string temp(buffer, sizeof(buffer));
-    for (size_t i{1}; i <= temp.size(); ++i)
-    {
-        std::cout << std::hex << (size_t)temp.at(i - 1) << ((i % 16 == 0) ? "\n" : " ");
-    }
+    // for (size_t i{1}; i <= temp.size(); ++i)
+    // {
+    //     std::cout << std::hex << (size_t)temp.at(i - 1) << ((i % 16 == 0) ? "\n" : " ");
+    // }
     std::cout << "\nPadding finished, sending message\n";
     return send(clientSocket, buffer, sizeof(buffer), 0);
 }
 
 std::string removePadding(std::string msg)
 {
-    std::cout << "Size of msg: " << msg.length() << std::endl;
-    std::cout << "The message in removePadding '" << msg << "' This is the HEX" << std::endl;
-    for (size_t i{1}; i <= msg.size(); ++i)
-    {
-        std::cout << std::hex << (size_t)msg.at(i - 1) << ((i % 16 == 0) ? "\n" : " ");
-    }
-    int i;
+    // std::cout << "Size of msg: " << msg.length() << std::endl;
+    // std::cout << "The message in removePadding '" << msg << "' This is the HEX" << std::endl;
+    // for (size_t i{1}; i <= msg.size(); ++i)
+    // {
+    //     std::cout << std::hex << (size_t)msg.at(i - 1) << ((i % 16 == 0) ? "\n" : " ");
+    // }
+    //int i;
     std::string removePadding;
     msg.erase((msg.length() - 1), 1);
     msg.erase(0, 1);
     removePadding = msg;
-    std::cout << "\nAfter removing the padding the HEX is \n";
-    for (size_t i{1}; i <= removePadding.size(); ++i)
-    {
-        std::cout << std::hex << (size_t)removePadding.at(i - 1) << ((i % 16 == 0) ? "\n" : " ");
-    }
-    std::cout << "\nthe message is now " << removePadding
-              << "\nend of removePadding, returning message" << std::endl;
-    std::cout << "The size at the end is: " << removePadding.length() << std::endl;
+    //std::cout << "\nAfter removing the padding the HEX is \n";
+    // for (size_t i{1}; i <= removePadding.size(); ++i)
+    // {
+    //     std::cout << std::hex << (size_t)removePadding.at(i - 1) << ((i % 16 == 0) ? "\n" : " ");
+    // }
+    //  std::cout << "\nthe message is now " << removePadding
+    std::cout << "\nend of removePadding, returning message" << std::endl;
+    //std::cout << "The size at the end is: " << removePadding.length() << std::endl;
     return removePadding;
 }
 std::string checkMessage(char *buffer)
@@ -129,13 +129,14 @@ std::string checkMessage(char *buffer)
     if (buffer[0] == 0x01)
     {
         std::string msg = buffer;
-        std::cout << "\n now printing HEX in checkMessage " << std::endl;
-        for (size_t i{1}; i <= msg.size(); ++i)
-        {
-            std::cout << std::hex << (size_t)msg.at(i - 1) << ((i % 16 == 0) ? "\n" : " ");
-        }
-        std::cout << std::endl;
-        bool finished = false;
+        std::cout << "\n now in checkMessage 'if (buffer[0] == 0x01)'" << std::endl;
+        //std::cout << "\n now printing HEX in checkMessage " << std::endl;
+        // for (size_t i{1}; i <= msg.size(); ++i)
+        // {
+        //     std::cout << std::hex << (size_t)msg.at(i - 1) << ((i % 16 == 0) ? "\n" : " ");
+        // }
+        // std::cout << std::endl;
+        // bool finished = false;
         // while (!finished)
         // {
         //     if (buffer[sizeof(buffer) + 1] == 0x04)
@@ -251,12 +252,11 @@ void ConnectionToServers(std::string stringIpAddress, std::string stringPort, in
     nServer->port = port;
     nServer->groupID = "V_GROUP_0";
     servers.emplace(serverSocket, nServer);
-    std::string msg;
-    msg = "GROUP 20";
     FD_SET(serverSocket, openSocekts);
     // And update the maximum file descriptor
     maxfds = std::max(maxfds, serverSocket);
-    nwrite = sendCommand(serverSocket, msg);
+    std::string hellomessage = "CONNECT," + serverName + "," + port + "," + ipAddress;
+    nwrite = sendCommand(serverSocket, hellomessage);
     if (nwrite == -1)
     {
         perror("send() to server failed: ");
@@ -318,9 +318,8 @@ std::string listServers()
     }
     return msg;
 }
-
-// Process command from client on the server
-void clientCommand(int clientSocket, fd_set *openSockets, int *maxfds,
+// Process command from server on the server
+void serverCommand(int serverSocket, fd_set *openSockets, int *maxfds,
                    char *buffer)
 {
     std::vector<std::string> tokens;
@@ -333,8 +332,132 @@ void clientCommand(int clientSocket, fd_set *openSockets, int *maxfds,
         str = constructCommand(str);
     }
 
-    // Split command from client into tokens for parsing
+    // Split command from server into tokens for parsing
     std::stringstream stream(str);
+
+    while (stream >> token)
+
+        tokens.push_back(token);
+    if (tokens[0].compare("CONNECT") == 0 && (tokens.size() == 4))
+    {
+        for (auto const &pair : servers)
+        {
+            if (pair.second->sock == serverSocket)
+            {
+                pair.second->groupID = tokens[1];
+                pair.second->port = tokens[2];
+                pair.second->IP = tokens[3];
+
+                std::ostringstream oss;
+                oss << pair.second->groupID << " "
+                    << pair.second->port << " "
+                    << pair.second->IP << " ";
+                std::string temp = oss.str();
+                std::cout << "the new connected server is " << temp << std::endl;
+            }
+        }
+    }
+    else if (tokens[0].compare("LEAVE") == 0)
+    {
+        if (servers.empty())
+        {
+            std::cout << "There are no registered servers on this server" << std::endl;
+        }
+        else
+        {
+            // Close the socket, and leave the socket handling
+            // code to deal with tidying up servers etc. when
+            // select() detects the OS has torn down the connection.
+
+            closeServer(serverSocket, openSockets, maxfds);
+        }
+    }
+    // This is slightly fragile, since it's relying on the order
+    // of evaluation of the if statement.
+    else if ((tokens[0].compare("MSG") == 0) && (tokens[1].compare("ALL") == 0))
+    {
+        if (!servers.empty())
+        {
+
+            std::string msg;
+            for (auto i = tokens.begin() + 2; i != tokens.end(); i++)
+            {
+                msg += *i + " ";
+            }
+
+            for (auto const &pair : servers)
+            {
+                send(pair.second->sock, msg.c_str(), msg.length(), 0);
+            }
+        }
+        else
+        {
+            std::cout << "There are no registered servers on this server" << std::endl;
+        }
+    }
+    else if (tokens[0].compare("MSG") == 0)
+    {
+        if (!servers.empty())
+        {
+            for (auto const &pair : servers)
+            {
+                if (pair.second->groupID.compare(tokens[1]) == 0)
+                {
+                    std::string msg;
+                    for (auto i = tokens.begin() + 2; i != tokens.end(); i++)
+                    {
+                        msg += *i + " ";
+                    }
+                    send(pair.second->sock, msg.c_str(), msg.length(), 0);
+                }
+            }
+            std::cout << "There are no registered servers on this server" << std::endl;
+        }
+    }
+    else if (tokens[0].compare("DIR") == 0)
+    {
+        std::string dircontent;
+        dircontent = viewFiles();
+        std::cout << dircontent << std::endl;
+    }
+    else if (tokens[0].compare("LISTSERVERS") == 0)
+    {
+        //Send to specific groupID
+        std::string msg;
+        msg = listServers();
+        for (auto const &pair : servers)
+        {
+            sendCommand(pair.second->sock, msg);
+        }
+    }
+    else if (tokens[0].compare("LEAVE") == 0)
+    {
+        if (!servers.empty())
+        {
+            for (auto const &pair : servers)
+            {
+                if ((pair.second->IP.compare(tokens[1]) && pair.second->port.compare(tokens[2])) == 0)
+                {
+                    close(pair.second->sock);
+                }
+            }
+            std::cout << "LEAVE: There are no registered servers on this server" << std::endl;
+        }
+    }
+    else
+    {
+        std::cout << "Unknown command from server:" << buffer << std::endl;
+    }
+}
+// Process command from client on the server
+void clientCommand(int clientSocket, fd_set *openSockets, int *maxfds,
+                   char *buffer)
+{
+    std::vector<std::string> tokens;
+    std::string token;
+
+    // Split command from client into tokens for parsing
+    std::stringstream stream(buffer);
 
     while (stream >> token)
         tokens.push_back(token);
@@ -428,11 +551,31 @@ void clientCommand(int clientSocket, fd_set *openSockets, int *maxfds,
         std::string port = tokens[2];
         ConnectionToServers(ipAddress, port, clientSocket, openSockets);
     }
-    else if (tokens[0].compare("SM") == 0)
+    else if (tokens[0].compare("LISTSERVERS") == 0)
     {
         if (!servers.empty())
         {
             std::cout << "Sending message to all connected servers " << std::endl;
+            std::string msg = buffer;
+            //  std::cout << "Before " << msg << std::endl;
+            msg += "," + serverName;
+            // std::cout << "Client LISTSERVERS: " << listServers() << std::endl;
+            // std::cout << "Sending message to all connected servers " << msg << std::endl;
+            for (auto const &pair : servers)
+            {
+                sendCommand(pair.second->sock, msg);
+            }
+        }
+        else
+        {
+            std::cout << "LISTSERVERS: There are servers connected to this server to recive this message" << std::endl;
+        }
+    }
+    else if (tokens[0].compare("SM") == 0)
+    {
+        if (!servers.empty())
+        {
+            std::cout << "Sending LISTSERVERS to all connected servers " << std::endl;
             std::string msg;
 
             for (auto i = tokens.begin() + 1; i != tokens.end(); i++)
@@ -442,7 +585,6 @@ void clientCommand(int clientSocket, fd_set *openSockets, int *maxfds,
 
             for (auto const &pair : servers)
             {
-                //send(pair.second->sock, msg.c_str(), msg.length(), 0);
                 sendCommand(pair.second->sock, msg);
             }
         }
@@ -465,16 +607,6 @@ void clientCommand(int clientSocket, fd_set *openSockets, int *maxfds,
     else if (tokens[0].compare("QC") == 0) //Quick connect to 127.0.0.1 10003
     {
         ConnectionToServers("127.0.0.1", "10003", clientSocket, openSockets);
-    }
-    else if (tokens[0].compare("LISTSERVERS") == 0)
-    {
-        std::string msg;
-        msg = listServers();
-        for (auto const &pair : clients)
-        {
-            //send(pair.second->sock, msg.c_str(), msg.length(), 0);
-            sendCommand(pair.second->sock, msg);
-        }
     }
     else if (tokens[1].compare("LISTCLIENTS") == 0)
     {
@@ -536,6 +668,7 @@ int main(int argc, char *argv[])
         exit(0);
     }
     // Setup socket for server to listen to
+    serverPort = argv[1];
     listenSSock = open_socket(atoi(argv[1]));
     listenCSock = open_socket(atoi(argv[1]) + 1);
     printf("Listening for servers on port: %d\n", atoi(argv[1]));
@@ -655,28 +788,21 @@ int main(int argc, char *argv[])
                         }
 
                         std::cout << "\nServer buffer: " << buffer << std::endl;
-                        std::string temp1 = buffer;
-                        if (buffer[0] == 0x01)
-                        {
-                            std::cout << " now printing HEX after buffer " << std::endl;
-                            for (size_t i{1}; i <= temp1.size(); ++i)
-                            {
-                                std::cout << std::hex << (size_t)temp1.at(i - 1) << ((i % 16 == 0) ? "\n" : " ");
-                            }
-                            std::string temp = checkMessage(buffer);
-                            std::cout << "\nTemp : " << temp << " now printing HEX" << std::endl;
-                            for (size_t i{1}; i <= temp.size(); ++i)
-                            {
-                                std::cout << std::hex << (size_t)temp.at(i - 1) << ((i % 16 == 0) ? "\n" : " ");
-                            }
-                            strcpy(buffer, temp.c_str());
-                            writeToFile(buffer);
-                            clientCommand(server->sock, &openSockets, &maxfds, buffer);
-                        }
-                        else
-                        {
-                            std::cout << "no padding" << std::endl;
-                        }
+                        // std::string temp1 = buffer;
+                        // std::cout << " now printing HEX after buffer " << std::endl;
+                        // for (size_t i{1}; i <= temp1.size(); ++i)
+                        // {
+                        //     std::cout << std::hex << (size_t)temp1.at(i - 1) << ((i % 16 == 0) ? "\n" : " ");
+                        // }
+                        std::string temp = checkMessage(buffer);
+                        // std::cout << "\nTemp : " << temp << " now printing HEX" << std::endl;
+                        // for (size_t i{1}; i <= temp.size(); ++i)
+                        // {
+                        //     std::cout << std::hex << (size_t)temp.at(i - 1) << ((i % 16 == 0) ? "\n" : " ");
+                        // }
+                        strcpy(buffer, temp.c_str());
+                        writeToFile(buffer);
+                        serverCommand(server->sock, &openSockets, &maxfds, buffer);
 
                         // We don't check for -1 (nothing received) because select()
                         // only triggers if there is something on the socket for us.

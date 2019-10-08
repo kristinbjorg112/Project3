@@ -47,10 +47,10 @@ int maxfds;       // Passed to select() as max fd in set
 std::string serverName = "V_GROUP_20";
 std::string serverPort;
 
-//
+// Help functions, are below main()
 std::string viewFiles();
 std::string constructCommand(std::string str);
-
+std::string getTimeStamp();
 // Simple class for handling connections from clients.
 //
 // Client(int socket) - socket to send/receive traffic from client.
@@ -91,41 +91,102 @@ int sendCommand(int clientSocket, std::string msg)
     memmove(buffer + 1, buffer, sizeof(buffer));
     buffer[0] = 0x01;
     buffer[n + 1] = 0x04;
-    std::cout << "sending message\n";
+    std::string temp(buffer, sizeof(buffer));
+    for (size_t i{1}; i <= temp.size(); ++i)
+    {
+        std::cout << std::hex << (size_t)temp.at(i - 1) << ((i % 16 == 0) ? "\n" : " ");
+    }
+    std::cout << "\nPadding finished, sending message\n";
     return send(clientSocket, buffer, sizeof(buffer), 0);
 }
+
 std::string removePadding(std::string msg)
 {
+    std::cout << "Size of msg: " << msg.length() << std::endl;
+    std::cout << "The message in removePadding '" << msg << "' This is the HEX" << std::endl;
+    for (size_t i{1}; i <= msg.size(); ++i)
+    {
+        std::cout << std::hex << (size_t)msg.at(i - 1) << ((i % 16 == 0) ? "\n" : " ");
+    }
     int i;
     std::string removePadding;
-    int n = msg.length();
-    char newBuffer[n - 2];
-    memset(newBuffer, 0, sizeof(newBuffer));
-    for (i = 0; i < sizeof(newBuffer); i++)
+    msg.erase((msg.length() - 1), 1);
+    msg.erase(0, 1);
+    removePadding = msg;
+    std::cout << "\nAfter removing the padding the HEX is \n";
+    for (size_t i{1}; i <= removePadding.size(); ++i)
     {
-        newBuffer[i] = +msg[i + 1];
+        std::cout << std::hex << (size_t)removePadding.at(i - 1) << ((i % 16 == 0) ? "\n" : " ");
     }
-    return removePadding = newBuffer;
+    std::cout << "\nthe message is now " << removePadding
+              << "\nend of removePadding, returning message" << std::endl;
+    std::cout << "The size at the end is: " << removePadding.length() << std::endl;
+    return removePadding;
 }
+std::string checkMessage(char *buffer)
+{
 
+    if (buffer[0] == 0x01)
+    {
+        std::string msg = buffer;
+        std::cout << "\n now printing HEX in checkMessage " << std::endl;
+        for (size_t i{1}; i <= msg.size(); ++i)
+        {
+            std::cout << std::hex << (size_t)msg.at(i - 1) << ((i % 16 == 0) ? "\n" : " ");
+        }
+        std::cout << std::endl;
+        bool finished = false;
+        // while (!finished)
+        // {
+        //     if (buffer[sizeof(buffer) + 1] == 0x04)
+        //     {
+        //         finished = true;
+        //     }
+        // }
+        if (msg[0] == 0x01 && msg[msg.length() - 1] == 0x04)
+        {
+            std::string msg = buffer;
+            std::cout << "passed SOH and EOT check" << std::endl;
+            std::string outcome;
+            outcome = removePadding(msg);
+            //char buffermsg[1025];
+            //strcpy(buffermsg, msg.c_str());
+            return outcome;
+        }
+        else
+        {
+            std::cout << "No EOT on the message, lets wait a bit" << std::endl;
+            usleep(10000);
+            if (msg[0] == 0x01 && msg[msg.length() - 1] == 0x04)
+            {
+                std::string msg(buffer, sizeof(buffer));
+                std::cout << "passed SOH and EOT check" << std::endl;
+                msg = removePadding(msg);
+                char buffermsg[1025];
+                strcpy(buffermsg, msg.c_str());
+                return msg;
+            }
+            std::cout << "No EOT on the message" << std::endl;
+            return buffer;
+            //What to do?
+        }
+        std::cout << "no padding on this message" << std::endl;
+    }
+    else
+    {
+        std::cout << "No padding on this message" << std::endl;
+        return buffer;
+    }
+}
 int writeToFile(char *buffer)
 {
     std::ofstream file;
     //Creates a new text file, in the future with each group name
     file.open("./data/GROUPNAME.txt", std::ios::in | std::ios::app | std::ios::out);
-    std::time_t t = std::time(0); // Get current time
-    std::tm *now = std::localtime(&t);
-    file << "\n"
-         << (now->tm_year + 1900) << '/'
-         << (now->tm_mon + 1) << '/'
-         << now->tm_mday << '/'
-         << now->tm_hour << '-'
-         << now->tm_min << '-'
-         << now->tm_sec << ": ";
+    file << getTimeStamp();
     file << buffer;
     file.close();
 }
-
 void readFromFile()
 {
     std::string line;
@@ -202,141 +263,62 @@ void ConnectionToServers(std::string stringIpAddress, std::string stringPort, in
         //finished = true;
     }
 }
-int open_socket(int portno)
-{
-    struct sockaddr_in sk_addr; // address settings for bind()
-    int sock;                   // socket opened for this port
-    int set = 1;                // for setsockopt
-
-    // Create socket for connection. Set to be non-blocking, so recv will
-    // return immediately if there isn't anything waiting to be read.
-
-    if ((sock = socket(AF_INET, SOCK_STREAM | SOCK_NONBLOCK, 0)) < 0)
-    {
-        perror("Failed to open socket");
-        return (-1);
-    }
-
-    // Turn on SO_REUSEADDR to allow socket to be quickly reused after
-    // program exit.
-
-    if (setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, &set, sizeof(set)) < 0)
-    {
-        perror("Failed to set SO_REUSEADDR:");
-    }
-    memset(&sk_addr, 0, sizeof(sk_addr));
-
-    sk_addr.sin_family = AF_INET;
-    sk_addr.sin_addr.s_addr = INADDR_ANY;
-    sk_addr.sin_port = htons(portno);
-
-    // Bind to socket to listen for connections from clients
-
-    if (bind(sock, (sockaddr *)&sk_addr, sizeof(sk_addr)) < 0)
-    {
-        perror("Failed to bind to socket:");
-        return (-1);
-    }
-    else
-    {
-        return (sock);
-    }
-}
-// Close a client's connection, remove it from the client list, and
-// tidy up select sockets afterwards.
-void closeClient(int clientSocket, fd_set *openSockets, int *maxfds)
-{
-    // Remove client from the clients list
-    clients.erase(clientSocket);
-    // If this client's socket is maxfds then the next lowest
-    // one has to be determined. Socket fd's can be reused by the Kernel,
-    // so there aren't any nice ways to do this.
-    if (*maxfds == clientSocket)
-    {
-        for (auto const &p : clients)
-        {
-            *maxfds = std::max(*maxfds, p.second->sock);
-        }
-    }
-    // And remove from the list of open sockets.
-    FD_CLR(clientSocket, openSockets);
-}
-///Hope this works. Please check if this makes sense
-void closeServer(int serverSocket, fd_set *openSockets, int *maxfds)
-{
-    // Remove Server from the Server list
-    clients.erase(serverSocket);
-    // If this client's socket is maxfds then the next lowest
-    // one has to be determined. Socket fd's can be reused by the Kernel,
-    // so there aren't any nice ways to do this.
-    if (*maxfds == serverSocket)
-    {
-        for (auto const &p : servers)
-        {
-            *maxfds = std::max(*maxfds, p.second->sock);
-        }
-    }
-    // And remove from the list of open sockets.
-    FD_CLR(serverSocket, openSockets);
-}
+int open_socket(int portno);
+void closeClient(int clientSocket, fd_set *openSockets, int *maxfds);
+void closeServer(int serverSocket, fd_set *openSockets, int *maxfds);
 std::string listClients()
 {
     std::string msg;
     if (clients.empty())
     {
-        std::cout << "No clients registered on this server" << std::endl;
         return msg = ("No clients registered on this server");
     }
     else
     {
-        std::cout << "Listing clients: " << std::endl;
-        msg = ("Listing clients: \n");
+        msg = ("Listing clients: ");
         for (auto const &x : clients)
         {
-            std::cout << "Key: "
-                      << x.first
-                      << ", Name: "
-                      << x.second->name
-                      << ", Socket: "
-                      << x.second->sock
-                      << std::endl;
-            // msg = msg + ("Key: " + x.first); //dose not work
-            // msg = msg + (", Name: " + x.second->name);
-            // msg = msg + (", Socket: " + x.second->sock);
-
             std::ostringstream oss;
-            oss << ("Key: " + x.first) << (", Name: " + x.second->name) << (", Socket: " + x.second->sock);
-            msg = oss.str();
+            oss << "\nKey: "
+                << x.first
+                << ", Name: "
+                << x.second->name
+                << ", Socket: "
+                << x.second->sock;
+            msg += oss.str();
         }
     }
-    std::cout << "Printing msg: " << msg << std::endl;
     return msg;
 }
-void listServers()
+std::string listServers()
 {
+    std::string msg;
     if (servers.empty())
     {
-        std::cout << "No servers connected to this server" << std::endl;
+        return msg = ("No servers connected to this server");
     }
     else
     {
-        std::cout << "Listing servers connected to this one: " << std::endl;
-         for (auto const &x : servers)
-         {
-             std::cout << "Key: "
-                       << x.first // string (key)
-                       << ", groupID: "
-                       << x.second->groupID // string's value
-                       << ", IP: "
-                       << x.second->IP // string's value
-                       << ", Port: "
-                       << x.second->port // string's value
-                       << ", Socket: "
-                       << x.second->sock // string's value
-                       << std::endl;
-         }
+        msg = ("Listing servers connected to this one: ");
+        for (auto const &x : servers)
+        {
+            std::ostringstream oss;
+            oss << "\nKey: "
+                << x.first
+                << ", groupID: "
+                << x.second->groupID
+                << ", IP: "
+                << x.second->IP
+                << ", Port: "
+                << x.second->port
+                << ", Socket: "
+                << x.second->sock;
+            msg += oss.str();
+        }
     }
+    return msg;
 }
+
 // Process command from client on the server
 void clientCommand(int clientSocket, fd_set *openSockets, int *maxfds,
                    char *buffer)
@@ -349,8 +331,8 @@ void clientCommand(int clientSocket, fd_set *openSockets, int *maxfds,
     {
         std::cout << "Found , in the command";
         str = constructCommand(str);
-    } 
-   
+    }
+
     // Split command from client into tokens for parsing
     std::stringstream stream(str);
 
@@ -452,6 +434,7 @@ void clientCommand(int clientSocket, fd_set *openSockets, int *maxfds,
         {
             std::cout << "Sending message to all connected servers " << std::endl;
             std::string msg;
+
             for (auto i = tokens.begin() + 1; i != tokens.end(); i++)
             {
                 msg += *i + " ";
@@ -459,8 +442,8 @@ void clientCommand(int clientSocket, fd_set *openSockets, int *maxfds,
 
             for (auto const &pair : servers)
             {
-                send(pair.second->sock, msg.c_str(), msg.length(), 0);
-                //sendCommand(pair.second->sock, msg);
+                //send(pair.second->sock, msg.c_str(), msg.length(), 0);
+                sendCommand(pair.second->sock, msg);
             }
         }
         else
@@ -483,22 +466,27 @@ void clientCommand(int clientSocket, fd_set *openSockets, int *maxfds,
     {
         ConnectionToServers("127.0.0.1", "10003", clientSocket, openSockets);
     }
-    else if (tokens[0].compare("LIST") == 0)
+    else if (tokens[0].compare("LISTSERVERS") == 0)
     {
-        if (tokens[1].compare("SERVERS") == 0)
+        std::string msg;
+        msg = listServers();
+        for (auto const &pair : clients)
         {
-            listServers();
-        }
-        else if (tokens[1].compare("CLIENTS") == 0)
-        {
-            for (auto const &pair : clients)
-            {
-                std::string msg;
-                msg = listClients();
-                send(pair.second->sock, msg.c_str(), msg.length(), 0);
-            }
+            //send(pair.second->sock, msg.c_str(), msg.length(), 0);
+            sendCommand(pair.second->sock, msg);
         }
     }
+    else if (tokens[1].compare("LISTCLIENTS") == 0)
+    {
+        for (auto const &pair : clients)
+        {
+            std::string msg;
+            msg = listClients();
+            //send(pair.second->sock, msg.c_str(), msg.length(), 0);
+            sendCommand(pair.second->sock, msg);
+        }
+    }
+
     else if (tokens[0].compare("READ") == 0)
     {
         readFromFile();
@@ -509,21 +497,20 @@ void clientCommand(int clientSocket, fd_set *openSockets, int *maxfds,
         {
             for (auto const &pair : servers)
             {
-                if ((pair.second->IP.compare(tokens[1])&&pair.second->port.compare(tokens[2]) )== 0)
-                { 
+                if ((pair.second->IP.compare(tokens[1]) && pair.second->port.compare(tokens[2])) == 0)
+                {
                     close(pair.second->sock);
                 }
             }
             std::cout << "There are no registered clients on this server" << std::endl;
         }
-
     }
     else
     {
         std::cout << "Unknown command from client:" << buffer << std::endl;
     }
 }
-
+/*===========================MAIN============================*/
 int main(int argc, char *argv[])
 {
     bool finished;
@@ -549,19 +536,19 @@ int main(int argc, char *argv[])
         exit(0);
     }
     // Setup socket for server to listen to
-    listenCSock = open_socket(atoi(argv[1])+1);
     listenSSock = open_socket(atoi(argv[1]));
-    printf("Listening for clients on port: %d\n", (atoi(argv[1])+1));
+    listenCSock = open_socket(atoi(argv[1]) + 1);
     printf("Listening for servers on port: %d\n", atoi(argv[1]));
+    printf("Listening for clients on port: %d\n", (atoi(argv[1]) + 1));
 
     if (listen(listenCSock, BACKLOG) < 0)
     {
-        printf("Listen failed on client port %s\n", (argv[1])+1);
+        printf("Listen failed on client port %s\n", (argv[1]));
         exit(0);
     }
     else if (listen(listenSSock, BACKLOG) < 0)
     {
-        printf("Listen failed on server port %s\n", ((argv[1])));
+        printf("Listen failed on server port %s\n", ((argv[1]) + 1));
         exit(0);
     }
     else
@@ -666,9 +653,31 @@ int main(int argc, char *argv[])
 
                             closeServer(server->sock, &openSockets, &maxfds);
                         }
+
                         std::cout << "\nServer buffer: " << buffer << std::endl;
-                        writeToFile(buffer);
-                        clientCommand(server->sock, &openSockets, &maxfds, buffer);
+                        std::string temp1 = buffer;
+                        if (buffer[0] == 0x01)
+                        {
+                            std::cout << " now printing HEX after buffer " << std::endl;
+                            for (size_t i{1}; i <= temp1.size(); ++i)
+                            {
+                                std::cout << std::hex << (size_t)temp1.at(i - 1) << ((i % 16 == 0) ? "\n" : " ");
+                            }
+                            std::string temp = checkMessage(buffer);
+                            std::cout << "\nTemp : " << temp << " now printing HEX" << std::endl;
+                            for (size_t i{1}; i <= temp.size(); ++i)
+                            {
+                                std::cout << std::hex << (size_t)temp.at(i - 1) << ((i % 16 == 0) ? "\n" : " ");
+                            }
+                            strcpy(buffer, temp.c_str());
+                            writeToFile(buffer);
+                            clientCommand(server->sock, &openSockets, &maxfds, buffer);
+                        }
+                        else
+                        {
+                            std::cout << "no padding" << std::endl;
+                        }
+
                         // We don't check for -1 (nothing received) because select()
                         // only triggers if there is something on the socket for us.
                     }
@@ -696,17 +705,107 @@ std::string viewFiles()
     closedir(dr);
     return filesInDir;
 }
-
 std::string constructCommand(std::string str)
 {
-    
-    for(char& c : str)
+
+    for (char &c : str)
     {
-        if(c == ',')
+        if (c == ',')
         {
             c = ' ';
         }
     }
     return str;
 }
+std::string getTimeStamp()
+{
+    std::string timeStamp;
+    std::stringstream temp;
+    std::time_t t = std::time(0);
+    std::tm *now = std::localtime(&t);
+    temp << "\n"
+         << (now->tm_year + 1900) << '/'
+         << (now->tm_mon + 1) << '/'
+         << now->tm_mday << '/'
+         << now->tm_hour << '-'
+         << now->tm_min << '-'
+         << now->tm_sec << ": ";
+    return timeStamp = temp.str();
+}
+int open_socket(int portno)
+{
+    struct sockaddr_in sk_addr; // address settings for bind()
+    int sock;                   // socket opened for this port
+    int set = 1;                // for setsockopt
 
+    // Create socket for connection. Set to be non-blocking, so recv will
+    // return immediately if there isn't anything waiting to be read.
+
+    if ((sock = socket(AF_INET, SOCK_STREAM | SOCK_NONBLOCK, 0)) < 0)
+    {
+        perror("Failed to open socket");
+        return (-1);
+    }
+
+    // Turn on SO_REUSEADDR to allow socket to be quickly reused after
+    // program exit.
+
+    if (setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, &set, sizeof(set)) < 0)
+    {
+        perror("Failed to set SO_REUSEADDR:");
+    }
+    memset(&sk_addr, 0, sizeof(sk_addr));
+
+    sk_addr.sin_family = AF_INET;
+    sk_addr.sin_addr.s_addr = INADDR_ANY;
+    sk_addr.sin_port = htons(portno);
+
+    // Bind to socket to listen for connections from clients
+
+    if (bind(sock, (sockaddr *)&sk_addr, sizeof(sk_addr)) < 0)
+    {
+        perror("Failed to bind to socket:");
+        return (-1);
+    }
+    else
+    {
+        return (sock);
+    }
+}
+// Close a client's connection, remove it from the client list, and
+// tidy up select sockets afterwards.
+void closeClient(int clientSocket, fd_set *openSockets, int *maxfds)
+{
+    // Remove client from the clients list
+    clients.erase(clientSocket);
+    // If this client's socket is maxfds then the next lowest
+    // one has to be determined. Socket fd's can be reused by the Kernel,
+    // so there aren't any nice ways to do this.
+    if (*maxfds == clientSocket)
+    {
+        for (auto const &p : clients)
+        {
+            *maxfds = std::max(*maxfds, p.second->sock);
+        }
+    }
+    // And remove from the list of open sockets.
+    FD_CLR(clientSocket, openSockets);
+}
+///Hope this works. Please check if this makes sense
+void closeServer(int serverSocket, fd_set *openSockets, int *maxfds)
+{
+    // Remove Server from the Server list
+    clients.erase(serverSocket);
+    // If this client's socket is maxfds then the next lowest
+    // one has to be determined. Socket fd's can be reused by the Kernel,
+    // so there aren't any nice ways to do this.
+    if (*maxfds == serverSocket)
+    {
+        for (auto const &p : servers)
+        {
+            *maxfds = std::max(*maxfds, p.second->sock);
+        }
+    }
+    // And remove from the list of open sockets.
+    FD_CLR(serverSocket, openSockets);
+}

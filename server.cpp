@@ -461,185 +461,169 @@ void clientCommand(int clientSocket, fd_set *openSockets, int *maxfds,
 
     while (stream >> token)
         tokens.push_back(token);
-
-    if ((tokens[0].compare("CONNECT") == 0) && (tokens.size() == 2))
+    
+    if(tokens[0].compare("SM") == 0)
     {
-        if (clients.empty())
+        if(tokens[1].compare("LISTSERVERS") == 0)
         {
-            std::cout << "There are no registered clients on this server" << std::endl;
-        }
-        else
-        {
-            clients[clientSocket]->name = tokens[1];
-        }
-    }
-    else if (tokens[0].compare("LEAVE") == 0)
-    {
-        if (clients.empty())
-        {
-            std::cout << "There are no registered clients on this server" << std::endl;
-        }
-        else
-        {
-            // Close the socket, and leave the socket handling
-            // code to deal with tidying up clients etc. when
-            // select() detects the OS has torn down the connection.
-
-            closeClient(clientSocket, openSockets, maxfds);
-        }
-    }
-    else if (tokens[0].compare("WHO") == 0)
-    {
-        std::cout << "Who is logged on" << std::endl;
-        std::string msg;
-        if (!clients.empty())
-        {
-            for (auto const &names : clients)
+            if (!servers.empty())
             {
-                msg += names.second->name + ",";
-            }
-            // Reducing the msg length by 1 loses the excess "," - which
-            // granted is totally cheating.
-            send(clientSocket, msg.c_str(), msg.length() - 1, 0);
-        }
-    }
-    // This is slightly fragile, since it's relying on the order
-    // of evaluation of the if statement.
-    else if ((tokens[0].compare("MSG") == 0) && (tokens[1].compare("ALL") == 0))
-    {
-        if (!clients.empty())
-        {
-
-            std::string msg;
-            for (auto i = tokens.begin() + 2; i != tokens.end(); i++)
-            {
-                msg += *i + " ";
-            }
-
-            for (auto const &pair : clients)
-            {
-                send(pair.second->sock, msg.c_str(), msg.length(), 0);
-            }
-        }
-        else
-        {
-            std::cout << "There are no registered clients on this server" << std::endl;
-        }
-    }
-    else if (tokens[0].compare("MSG") == 0)
-    {
-        if (!clients.empty())
-        {
-            for (auto const &pair : clients)
-            {
-                if (pair.second->name.compare(tokens[1]) == 0)
+                std::cout << "Sending message to all connected servers " << std::endl;
+                std::string msg = tokens[1];
+                //  std::cout << "Before " << msg << std::endl;
+                msg += "," + serverName;
+                // std::cout << "Client LISTSERVERS: " << listServers() << std::endl;
+                // std::cout << "Sending message to all connected servers " << msg << std::endl;
+                for (auto const &pair : servers)
                 {
-                    std::string msg;
-                    for (auto i = tokens.begin() + 2; i != tokens.end(); i++)
+                    sendCommand(pair.second->sock, msg);
+                }
+            }
+            else
+            {
+                std::cout << "LISTSERVERS: There are servers connected to this server to recive this message" << std::endl;
+            }
+        }
+        else if(tokens[1].compare("KEEPALIVE") == 0)
+        {
+            //DO command keepalive, KEEPALIVE,<# of Messages>
+        }
+        else if(tokens[1].compare("GET_MSG") == 0)
+        {
+            //DO command GET MSG,<GROUP_ID>
+        }
+        else if(tokens[1].compare("SEND_MSG") == 0)
+        {
+            //DO command SEND MSG,<FROM GROUP ID>,<TO GROUP ID>,<Message content>
+        }
+        else if (tokens[0].compare("LEAVE") == 0)
+        {
+            //LEAVE,SERVER IP,PORT
+            if (!servers.empty())
+            {
+                for (auto const &pair : servers)
+                {
+                    if ((pair.second->IP.compare(tokens[1]) && pair.second->port.compare(tokens[2])) == 0)
                     {
-                        msg += *i + " ";
+                        close(pair.second->sock);
                     }
-                    send(pair.second->sock, msg.c_str(), msg.length(), 0);
                 }
+                std::cout << "There are no registered clients on this server" << std::endl;
             }
-            std::cout << "There are no registered clients on this server" << std::endl;
         }
-    }
-    else if (tokens[0].compare("SC") == 0)
-    {
-        std::string ipAddress = tokens[1];
-        std::string port = tokens[2];
-        ConnectionToServers(ipAddress, port, clientSocket, openSockets);
-    }
-    else if (tokens[0].compare("LISTSERVERS") == 0)
-    {
-        if (!servers.empty())
+        else if(tokens[1].compare("STATUSREQ") == 0)
         {
-            std::cout << "Sending message to all connected servers " << std::endl;
-            std::string msg = buffer;
-            //  std::cout << "Before " << msg << std::endl;
-            msg += "," + serverName;
-            // std::cout << "Client LISTSERVERS: " << listServers() << std::endl;
-            // std::cout << "Sending message to all connected servers " << msg << std::endl;
-            for (auto const &pair : servers)
-            {
-                sendCommand(pair.second->sock, msg);
-            }
+            //DO command STATUSREQ,FROM GROUP
+        }
+        else if(tokens[1].compare("STATUSRESP") == 0)
+        {
+            //DO command STATUSREQ,FROM GROUP
         }
         else
         {
-            std::cout << "LISTSERVERS: There are servers connected to this server to recive this message" << std::endl;
-        }
-    }
-    else if (tokens[0].compare("SM") == 0)
-    {
-        if (!servers.empty())
-        {
-            std::cout << "Sending LISTSERVERS to all connected servers " << std::endl;
-            std::string msg;
-
-            for (auto i = tokens.begin() + 1; i != tokens.end(); i++)
-            {
-                msg += *i + " ";
-            }
-
-            for (auto const &pair : servers)
-            {
-                sendCommand(pair.second->sock, msg);
-            }
-        }
-        else
-        {
-            std::cout << "There are servers connected to this server to recive this message" << std::endl;
-        }
-    }
-    else if (tokens[0].compare("GROUP") == 0)
-    {
-        //Made so we dont get "Unknown command from client:" each time
-        //we connect
-    }
-    else if (tokens[0].compare("DIR") == 0)
-    {
-        std::string dircontent;
-        dircontent = viewFiles();
-        std::cout << dircontent << std::endl;
-    }
-    else if (tokens[0].compare("QC") == 0) //Quick connect to 127.0.0.1 10003
-    {
-        ConnectionToServers("127.0.0.1", "10003", clientSocket, openSockets);
-    }
-    else if (tokens[1].compare("LISTCLIENTS") == 0)
-    {
-        for (auto const &pair : clients)
-        {
-            std::string msg;
-            msg = listClients();
-            //send(pair.second->sock, msg.c_str(), msg.length(), 0);
-            sendCommand(pair.second->sock, msg);
-        }
-    }
-
-    else if (tokens[0].compare("READ") == 0)
-    {
-        readFromFile();
-    }
-    else if (tokens[0].compare("LEAVE") == 0)
-    {
-        if (!servers.empty())
-        {
-            for (auto const &pair : servers)
-            {
-                if ((pair.second->IP.compare(tokens[1]) && pair.second->port.compare(tokens[2])) == 0)
-                {
-                    close(pair.second->sock);
-                }
-            }
-            std::cout << "There are no registered clients on this server" << std::endl;
+            std::cout << "Unknown SM command from client:" << buffer << std::endl;
         }
     }
     else
     {
-        std::cout << "Unknown command from client:" << buffer << std::endl;
+        if (tokens[0].compare("LEAVE") == 0)
+        {
+            if (clients.empty())
+            {
+                std::cout << "There are no registered clients on this server" << std::endl;
+            }
+        
+            else
+            {
+            // Close the socket, and leave the socket handling
+            // code to deal with tidying up clients etc. when
+            // select() detects the OS has torn down the connection.
+
+                closeClient(clientSocket, openSockets, maxfds);
+            }
+        }
+        else if (tokens[0].compare("WHO") == 0)
+        {
+            std::cout << "Who is logged on" << std::endl;
+            std::string msg;
+            if (!clients.empty())
+            {
+                for (auto const &names : clients)
+                {
+                    msg += names.second->name + ",";
+                }
+            // Reducing the msg length by 1 loses the excess "," - which
+            // granted is totally cheating.
+                send(clientSocket, msg.c_str(), msg.length() - 1, 0);
+             }
+         }
+
+        else if (tokens[0].compare("MSG") == 0)
+        {
+            if (!clients.empty())
+            {
+                for (auto const &pair : clients)
+                {
+                    if (pair.second->name.compare(tokens[1]) == 0)
+                    {
+                        std::string msg;
+                        for (auto i = tokens.begin() + 2; i != tokens.end(); i++)
+                        {
+                            msg += *i + " ";
+                        }
+                        send(pair.second->sock, msg.c_str(), msg.length(), 0);
+                    }
+                }
+            std::cout << "There are no registered clients on this server" << std::endl;
+            }
+        }
+
+        else if (tokens[0].compare("SC") == 0)
+        {
+            std::string ipAddress = tokens[1];
+            std::string port = tokens[2];
+            ConnectionToServers(ipAddress, port, clientSocket, openSockets);
+        }
+        else if (tokens[0].compare("DIR") == 0)
+        {
+            std::string dircontent;
+            dircontent = viewFiles();
+            std::cout << dircontent << std::endl;
+        }
+        else if (tokens[0].compare("QC") == 0) //Quick connect to 127.0.0.1 10003
+        {
+            ConnectionToServers("127.0.0.1", "10003", clientSocket, openSockets);
+        }
+        else if (tokens[0].compare("LISTCLIENTS") == 0)
+        {
+            for (auto const &pair : clients)
+            {
+                std::string msg;
+                msg = listClients();
+                //send(pair.second->sock, msg.c_str(), msg.length(), 0);
+                sendCommand(pair.second->sock, msg);
+            }
+        }
+        else if (tokens[0].compare("READ") == 0)
+        {
+            readFromFile();
+        }
+        else if(tokens[0].compare("GET") == 0)
+        {
+            //DO command GETMSG, GROUP ID Get a single message from the server for the GROUP ID
+        }
+        else if(tokens[0].compare("SEND") == 0)
+        {
+            //DO command SENDMSG, GROUP ID Send a message to the server for the GROUP ID
+        }
+        else if(tokens[0].compare("LISTSERVERS") == 0)
+        {
+            //DO command LISTSERVERS List servers your server is connected to
+        }
+        else
+        {
+            std::cout << "Unknown command from client:" << buffer << std::endl;
+        }
     }
 }
 /*===========================MAIN============================*/

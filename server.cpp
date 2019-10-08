@@ -357,21 +357,6 @@ void serverCommand(int serverSocket, fd_set *openSockets, int *maxfds,
             }
         }
     }
-    else if (tokens[0].compare("LEAVE") == 0)
-    {
-        if (servers.empty())
-        {
-            std::cout << "There are no registered servers on this server" << std::endl;
-        }
-        else
-        {
-            // Close the socket, and leave the socket handling
-            // code to deal with tidying up servers etc. when
-            // select() detects the OS has torn down the connection.
-
-            closeServer(serverSocket, openSockets, maxfds);
-        }
-    }
     // This is slightly fragile, since it's relying on the order
     // of evaluation of the if statement.
     else if ((tokens[0].compare("MSG") == 0) && (tokens[1].compare("ALL") == 0))
@@ -444,6 +429,26 @@ void serverCommand(int serverSocket, fd_set *openSockets, int *maxfds,
             std::cout << "LEAVE: There are no registered servers on this server" << std::endl;
         }
     }
+    else if(tokens[1].compare("KEEPALIVE") == 0)
+    {
+        //DO command keepalive, KEEPALIVE,<# of Messages>
+    }
+    else if(tokens[1].compare("GET_MSG") == 0)
+    {
+        //DO command GET MSG,<GROUP_ID>
+    }
+    else if(tokens[1].compare("SEND_MSG") == 0)
+    {
+        //DO command SEND MSG,<FROM GROUP ID>,<TO GROUP ID>,<Message content>
+    }
+    else if(tokens[1].compare("STATUSREQ") == 0)
+    {
+        //DO command STATUSREQ,FROM GROUP
+    }
+    else if(tokens[1].compare("STATUSRESP") == 0)
+    {
+        //DO command STATUSREQ,FROM GROUP
+    }
     else
     {
         std::cout << "Unknown command from server:" << buffer << std::endl;
@@ -499,17 +504,6 @@ void clientCommand(int clientSocket, fd_set *openSockets, int *maxfds,
         else if (tokens[0].compare("LEAVE") == 0)
         {
             //LEAVE,SERVER IP,PORT
-            if (!servers.empty())
-            {
-                for (auto const &pair : servers)
-                {
-                    if ((pair.second->IP.compare(tokens[1]) && pair.second->port.compare(tokens[2])) == 0)
-                    {
-                        close(pair.second->sock);
-                    }
-                }
-                std::cout << "There are no registered clients on this server" << std::endl;
-            }
         }
         else if(tokens[1].compare("STATUSREQ") == 0)
         {

@@ -91,23 +91,93 @@ int sendCommand(int clientSocket, std::string msg)
     memmove(buffer + 1, buffer, sizeof(buffer));
     buffer[0] = 0x01;
     buffer[n + 1] = 0x04;
-    std::cout << "sending message\n";
+    std::string temp(buffer, sizeof(buffer));
+    for (size_t i{1}; i <= temp.size(); ++i)
+    {
+        std::cout << std::hex << (size_t)temp.at(i - 1) << ((i % 16 == 0) ? "\n" : " ");
+    }
+    std::cout << "\nPadding finished, sending message\n";
     return send(clientSocket, buffer, sizeof(buffer), 0);
 }
+
 std::string removePadding(std::string msg)
 {
+    std::cout << "Size of msg: " << msg.length() << std::endl;
+    std::cout << "The message in removePadding '" << msg << "' This is the HEX" << std::endl;
+    for (size_t i{1}; i <= msg.size(); ++i)
+    {
+        std::cout << std::hex << (size_t)msg.at(i - 1) << ((i % 16 == 0) ? "\n" : " ");
+    }
     int i;
     std::string removePadding;
-    int n = msg.length();
-    char newBuffer[n - 2];
-    memset(newBuffer, 0, sizeof(newBuffer));
-    for (i = 0; i < sizeof(newBuffer); i++)
+    msg.erase((msg.length() - 1), 1);
+    msg.erase(0, 1);
+    removePadding = msg;
+    std::cout << "\nAfter removing the padding the HEX is \n";
+    for (size_t i{1}; i <= removePadding.size(); ++i)
     {
-        newBuffer[i] = +msg[i + 1];
+        std::cout << std::hex << (size_t)removePadding.at(i - 1) << ((i % 16 == 0) ? "\n" : " ");
     }
-    return removePadding = newBuffer;
+    std::cout << "\nthe message is now " << removePadding
+              << "\nend of removePadding, returning message" << std::endl;
+    std::cout << "The size at the end is: " << removePadding.length() << std::endl;
+    return removePadding;
 }
+std::string checkMessage(char *buffer)
+{
 
+    if (buffer[0] == 0x01)
+    {
+        std::string msg = buffer;
+        std::cout << "\n now printing HEX in checkMessage " << std::endl;
+        for (size_t i{1}; i <= msg.size(); ++i)
+        {
+            std::cout << std::hex << (size_t)msg.at(i - 1) << ((i % 16 == 0) ? "\n" : " ");
+        }
+        std::cout << std::endl;
+        bool finished = false;
+        // while (!finished)
+        // {
+        //     if (buffer[sizeof(buffer) + 1] == 0x04)
+        //     {
+        //         finished = true;
+        //     }
+        // }
+        if (msg[0] == 0x01 && msg[msg.length() - 1] == 0x04)
+        {
+            std::string msg = buffer;
+            std::cout << "passed SOH and EOT check" << std::endl;
+            std::string outcome;
+            outcome = removePadding(msg);
+            //char buffermsg[1025];
+            //strcpy(buffermsg, msg.c_str());
+            return outcome;
+        }
+        else
+        {
+            std::cout << "No EOT on the message, lets wait a bit" << std::endl;
+            usleep(10000);
+            if (msg[0] == 0x01 && msg[msg.length() - 1] == 0x04)
+            {
+                std::string msg(buffer, sizeof(buffer));
+                std::cout << "passed SOH and EOT check" << std::endl;
+                msg = removePadding(msg);
+                char buffermsg[1025];
+                strcpy(buffermsg, msg.c_str());
+                return msg;
+            }
+            std::cout << "No EOT on the message" << std::endl;
+            return buffer;
+            //What to do?
+        }
+        std::cout << "no padding on this message" << std::endl;
+    }
+    else
+    {
+        std::cout << "No padding on this message" << std::endl;
+        return buffer;
+    }
+}
 int writeToFile(char *buffer)
 {
     std::ofstream file;
@@ -117,7 +187,6 @@ int writeToFile(char *buffer)
     file << buffer;
     file.close();
 }
-
 void readFromFile()
 {
     std::string line;
@@ -206,17 +275,16 @@ std::string listClients()
     }
     else
     {
-        msg = ("Listing clients: \n");
+        msg = ("Listing clients: ");
         for (auto const &x : clients)
         {
             std::ostringstream oss;
-            oss << "Key: "
+            oss << "\nKey: "
                 << x.first
                 << ", Name: "
                 << x.second->name
                 << ", Socket: "
-                << x.second->sock
-                << std::endl;
+                << x.second->sock;
             msg += oss.str();
         }
     }
@@ -235,7 +303,7 @@ std::string listServers()
         for (auto const &x : servers)
         {
             std::ostringstream oss;
-            oss << "Key: "
+            oss << "\nKey: "
                 << x.first
                 << ", groupID: "
                 << x.second->groupID
@@ -244,13 +312,13 @@ std::string listServers()
                 << ", Port: "
                 << x.second->port
                 << ", Socket: "
-                << x.second->sock
-                << std::endl;
+                << x.second->sock;
             msg += oss.str();
         }
     }
     return msg;
 }
+
 // Process command from client on the server
 void clientCommand(int clientSocket, fd_set *openSockets, int *maxfds,
                    char *buffer)
@@ -366,6 +434,7 @@ void clientCommand(int clientSocket, fd_set *openSockets, int *maxfds,
         {
             std::cout << "Sending message to all connected servers " << std::endl;
             std::string msg;
+
             for (auto i = tokens.begin() + 1; i != tokens.end(); i++)
             {
                 msg += *i + " ";
@@ -373,8 +442,8 @@ void clientCommand(int clientSocket, fd_set *openSockets, int *maxfds,
 
             for (auto const &pair : servers)
             {
-                send(pair.second->sock, msg.c_str(), msg.length(), 0);
-                //sendCommand(pair.second->sock, msg);
+                //send(pair.second->sock, msg.c_str(), msg.length(), 0);
+                sendCommand(pair.second->sock, msg);
             }
         }
         else
@@ -401,14 +470,20 @@ void clientCommand(int clientSocket, fd_set *openSockets, int *maxfds,
     {
         std::string msg;
         msg = listServers();
+        for (auto const &pair : clients)
+        {
+            //send(pair.second->sock, msg.c_str(), msg.length(), 0);
+            sendCommand(pair.second->sock, msg);
+        }
     }
-    else if (tokens[1].compare("CLIENTS") == 0)
+    else if (tokens[1].compare("LISTCLIENTS") == 0)
     {
         for (auto const &pair : clients)
         {
             std::string msg;
             msg = listClients();
-            send(pair.second->sock, msg.c_str(), msg.length(), 0);
+            //send(pair.second->sock, msg.c_str(), msg.length(), 0);
+            sendCommand(pair.second->sock, msg);
         }
     }
 
@@ -578,9 +653,31 @@ int main(int argc, char *argv[])
 
                             closeServer(server->sock, &openSockets, &maxfds);
                         }
+
                         std::cout << "\nServer buffer: " << buffer << std::endl;
-                        writeToFile(buffer);
-                        clientCommand(server->sock, &openSockets, &maxfds, buffer);
+                        std::string temp1 = buffer;
+                        if (buffer[0] == 0x01)
+                        {
+                            std::cout << " now printing HEX after buffer " << std::endl;
+                            for (size_t i{1}; i <= temp1.size(); ++i)
+                            {
+                                std::cout << std::hex << (size_t)temp1.at(i - 1) << ((i % 16 == 0) ? "\n" : " ");
+                            }
+                            std::string temp = checkMessage(buffer);
+                            std::cout << "\nTemp : " << temp << " now printing HEX" << std::endl;
+                            for (size_t i{1}; i <= temp.size(); ++i)
+                            {
+                                std::cout << std::hex << (size_t)temp.at(i - 1) << ((i % 16 == 0) ? "\n" : " ");
+                            }
+                            strcpy(buffer, temp.c_str());
+                            writeToFile(buffer);
+                            clientCommand(server->sock, &openSockets, &maxfds, buffer);
+                        }
+                        else
+                        {
+                            std::cout << "no padding" << std::endl;
+                        }
+
                         // We don't check for -1 (nothing received) because select()
                         // only triggers if there is something on the socket for us.
                     }
@@ -608,7 +705,6 @@ std::string viewFiles()
     closedir(dr);
     return filesInDir;
 }
-
 std::string constructCommand(std::string str)
 {
 

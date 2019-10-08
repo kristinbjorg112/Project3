@@ -299,22 +299,38 @@ std::string listServers()
     }
     else
     {
-        msg = ("Listing servers connected to this one: ");
-        for (auto const &x : servers)
+       // msg = ("Listing servers connected to this one: ");
+       msg = "SERVERS,";
+
+       for (auto const &x : servers)
         {
             std::ostringstream oss;
-            oss << "\nKey: "
-                << x.first
-                << ", groupID: "
-                << x.second->groupID
-                << ", IP: "
+            oss << x.second->groupID
+                << ","
                 << x.second->IP
-                << ", Port: "
+                << ","
                 << x.second->port
-                << ", Socket: "
-                << x.second->sock;
+                << ","
+                << x.second->sock
+                << ";";
+                
             msg += oss.str();
         }
+        // for (auto const &x : servers)
+        // {
+        //     std::ostringstream oss;
+        //     oss << "\nKey: "
+        //         << x.first
+        //         << ", groupID: "
+        //         << x.second->groupID
+        //         << ", IP: "
+        //         << x.second->IP
+        //         << ", Port: "
+        //         << x.second->port
+        //         << ", Socket: "
+        //         << x.second->sock;
+        //     msg += oss.str();
+        // }
     }
     return msg;
 }
@@ -612,7 +628,12 @@ void clientCommand(int clientSocket, fd_set *openSockets, int *maxfds,
         }
         else if(tokens[0].compare("LISTSERVERS") == 0)
         {
-            //DO command LISTSERVERS List servers your server is connected to
+            std::string msg;
+            msg = listServers();
+            for (auto const &pair : clients)
+            {
+               sendCommand(pair.second->sock, msg);
+            }
         }
         else
         {

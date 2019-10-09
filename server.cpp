@@ -358,14 +358,14 @@ std::string listClients()
 std::string listServers()
 {
     std::string msg;
-    if (servers.empty())
-    {
-        return msg = ("No servers connected to this server");
-    }
-    else
-    {
+    // if (servers.empty())
+    // {
+    //     return msg = ("No servers connected to this server");
+    // }
+    //else
+    //{
        // msg = ("Listing servers connected to this one: ");
-       msg = "SERVERS,";
+       msg = "SERVERS," + serverName + "," + "127.0.0.1" + "," + serverPort + ";";
 
        for (auto const &x : servers)
         {
@@ -375,12 +375,10 @@ std::string listServers()
                 << x.second->IP
                 << ","
                 << x.second->port
-                << ","
-                << x.second->sock
                 << ";";
                 
             msg += oss.str();
-        }
+      //  }
         // for (auto const &x : servers)
         // {
         //     std::ostringstream oss;
@@ -511,23 +509,24 @@ void serverCommand(int serverSocket, fd_set *openSockets, int *maxfds,
             std::cout << "LEAVE: There are no registered servers on this server" << std::endl;
         }
     }
-    else if(tokens[1].compare("KEEPALIVE") == 0)
+    else if(tokens[0].compare("KEEPALIVE") == 0)
     {
         //DO command keepalive, KEEPALIVE,<# of Messages>
     }
-    else if(tokens[1].compare("GET_MSG") == 0)
+    else if(tokens[0].compare("GET_MSG") == 0)
     {
         //DO command GET MSG,<GROUP_ID>
     }
-    else if(tokens[1].compare("SEND_MSG") == 0)
+    else if(tokens[0].compare("SEND_MSG") == 0)
     {
-        //DO command SEND MSG,<FROM GROUP ID>,<TO GROUP ID>,<Message content>
+        std::cout << "message recived from group: " << token[1];
+        std::cout << " " << token[3];
     }
-    else if(tokens[1].compare("STATUSREQ") == 0)
+    else if(tokens[0].compare("STATUSREQ") == 0)
     {
         //DO command STATUSREQ,FROM GROUP
     }
-    else if(tokens[1].compare("STATUSRESP") == 0)
+    else if(tokens[0].compare("STATUSRESP") == 0)
     {
         //DO command STATUSREQ,FROM GROUP
     }
@@ -581,7 +580,29 @@ void clientCommand(int clientSocket, fd_set *openSockets, int *maxfds,
         }
         else if(tokens[1].compare("SEND_MSG") == 0)
         {
-            //DO command SEND MSG,<FROM GROUP ID>,<TO GROUP ID>,<Message content>
+            std::string msg;
+            std::cout << "Sending message to group: ";
+             for (auto const &pair : servers)
+            {
+                if (pair.second->groupID.compare(tokens[2]) == 0)
+                { 
+                    msg ="SEND_MSG," + serverName + ",";
+                    std::cout << "found server to send";
+                        for (auto i = tokens.begin() + 2; i != tokens.end(); i++)
+                        {
+                            msg += *i;
+                        }
+                        std::cout << msg;
+                    //std::ostringstream oss;
+                    //oss << token[1]
+                      //  << ","
+                       // << token[2]
+                        //<< ","
+                        //<< token[3];
+                        //msg += oss.str();
+                    }
+                    sendCommand(pair.second->sock,msg);
+            }
         }
         else if (tokens[0].compare("LEAVE") == 0)
         {

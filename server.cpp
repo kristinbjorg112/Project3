@@ -113,15 +113,16 @@ std::string removePadding(std::string msg)
     msg.erase((msg.length() - 1), 1);
     msg.erase(0, 1);
     removePadding = msg;
+   
     //std::cout << "\nAfter removing the padding the HEX is \n";
     // for (size_t i{1}; i <= removePadding.size(); ++i)
     // {
     //     std::cout << std::hex << (size_t)removePadding.at(i - 1) << ((i % 16 == 0) ? "\n" : " ");
     // }
-    //  std::cout << "\nthe message is now " << removePadding
-    std::cout << "\nend of removePadding, returning message" << std::endl;
+   // std::cout << "\nend of removePadding, returning message" << std::endl;
+    //std::cout << removePadding << " HERE IS THE REMOVE PADDING ";
     //std::cout << "The size at the end is: " << removePadding.length() << std::endl;
-    return removePadding;
+    return msg;
 }
 std::string checkMessage(char *buffer)
 {
@@ -407,8 +408,10 @@ void serverCommand(int serverSocket, fd_set *openSockets, int *maxfds,
     std::string str(buffer);
     if (str.find(",") != std::string::npos)
     {
-        std::cout << "Found , in the command";
-        str = constructCommand(str);
+        std::cout << "Found , in the command" << std::endl;
+        std::string temp;
+        temp = constructCommand(str);
+        str = temp;
     }
 
     // Split command from server into tokens for parsing
@@ -519,8 +522,13 @@ void serverCommand(int serverSocket, fd_set *openSockets, int *maxfds,
     }
     else if(tokens[0].compare("SEND_MSG") == 0)
     {
-        std::cout << "message recived from group: " << token[1];
-        std::cout << " " << token[3];
+        std::cout << "Message from group: " << tokens[1] << std::endl;
+        for (auto i = tokens.begin() + 3; i != tokens.end(); i++)
+         {
+             std::cout << *i << " ";
+                            
+        }
+        std::cout.flush();
     }
     else if(tokens[0].compare("STATUSREQ") == 0)
     {
@@ -591,15 +599,9 @@ void clientCommand(int clientSocket, fd_set *openSockets, int *maxfds,
                         for (auto i = tokens.begin() + 2; i != tokens.end(); i++)
                         {
                             msg += *i;
+                            msg += ",";
                         }
                         std::cout << msg;
-                    //std::ostringstream oss;
-                    //oss << token[1]
-                      //  << ","
-                       // << token[2]
-                        //<< ","
-                        //<< token[3];
-                        //msg += oss.str();
                     }
                     sendCommand(pair.second->sock,msg);
             }
@@ -886,8 +888,9 @@ int main(int argc, char *argv[])
                         // {
                         //     std::cout << std::hex << (size_t)temp.at(i - 1) << ((i % 16 == 0) ? "\n" : " ");
                         // }
+                        std::cout << "Finishd checkMessage" << std::endl;
                         strcpy(buffer, temp.c_str());
-                        writeToFile(buffer);
+                        //writeToFile(buffer);
                         serverCommand(server->sock, &openSockets, &maxfds, buffer);
 
                         // We don't check for -1 (nothing received) because select()

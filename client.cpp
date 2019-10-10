@@ -119,9 +119,14 @@ int main(int argc, char *argv[])
     // printf("SC <IPaddress> <port> : Connect to server through the server\n");
     // printf("LIST <CLIENTS>/<SERVERS>: Lists connected clients/servers\n");
     printf("====================CLIENT COMMAND=======================\n");
-    printf("LISTSERVERS                   Lists all connected servers\n");
     printf("GETMSG <GROUPID>           TODO, dose the same as GET_MSG\n");
+    printf("SENDMSG <GROUPID>     Send a message to a specific server\n");
+    printf("SENDMSG           Send a message to all connected servers\n");
+    printf("LISTSERVERS                   Lists all connected servers\n");
+    printf("QC <int, int>             Connect to 127.0.0.0 port 100??\n");
     printf("====================SERVER COMMAND=======================\n");
+    printf("CONNECT <GROUPID,PORT,IP>        TODO, take a closer look\n");
+    printf("LISTSERVERS <GROUPID> Servers conneced to some other serv\n");
 
     while (!finished)
     {

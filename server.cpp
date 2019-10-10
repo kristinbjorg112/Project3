@@ -235,8 +235,8 @@ std::string getMessage(std::string groupId)
         {
             if (x.second.size() == 0)
             {
-                std::cout << "There are no new messages from this group" << std::endl;
-                oss << "There are no new messages from this group" << std::endl;
+                std::cout << "There are no new messages on this server" << std::endl;
+                oss << "There are no new messages on this server" << std::endl;
             }
             else
             {
@@ -474,7 +474,7 @@ void serverCommand(int serverSocket, fd_set *openSockets, int *maxfds,
     std::cout << "serverCommand: " << std::endl;
     if (checkIfGroupIdExsists(serverSocket))
     {
-        std::cout << "there is no GROUPID associated with this server socket. Unable to add message to map until thats done";
+        std::cout << "there is no GROUPID associated with this server socket. Unable to add message to map until thats done" << std::endl;
     }
     else
     {
@@ -553,10 +553,10 @@ void serverCommand(int serverSocket, fd_set *openSockets, int *maxfds,
         dircontent = viewFiles();
         std::cout << dircontent << std::endl;
     }
-    else if (tokens[0].compare("LISTSERVERS") == 0)
+    else if (tokens[0].compare("SERVERS") == 0)
     {
         //Send to specific groupID
-        std::cout << "serverCommand->LISTSERVERS: sending list" << std::endl;
+        std::cout << "serverCommand->SERVERS: sending list" << std::endl;
         std::string msg;
         msg = listServers();
         for (auto const &pair : servers)
@@ -585,15 +585,21 @@ void serverCommand(int serverSocket, fd_set *openSockets, int *maxfds,
     }
     else if (tokens[0].compare("GET_MSG") == 0)
     {
-        std::cout << "serverCommand: Comes to GET_MSG" << std::endl;
-        //not tested
         if (!servers.empty())
         {
-            std::string msg = getMessage(tokens[1]);
-            //TODO sends to all servers. Should only send to one
-            for (auto const &pair : servers)
+            if (tokens.size() != 2)
             {
-                send(pair.second->sock, msg.c_str(), msg.length(), 0);
+                sendCommand(serverSocket, "Please insert groupID\n");
+            }
+            else
+            {
+                std::cout << "Getting msg";
+                std::string msg = getMessage(tokens[1]);
+                //TODO sends to all servers. Should only send to one
+                for (auto const &pair : servers)
+                {
+                    sendCommand(serverSocket, msg);
+                }
             }
         }
         else
@@ -635,7 +641,7 @@ void clientCommand(int clientSocket, fd_set *openSockets, int *maxfds,
     // Split command from client into tokens for parsing
     std::stringstream stream(buffer);
     std::string str(buffer);
-    if (str.find(",") != std::string::npos)
+    if (str.find("0x01") != std::string::npos)
     {
         std::cout << "Wrong port hole, dummy. The right one is the port-hole above this one. Please try again" << std::endl;
         std::string msg = "\nWrong port-hole, dummy. The right one is the port-hole above this one. Please try again\n";
@@ -787,8 +793,27 @@ void clientCommand(int clientSocket, fd_set *openSockets, int *maxfds,
             }
         }
 
-        else if (tokens[0].compare("MSG") == 0)
+        else if (tokens[0].compare("GETMSG") == 0)
         {
+            std::cout << "clientCommand: Comes to GETMSG" << std::endl;
+            //not tested
+            if (!clients.empty())
+            {
+                if (tokens.size() != 2)
+                {
+                    std::string error = "Please insert groupID";
+                    send(clientSocket, error.c_str(), error.length(), 0);
+                }
+                else
+                {
+                    std::string msg = getMessage(tokens[1]);
+                    send(clientSocket, msg.c_str(), msg.length(), 0);
+                }
+            }
+            else
+            {
+                std::cout << "There are no clients connected to this server" << std::endl;
+            }
         }
 
         else if (tokens[0].compare("SC") == 0)

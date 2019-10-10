@@ -111,13 +111,17 @@ int main(int argc, char *argv[])
     std::thread serverThread(listenServer, serverSocket);
 
     finished = false;
-    printf("CONNECT <name>        : Connect to server as <name>\n");
-    printf("LEAVE                 : Close connection to client\n");
-    printf("WHO                   : Show connections to server\n");
-    printf("MSG <name> <message>  : Send message to name\n");
-    //printf("MSG ALL <message>     : Send message to all connected\n");
-    printf("SC <IPaddress> <port> : Connect to server through the server\n");
-    printf("LIST <CLIENTS>/<SERVERS>: Lists connected clients/servers\n");
+    // printf("CONNECT <name>        : Connect to server as <name>\n");
+    // printf("LEAVE                 : Close connection to client\n");
+    // printf("WHO                   : Show connections to server\n");
+    // printf("MSG <name> <message>  : Send message to name\n");
+    // //printf("MSG ALL <message>     : Send message to all connected\n");
+    // printf("SC <IPaddress> <port> : Connect to server through the server\n");
+    // printf("LIST <CLIENTS>/<SERVERS>: Lists connected clients/servers\n");
+    printf("====================CLIENT COMMAND=======================\n");
+    printf("LISTSERVERS                   Lists all connected servers\n");
+    printf("GETMSG <GROUPID>           TODO, dose the same as GET_MSG\n");
+    printf("====================SERVER COMMAND=======================\n");
 
     while (!finished)
     {

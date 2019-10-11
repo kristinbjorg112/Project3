@@ -254,6 +254,14 @@ std::string getMessage(std::string groupId)
     }
     return oss.str();
 }
+
+void lisetserversOnConnect(int sock)
+{
+    //Send to specific server
+    std::cout << "Connected to a server Sending it a listserver" << std::endl;
+    std::string msg = "LISTSERVERS" + ',' + serverName + ',' + getIp() + ',' + serverPort;
+    sendCommand(sock, msg);
+}
 //Added, based on main's client.cpp
 void ConnectionToServers(std::string stringIpAddress, std::string stringPort, int clientSocket, fd_set *openSocekts)
 {
@@ -285,11 +293,11 @@ void ConnectionToServers(std::string stringIpAddress, std::string stringPort, in
     // Turn on SO_REUSEADDR to allow socket to be quickly reused after
     // program exit.
 
-    if (setsockopt(serverSocket, SOL_SOCKET, SO_REUSEADDR, &set, sizeof(set)) < 0)
-    {
-        printf("Failed to set SO_REUSEADDR for port %s\n", port);
-        perror("setsockopt failed: ");
-    }
+     if (setsockopt(serverSocket, SOL_SOCKET, SO_REUSEADDR, &set, sizeof(set)) < 0)
+     {
+         printf("Failed to set SO_REUSEADDR for port %s\n", port);
+         perror("setsockopt failed: ");
+     }
 
     if (connect(serverSocket, svr->ai_addr, svr->ai_addrlen) < 0)
     {
@@ -306,14 +314,9 @@ void ConnectionToServers(std::string stringIpAddress, std::string stringPort, in
     FD_SET(serverSocket, openSocekts);
     // And update the maximum file descriptor
     maxfds = std::max(maxfds, serverSocket);
-    std::string hellomessage = "CONNECT," + serverName + "," + port + "," + ipAddress;
-    nwrite = sendCommand(serverSocket, hellomessage);
-    if (nwrite == -1)
-    {
-        perror("send() to server failed: ");
-        //finished = true;
-    }
+    lisetserversOnConnect(serverSocket);
 }
+
 int open_socket(int portno);
 void closeClient(int clientSocket, fd_set *openSockets, int *maxfds);
 void closeServer(int serverSocket, fd_set *openSockets, int *maxfds);
@@ -523,76 +526,81 @@ void serverCommand(int serverSocket, fd_set *openSockets, int *maxfds,
         temp = constructCommand(str);
         str = temp;
     }
-    if (str.find(";") != std::string::npos)
-    {
-        std::string withoutSemicolon = removeSemicolon(str);
-        std::cout << "Listing servers: " << std::endl
-                  << buffer << std::endl;
-        addMessageToMap(serverSocket, withoutSemicolon);
-        return;
-    }
+    // if (str.find(";") != std::string::npos)
+    // {
+    //     std::string withoutSemicolon = removeSemicolon(str);
+    //     std::cout << "Listing servers: " << std::endl
+    //               << buffer << std::endl;
+    //     addMessageToMap(serverSocket, withoutSemicolon);
+    //     //return;
+    // }
     // Split command from server into tokens for parsing
     std::stringstream stream(str);
 
-    if (checkIfGroupIdExsists(serverSocket))
-    {
-        std::cout << "there is no GROUPID associated with this server socket. Unable to add message to map until thats done" << std::endl;
-    }
-    else
-    {
-        addMessageToMap(serverSocket, str);
-    }
+    // if (checkIfGroupIdExsists(serverSocket))
+    // {
+    //     std::cout << "there is no GROUPID associated with this server socket. Unable to add message to map until thats done" << std::endl;
+    // }
+    // else
+    // {
+    //     addMessageToMap(serverSocket, str);
+    // }
     while (stream >> token)
         tokens.push_back(token);
 
-    if (tokens[0].compare("CONNECT") == 0 && (tokens.size() == 4))
+    // if (tokens[0].compare("CONNECT") == 0 && (tokens.size() == 4))
+    // {
+    //     for (auto const &pair : servers)
+    //     {
+    //         if (pair.second->sock == serverSocket)
+    //         {
+    //             pair.second->groupID = tokens[1];
+    //             pair.second->port = tokens[2];
+    //             pair.second->IP = getIp();
+
+    //             std::ostringstream oss;
+    //             oss << pair.second->groupID << " "
+    //                 << pair.second->port << " "
+    //                 << pair.second->IP << " ";
+    //             std::string temp = oss.str();
+    //             std::cout << "The connected server is: '" << temp << "'" << std::endl;
+
+    //             addMessageToMap(serverSocket, str);
+    //         }
+    //     }
+
+    if ((tokens[0].compare("LISTSERVERS")) == 0)
     {
-        for (auto const &pair : servers)
+        std::cout << "got command to listservers seting it in my map" << std::endl;
+        if (tokens.size() == 4)
         {
-            if (pair.second->sock == serverSocket)
+            for (auto const &pair : servers)
             {
-                pair.second->groupID = tokens[1];
-                pair.second->port = tokens[2];
-                pair.second->IP = getIp();
+                if (pair.second->sock == serverSocket)
+                {
+                    pair.second->IP = tokens[2];
+                    pair.second->port = tokens[3];
+                    pair.second->groupID = tokens[1];
 
-                std::ostringstream oss;
-                oss << pair.second->groupID << " "
-                    << pair.second->port << " "
-                    << pair.second->IP << " ";
-                std::string temp = oss.str();
-                std::cout << "The connected server is: '" << temp << "'" << std::endl;
+                    std::ostringstream oss;
+                    oss << pair.second->groupID << " "
+                        << pair.second->port << " "
+                        << pair.second->IP << " ";
 
-                addMessageToMap(serverSocket, str);
+                    std::string temp = oss.str();
+
+                    std::cout << temp << "Name of new connected server" << std::endl;
+                }
             }
         }
-    }
-    else if (tokens[0].compare("LISTSERVERS") == 0)
-    {
-        //Send to specific server
-        std::cout << "serverCommand->SERVERS: sending list" << std::endl;
         std::string msg;
         msg = listServers();
-        if (checkIfTokenIsGroupId(tokens[1]))
-        {
-            std::cout << "checkIfTokenIsGroupId(tokens[1]) sucess" << std::endl;
-            if (!checkIfServerWithThatGroupIdIsConnected(tokens[1]))
-            {
-                std::cout << "There is no connected server with this GROUPID" << std::endl;
-            }
-            int socket = getServerSocketFromGroupID(tokens[1]);
-            sendCommand(socket, msg);
-        }
+        sendCommand(serverSocket, msg);
     }
     else if (tokens[0].compare("SERVERS") == 0)
     {
         //Send to all servers
         std::cout << "serverCommand->SERVERS: sending list" << std::endl;
-        std::string msg;
-        msg = listServers();
-        for (auto const &pair : servers)
-        {
-            sendCommand(pair.second->sock, msg);
-        }
     }
     else if (tokens[0].compare("LEAVE") == 0)
     {
@@ -799,7 +807,7 @@ void clientCommand(int clientSocket, fd_set *openSockets, int *maxfds,
             send(clientSocket, error.c_str(), error.length() - 1, 0);
         }
     }
-    else if (tokens[0].compare("LISTSERVERS") == 0)
+    else if (tokens[0].compare("LISTSERVERS") == 0 && tokens.size() == 1)
     {
         std::string msg = listServers();
         send(clientSocket, msg.c_str(), msg.length() - 1, 0);
@@ -815,10 +823,8 @@ void clientCommand(int clientSocket, fd_set *openSockets, int *maxfds,
         std::string base = "100";
         std::string port = tokens[1];
         base += port;
+        std::cout << "in QC" << std::endl;
         ConnectionToServers("127.0.0.1", base, clientSocket, openSockets);
-    }
-    if (tokens[0].compare("CONNECT") == 0)
-    {
     }
     else
     {

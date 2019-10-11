@@ -225,47 +225,41 @@ std::string getIp();
 
 std::string getMessage(std::string groupId)
 {
-    // std::cout << "Comes to getMessage: the token is " << groupId << std::endl;
-    // std::map<std::string, std::vector<std::string>>::iterator it;
-    // it = msgMap.find(groupId);
-    // std::ostringstream oss;
-    // if (it == msgMap.end())
-    // {
-    //     std::cout << "There are no messages from this group" << std::endl;
-    //     oss << "There are no messages from this group";
-    //     for (auto &x : msgMap)
-    //     {
-    //         if (!x.second.size() == 0)
-    //         {
-    //             std::cout << "Groups with new messages: " << std::endl;
-    //             oss << "\nGroups that have new messages on the server: " << x.first << std::endl;
-    //         }
-    //     }
-    // }
-    // else
-    // {
-    //     for (auto &x : msgMap)
-    //     {
-    //         if (x.second.size() == 0)
-    //         {
-    //             std::cout << "There are no new messages on this server" << std::endl;
-    //             oss << "There are no new messages on this server";
-    //         }
-    //         else
-    //         {
-    //             std::cout << "All messages from: " << x.first << std::endl;
-    //             oss << "All messages from: " << x.first << std::endl;
-    //             for (auto i = x.second.begin(); i < x.second.end(); i++)
-    //             {
-    //                 std::cout << "Message: ";
-    //                 std::cout << *i << std::endl;
-    //                 oss << *i << std::endl;
-    //                 x.second.pop_back();
-    //             }
-    //         }
-    //     }
-    // }
-    // return oss.str();
+    std::cout << "Comes to getMessage: the token is " << groupId << std::endl;
+    std::ostringstream oss;
+    if (messages.find(groupId) == messages.end())
+    {
+        std::cout << "There are no messages from this group" << std::endl;
+        oss << "There are no messages from this group";
+    }
+    else
+    {
+        for (auto &x : messages)
+        {
+            if (x.second->toGroupID == groupId)
+            {
+
+                if (x.second->vMsg.size() == 0)
+                {
+                    std::cout << "There are no new messages on this server" << std::endl;
+                    oss << "There are no new messages on this server";
+                }
+                else
+                {
+                    std::cout << "All messages to: " << x.second->fromGroupID << std::endl;
+                    oss << "All messages to: " << x.second->fromGroupID << std::endl;
+                    for (auto i = x.second->vMsg.begin(); i < x.second->vMsg.end(); i++)
+                    {
+                        std::cout << "Message: ";
+                        std::cout << *i << std::endl;
+                        oss << *i << std::endl;
+                        x.second->vMsg.pop_back();
+                    }
+                }
+            }
+        }
+    }
+    return oss.str();
 }
 
 //Added, based on main's client.cpp
@@ -795,63 +789,58 @@ void clientCommand(int clientSocket, fd_set *openSockets, int *maxfds,
     }
     else if (tokens[0].compare("SENDMSG") == 0 || tokens[0].compare("RS") == 0)
     {
-        if (!servers.empty())
+
+        //If token is a GROUPID send a message only to that
+        //group. Otherwise, send to all groups
+        if (checkIfTokenIsGroupId(tokens[1]))
         {
-            //If token is a GROUPID send a message only to that
-            //group. Otherwise, send to all groups
-            if (checkIfTokenIsGroupId(tokens[1]))
+
+            if (!checkIfServerWithThatGroupIdIsConnected(tokens[1]))
             {
+                std::cout << "clientCommand->SM: unable to send command, no connected servers" << std::endl;
+                std::string error = "Unable to send command, no connected servers, adding to map";
+                send(clientSocket, error.c_str(), error.length() - 1, 0);
+                Message *nMessage = new Message(tokens[1]);
 
-                if (!checkIfServerWithThatGroupIdIsConnected(tokens[1]))
+                std::string msg;
+                for (auto i = tokens.begin() + 2; i != tokens.end(); i++)
                 {
-                    std::cout << "clientCommand->SM: unable to send command, no connected servers" << std::endl;
-                    std::string error = "Unable to send command, no connected servers, adding to map";
-                    send(clientSocket, error.c_str(), error.length() - 1, 0);
-                    Message *nMessage = new Message(tokens[1]);
-
-                    std::string msg;
-                    for (auto i = tokens.begin() + 2; i != tokens.end(); i++)
-                    {
-                        msg += *i + " ";
-                    }
-                    nMessage->toGroupID = tokens[1];
-                    nMessage->vMsg.push_back(msg);
-                    nMessage->fromGroupID = serverName;
-                    messages.emplace(tokens[1], nMessage);
-                    for (auto const &x : messages)
-                    {
-                        std::cout << "To Group   :" << x.second->toGroupID << std::endl;
-                        for (auto i = x.second->vMsg.begin(); i != x.second->vMsg.end(); i++)
-                        {
-                            std::cout << *i << std::endl;
-                        }
-                        std::cout << "From Group :" << x.second->fromGroupID << std::endl;
-                    }
+                    msg += *i + " ";
                 }
-                else
+                nMessage->toGroupID = tokens[1];
+                nMessage->vMsg.push_back(msg);
+                nMessage->fromGroupID = serverName;
+                messages.emplace(tokens[1], nMessage);
+                for (auto const &x : messages)
                 {
-                    std::cout << "clientCommand->SENDMSG/RS: Sending the message '";
-                    std::string msg = "SEND_MSG," + serverName + ',' + tokens[1] + ',';
-                    for (auto i = tokens.begin() + 2; i != tokens.end(); i++)
+                    std::cout << "To Group   :" << x.second->toGroupID << std::endl;
+                    for (auto i = x.second->vMsg.begin(); i != x.second->vMsg.end(); i++)
                     {
-                        msg += *i + " ";
+                        std::cout << *i << std::endl;
                     }
-                    std::cout << "Message is  " << msg << std::endl;
-                    int socket = getServerSocketFromGroupID(tokens[1]);
-                    if (socket == -1)
-                    {
-                        std::cout << "unable to find serversocket from GROUPID" << std::endl;
-                    }
-                    sendCommand(socket, msg);
+                    std::cout << "From Group :" << x.second->fromGroupID << std::endl;
                 }
             }
             else
             {
-                std::cout << "clientCommand->NOT VALID GROUPID" << std::endl;
+                std::cout << "clientCommand->SENDMSG/RS: Sending the message '";
+                std::string msg = "SEND_MSG," + serverName + ',' + tokens[1] + ',';
+                for (auto i = tokens.begin() + 2; i != tokens.end(); i++)
+                {
+                    msg += *i + " ";
+                }
+                std::cout << "Message is  " << msg << std::endl;
+                int socket = getServerSocketFromGroupID(tokens[1]);
+                if (socket == -1)
+                {
+                    std::cout << "unable to find serversocket from GROUPID" << std::endl;
+                }
+                sendCommand(socket, msg);
             }
         }
         else
         {
+            std::cout << "clientCommand->NOT VALID GROUPID" << std::endl;
         }
     }
 

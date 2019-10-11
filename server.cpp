@@ -79,9 +79,20 @@ public:
 
     ~Server() {} // Virtual destructor defined for base class
 };
-std::map<int, Client *> clients;                        // Lookup table for per Client information
-std::map<int, Server *> servers;                        // Lookup table for per Server information
-std::map<std::string, std::vector<std::string>> msgMap; // Datastructure for messages
+
+class Message
+{
+public:
+    std::string toGroupID;
+    std::string fromGroupID;
+    std::vector<std::string> messages;
+    Message(std::string newGroupID) : toGroupID(newGroupID) {}
+    ~Message() {}
+};
+std::map<int, Client *> clients;           // Lookup table for per Client information
+std::map<int, Server *> servers;           // Lookup table for per Server information
+std::map<std::string, Message *> Messages; // Datastructure for messages
+//std::map<std::string, std::map<std::string, std::vector<std::string>> msgMessage> msgMap; // Datastructure for messages
 
 // Open socket for specified port.
 //
@@ -212,49 +223,51 @@ std::string getIp();
 
 std::string getMessage(std::string groupId)
 {
-    std::cout << "Comes to getMessage: the token is " << groupId << std::endl;
-    std::map<std::string, std::vector<std::string>>::iterator it;
-    it = msgMap.find(groupId);
-    std::ostringstream oss;
-    if (it == msgMap.end())
-    {
-        std::cout << "There are no messages from this group" << std::endl;
-        oss << "There are no messages from this group";
-        for (auto &x : msgMap)
-        {
-            if (!x.second.size() == 0)
-            {
-                std::cout << "Groups with new messages: " << std::endl;
-                oss << "\nGroups that have new messages on the server: " << x.first << std::endl;
-            }
-        }
-    }
-    else
-    {
-        for (auto &x : msgMap)
-        {
-            if (x.second.size() == 0)
-            {
-                std::cout << "There are no new messages on this server" << std::endl;
-                oss << "There are no new messages on this server";
-            }
-            else
-            {
-                std::cout << "All messages from: " << x.first << std::endl;
-                oss << "All messages from: " << x.first << std::endl;
-                for (auto i = x.second.begin(); i < x.second.end(); i++)
-                {
-                    std::cout << "Message: ";
-                    std::cout << *i << std::endl;
-                    oss << *i << std::endl;
-                    x.second.pop_back();
-                }
-            }
-        }
-    }
-    return oss.str();
+    // std::cout << "Comes to getMessage: the token is " << groupId << std::endl;
+    // std::map<std::string, std::vector<std::string>>::iterator it;
+    // it = msgMap.find(groupId);
+    // std::ostringstream oss;
+    // if (it == msgMap.end())
+    // {
+    //     std::cout << "There are no messages from this group" << std::endl;
+    //     oss << "There are no messages from this group";
+    //     for (auto &x : msgMap)
+    //     {
+    //         if (!x.second.size() == 0)
+    //         {
+    //             std::cout << "Groups with new messages: " << std::endl;
+    //             oss << "\nGroups that have new messages on the server: " << x.first << std::endl;
+    //         }
+    //     }
+    // }
+    // else
+    // {
+    //     for (auto &x : msgMap)
+    //     {
+    //         if (x.second.size() == 0)
+    //         {
+    //             std::cout << "There are no new messages on this server" << std::endl;
+    //             oss << "There are no new messages on this server";
+    //         }
+    //         else
+    //         {
+    //             std::cout << "All messages from: " << x.first << std::endl;
+    //             oss << "All messages from: " << x.first << std::endl;
+    //             for (auto i = x.second.begin(); i < x.second.end(); i++)
+    //             {
+    //                 std::cout << "Message: ";
+    //                 std::cout << *i << std::endl;
+    //                 oss << *i << std::endl;
+    //                 x.second.pop_back();
+    //             }
+    //         }
+    //     }
+    // }
+    // return oss.str();
 }
+
 //Added, based on main's client.cpp
+
 void ConnectionToServers(std::string stringIpAddress, std::string stringPort, int clientSocket, fd_set *openSocekts)
 {
     struct addrinfo hints, *svr;    // Network host entry for server
@@ -301,12 +314,12 @@ void ConnectionToServers(std::string stringIpAddress, std::string stringPort, in
     Server *nServer = new Server(serverSocket);
     nServer->IP = ipAddress;
     nServer->port = port;
-    nServer->groupID = "V_GROUP_0";
+    // nServer->groupID = "V_GROUP_0";
     servers.emplace(serverSocket, nServer);
     FD_SET(serverSocket, openSocekts);
     // And update the maximum file descriptor
     maxfds = std::max(maxfds, serverSocket);
-    std::string hellomessage = "CONNECT," + serverName + "," + port + "," + ipAddress;
+    std::string hellomessage = "LISTSERVERS," + serverName + "," + getIp() + "," + serverPort;
     nwrite = sendCommand(serverSocket, hellomessage);
     if (nwrite == -1)
     {
@@ -388,22 +401,22 @@ std::string listServers()
 
 void printAllMessagesInMap()
 {
-    for (auto &x : msgMap)
-    {
-        std::cout << "msgMap key: " << x.first << std::endl;
-        if (x.second.size() == 0)
-        {
-            return;
-        }
-        else
-        {
-            for (auto i = x.second.begin(); i < x.second.end(); i++)
-            {
-                std::cout << "Message: ";
-                std::cout << *i << std::endl;
-            }
-        }
-    }
+    // for (auto &x : msgMap)
+    // {
+    //     std::cout << "msgMap key: " << x.first << std::endl;
+    //     if (x.second.size() == 0)
+    //     {
+    //         return;
+    //     }
+    //     else
+    //     {
+    //         for (auto i = x.second.begin(); i < x.second.end(); i++)
+    //         {
+    //             std::cout << "Message: ";
+    //             std::cout << *i << std::endl;
+    //         }
+    //     }
+    // }
 }
 void addMessageToMapByGroupID(std::string group, std::string str)
 {
@@ -412,63 +425,63 @@ void addMessageToMapByGroupID(std::string group, std::string str)
 
     std::map<std::string, std::vector<std::string>>::iterator it;
 
-    it = msgMap.find(group);
-    if (it == msgMap.end())
-    {
-        std::cout << "No groupID exsists for this group, making new msgMap" << std::endl;
-        std::vector<std::string> newMessage;
-        newMessage.push_back(msg);
-        msgMap.emplace(group, newMessage);
-    }
-    else
-    {
-        std::cout << "Adding message to msgMap" << std::endl;
-        msgMap[group].push_back(msg);
-    }
+    // it = msgMap.find(group);
+    // if (it == msgMap.end())
+    // {
+    //     std::cout << "No groupID exsists for this group, making new msgMap" << std::endl;
+    //     std::vector<std::string> newMessage;
+    //     newMessage.push_back(msg);
+    //     msgMap.emplace(group, newMessage);
+    // }
+    // else
+    // {
+    //     std::cout << "Adding message to msgMap" << std::endl;
+    //     msgMap[group].push_back(msg);
+    // }
 }
 void addMessageToMap(int serverSocket, std::string str)
 {
-    std::string currentTime = getTimeStamp();
-    std::string msg = currentTime + str;
-    for (auto const &socket : servers)
-    {
-        if (socket.second->sock == serverSocket)
-        {
-            std::map<std::string, std::vector<std::string>>::iterator it;
+    // std::string currentTime = getTimeStamp();
+    // std::string msg = currentTime + str;
+    // for (auto const &socket : servers)
+    // {
+    //     if (socket.second->sock == serverSocket)
+    //     {
+    //         std::map<std::string, std::vector<std::string>>::iterator it;
 
-            it = msgMap.find(socket.second->groupID);
-            if (it == msgMap.end())
-            {
-                std::cout << "No groupID exsists for this group, making new msgMap" << std::endl;
-                std::vector<std::string> newMessage;
-                newMessage.push_back(msg);
-                msgMap.emplace(socket.second->groupID, newMessage);
-            }
-            else
-            {
-                std::cout << "Adding message to msgMap" << std::endl;
-                msgMap[socket.second->groupID].push_back(msg);
-            }
-        }
-    }
-    printAllMessagesInMap();
+    //         it = msgMap.find(socket.second->groupID);
+    //         if (it == msgMap.end())
+    //         {
+    //             std::cout << "No groupID exsists for this group, making new msgMap" << std::endl;
+    //             std::vector<std::string> newMessage;
+    //             newMessage.push_back(msg);
+    //             msgMap.emplace(socket.second->groupID, newMessage);
+    //         }
+    //         else
+    //         {
+    //             std::cout << "Adding message to msgMap" << std::endl;
+    //             msgMap[socket.second->groupID].push_back(msg);
+    //         }
+    //     }
+    // }
+    // printAllMessagesInMap();
 }
 bool checkIfGroupIdExsists(int serverSocket)
 {
-    for (auto const &socket : servers)
-    {
-        if (socket.second->sock == serverSocket)
-        {
-            std::map<std::string, std::vector<std::string>>::iterator it;
+    // for (auto const &socket : servers)
+    // {
+    //     if (socket.second->sock == serverSocket)
+    //     {
+    //         std::map<std::string, std::vector<std::string>>::iterator it;
 
-            it = msgMap.find(socket.second->groupID);
-            if (it == msgMap.end())
-            {
-                return true;
-            }
-        }
-    }
-    return false;
+    //         it = msgMap.find(socket.second->groupID);
+    //         if (it == msgMap.end())
+    //         {
+    //             return true;
+    //         }
+    //     }
+    // }
+    // return false;
 }
 bool checkIfTokenIsGroupId(std::string token)
 {
@@ -523,75 +536,77 @@ void serverCommand(int serverSocket, fd_set *openSockets, int *maxfds,
         temp = constructCommand(str);
         str = temp;
     }
-    if (str.find(";") != std::string::npos)
-    {
-        std::string withoutSemicolon = removeSemicolon(str);
-        std::cout << "Listing servers: " << std::endl
-                  << buffer << std::endl;
-        addMessageToMap(serverSocket, withoutSemicolon);
-        return;
-    }
+    // if (str.find(";") != std::string::npos)
+    // {
+    //     std::string withoutSemicolon = removeSemicolon(str);
+    //     std::cout << "Listing servers: " << std::endl
+    //               << buffer << std::endl;
+    //     addMessageToMap(serverSocket, withoutSemicolon);
+    //     return;
+    // }
     // Split command from server into tokens for parsing
     std::stringstream stream(str);
 
-    if (checkIfGroupIdExsists(serverSocket))
-    {
-        std::cout << "there is no GROUPID associated with this server socket. Unable to add message to map until thats done" << std::endl;
-    }
-    else
-    {
-        addMessageToMap(serverSocket, str);
-    }
+    // if (checkIfGroupIdExsists(serverSocket))
+    // {
+    //     std::cout << "there is no GROUPID associated with this server socket. Unable to add message to map until thats done" << std::endl;
+    // }
+    // else
+    // {
+    //     addMessageToMap(serverSocket, str);
+    // }
     while (stream >> token)
         tokens.push_back(token);
 
-    if (tokens[0].compare("CONNECT") == 0 && (tokens.size() == 4))
+    if (tokens[0].compare("LISTSERVERS") == 0 && (tokens.size() == 4))
     {
         for (auto const &pair : servers)
         {
             if (pair.second->sock == serverSocket)
             {
                 pair.second->groupID = tokens[1];
-                pair.second->port = tokens[2];
-                pair.second->IP = getIp();
+                pair.second->IP = tokens[2];
+                pair.second->port = tokens[3];
 
                 std::ostringstream oss;
                 oss << pair.second->groupID << " "
-                    << pair.second->port << " "
-                    << pair.second->IP << " ";
+                    << pair.second->IP << " "
+                    << pair.second->port << " ";
                 std::string temp = oss.str();
                 std::cout << "The connected server is: '" << temp << "'" << std::endl;
+                std::string msg = listServers();
+                sendCommand(serverSocket, msg);
+            }
+        }
+    }
 
-                addMessageToMap(serverSocket, str);
-            }
-        }
-    }
-    else if (tokens[0].compare("LISTSERVERS") == 0)
-    {
-        //Send to specific server
-        std::cout << "serverCommand->SERVERS: sending list" << std::endl;
-        std::string msg;
-        msg = listServers();
-        if (checkIfTokenIsGroupId(tokens[1]))
-        {
-            std::cout << "checkIfTokenIsGroupId(tokens[1]) sucess" << std::endl;
-            if (!checkIfServerWithThatGroupIdIsConnected(tokens[1]))
-            {
-                std::cout << "There is no connected server with this GROUPID" << std::endl;
-            }
-            int socket = getServerSocketFromGroupID(tokens[1]);
-            sendCommand(socket, msg);
-        }
-    }
     else if (tokens[0].compare("SERVERS") == 0)
     {
-        //Send to all servers
-        std::cout << "serverCommand->SERVERS: sending list" << std::endl;
-        std::string msg;
-        msg = listServers();
-        for (auto const &pair : servers)
+
+        std::cout << "serverCommand->SERVERS" << std::endl;
+        if (!checkIfGroupIdExsists(serverSocket))
         {
-            sendCommand(pair.second->sock, msg);
+            //add server to map
+            Server *nServer = new Server(serverSocket);
+            nServer->groupID = tokens[1];
+            nServer->IP = tokens[2];
+            nServer->port = tokens[3];
+            servers.emplace(serverSocket, nServer);
+            std::string serverlist = listServers();
+            std::cout << "serverCommand->SERVERS->if (!checkIfGroupIdExsists(serverSocket))" << serverlist << std::endl;
+        }
+        else
+        {
+            std::cout << "serverCommand->SERVERS->else" << std::endl;
+            for (auto const &pair : servers)
+            {
+                if (pair.second->sock == serverSocket)
+                {
+                    pair.second->groupID = tokens[1];
+                }
+            }
+            std::string serverlist = listServers();
+            std::cout << serverlist << std::endl;
         }
     }
     else if (tokens[0].compare("LEAVE") == 0)
@@ -778,18 +793,7 @@ void clientCommand(int clientSocket, fd_set *openSockets, int *maxfds,
             }
             else
             {
-                std::cout << "clientCommand->SENDMSG/RS: Sending message '";
-                std::string msg;
-                for (auto i = tokens.begin() + 1; i != tokens.end(); i++)
-                {
-                    msg += *i + " ";
-                    std::cout << *i << " ";
-                }
-                std::cout << "' to all connected servers" << std::endl;
-                for (auto const &pair : servers)
-                {
-                    sendCommand(pair.second->sock, msg);
-                }
+                //Write the message to map
             }
         }
         else
@@ -816,9 +820,6 @@ void clientCommand(int clientSocket, fd_set *openSockets, int *maxfds,
         std::string port = tokens[1];
         base += port;
         ConnectionToServers("127.0.0.1", base, clientSocket, openSockets);
-    }
-    if (tokens[0].compare("CONNECT") == 0)
-    {
     }
     else
     {

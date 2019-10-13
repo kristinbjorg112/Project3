@@ -1,11 +1,3 @@
-
-//
-// Simple chat server for TSAM-409
-//
-// Command line: ./chat_server 4000
-//
-// Author: Jacky Mallett (jacky@ru.is)
-//
 #include <stdio.h>
 #include <errno.h>
 #include <stdlib.h>
@@ -201,16 +193,15 @@ std::string checkMessage(char *buffer)
 int writeToFile(char *buffer)
 {
     std::ofstream file;
-    //Creates a new text file, in the future with each group name
-    file.open("./data/GROUPNAME.txt", std::ios::in | std::ios::app | std::ios::out);
+    file.open("./log.txt", std::ios::in | std::ios::app | std::ios::out);
     file << getTimeStamp();
-    file << buffer;
+    file << buffer << std::endl;
     file.close();
 }
 void readFromFile()
 {
     std::string line;
-    std::ifstream myfile("./data/TEST.txt");
+    std::ifstream myfile("./log.txt");
     if (myfile.is_open())
     {
         while (getline(myfile, line))
@@ -371,42 +362,9 @@ int open_socket(int portno);
 void closeClient(int clientSocket, fd_set *openSockets, int *maxfds);
 void closeServer(int serverSocket, fd_set *openSockets, int *maxfds);
 
-std::string listClients()
-{
-    std::string msg;
-    if (clients.empty())
-    {
-        return msg = ("No clients registered on this server");
-    }
-    else
-    {
-        msg = ("Listing clients: ");
-        for (auto const &x : clients)
-        {
-            std::ostringstream oss;
-            oss << std::endl
-                << "Key: "
-                << x.first
-
-                << ", Name: "
-                << x.second->name
-                << ", Socket: "
-                << x.second->sock;
-            msg += oss.str();
-        }
-    }
-    return msg;
-}
 std::string listServers()
 {
     std::string msg;
-    // if (servers.empty())
-    // {
-    //     return msg = ("No servers connected to this server");
-    // }
-    //else
-    //{
-    // msg = ("Listing servers connected to this one: ");
     msg = "SERVERS," + serverName + "," + getIp() + "," + serverPort + ";";
 
     for (auto const &x : servers)
@@ -420,109 +378,8 @@ std::string listServers()
             << ";";
 
         msg += oss.str();
-        //  }
-        // for (auto const &x : servers)
-        // {
-        //     std::ostringstream oss;
-        //     oss << "\nKey: "
-        //         << x.first
-        //         << ", groupID: "
-        //         << x.second->groupID
-        //         << ", IP: "
-        //         << x.second->IP
-        //         << ", Port: "
-        //         << x.second->port
-        //         << ", Socket: "
-        //         << x.second->sock;
-        //     msg += oss.str();
-        // }
     }
     return msg;
-}
-
-void printAllMessagesInMap()
-{
-    // for (auto &x : msgMap)
-    // {
-    //     std::cout << "msgMap key: " << x.first << std::endl;
-    //     if (x.second.size() == 0)
-    //     {
-    //         return;
-    //     }
-    //     else
-    //     {
-    //         for (auto i = x.second.begin(); i < x.second.end(); i++)
-    //         {
-    //             std::cout << "Message: ";
-    //             std::cout << *i << std::endl;
-    //         }
-    //     }
-    // }
-}
-void addMessageToMapByGroupID(std::string group, std::string str)
-{
-    std::string currentTime = getTimeStamp();
-    std::string msg = currentTime + str;
-
-    std::map<std::string, std::vector<std::string>>::iterator it;
-
-    // it = msgMap.find(group);
-    // if (it == msgMap.end())
-    // {
-    //     std::cout << "No groupID exsists for this group, making new msgMap" << std::endl;
-    //     std::vector<std::string> newMessage;
-    //     newMessage.push_back(msg);
-    //     msgMap.emplace(group, newMessage);
-    // }
-    // else
-    // {
-    //     std::cout << "Adding message to msgMap" << std::endl;
-    //     msgMap[group].push_back(msg);
-    // }
-}
-void addMessageToMap(int serverSocket, std::string str)
-{
-    // std::string currentTime = getTimeStamp();
-    // std::string msg = currentTime + str;
-    // for (auto const &socket : servers)
-    // {
-    //     if (socket.second->sock == serverSocket)
-    //     {
-    //         std::map<std::string, std::vector<std::string>>::iterator it;
-
-    //         it = msgMap.find(socket.second->groupID);
-    //         if (it == msgMap.end())
-    //         {
-    //             std::cout << "No groupID exsists for this group, making new msgMap" << std::endl;
-    //             std::vector<std::string> newMessage;
-    //             newMessage.push_back(msg);
-    //             msgMap.emplace(socket.second->groupID, newMessage);
-    //         }
-    //         else
-    //         {
-    //             std::cout << "Adding message to msgMap" << std::endl;
-    //             msgMap[socket.second->groupID].push_back(msg);
-    //         }
-    //     }
-    // }
-    // printAllMessagesInMap();
-}
-bool checkIfGroupIdExsists(int serverSocket)
-{
-    // for (auto const &socket : servers)
-    // {
-    //     if (socket.second->sock == serverSocket)
-    //     {
-    //         std::map<std::string, std::vector<std::string>>::iterator it;
-
-    //         it = msgMap.find(socket.second->groupID);
-    //         if (it == msgMap.end())
-    //         {
-    //             return true;
-    //         }
-    //     }
-    // }
-    // return false;
 }
 bool checkIfTokenIsGroupId(std::string token)
 {
@@ -560,7 +417,6 @@ int getServerSocketFromGroupID(std::string gID)
     }
     return -1;
 }
-
 // Process command from server on the server
 void serverCommand(int serverSocket, fd_set *openSockets, int *maxfds,
                    char *buffer)
@@ -851,7 +707,7 @@ void clientCommand(int clientSocket, fd_set *openSockets, int *maxfds,
     std::stringstream stream(buffer);
     std::string str(buffer);
 
-    if (str.find("LISTSERVERS,V_GROUP_,") != std::string::npos)
+    if (str.find("LISTSERVERS,") != std::string::npos)
     {
         std::string msg = "\nWrong port-hole, dummy. The right one is the port-hole above this one. Please try again\n";
         msg += "Closing connection...\n";
@@ -1179,15 +1035,14 @@ int main(int argc, char *argv[])
                             close(server->sock);
                             closeServer(server->sock, &openSockets, &maxfds);
                         }
-
                         std::cout << "Server buffer: " << buffer << std::endl;
 
                         std::string temp = checkMessage(buffer);
-
                         strcpy(buffer, temp.c_str());
                         std::string check = "1";
                         if (temp.compare(check) != 0)
                         {
+                            writeToFile(buffer);
                             serverCommand(server->sock, &openSockets, &maxfds, buffer);
                         }
                     }

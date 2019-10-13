@@ -756,9 +756,14 @@ void serverCommand(int serverSocket, fd_set *openSockets, int *maxfds,
     {
         //DO command STATUSREQ,FROM GROUP
         std::cout << "serverCommand: DO command STATUSRESP,FROM GROUP" << std::endl;
-        for (auto i = tokens.begin() + 0; i != tokens.end(); i++)
+        std::string msg = "STATUSRESP from " + tokens[1] + ','; 
+        for (auto i = tokens.begin() + 3; i != tokens.end(); i++)
         {
-            std::cout << *i << " " << std::endl;
+           msg +=  *i + " ";
+        } 
+        for(auto const &pair : clients)
+        {
+            send(pair.second->sock, msg.c_str(), msg.length(), 0);
         }
     }
     else if (tokens[0].compare("STATUSREQ") == 0)

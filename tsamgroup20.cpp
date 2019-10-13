@@ -455,6 +455,12 @@ void serverCommand(int serverSocket, fd_set *openSockets, int *maxfds,
             nServer->port = tokens[3];
             servers.emplace(serverSocket, nServer);
             std::string serverlist = listServers();
+            int n = serverlist.length(); 
+  
+            char char_array[n + 1]; 
+        
+            strcpy(char_array, serverlist.c_str());
+            writeToFile(char_array);
             std::cout << "serverCommand->SERVERS->if (!checkIfGroupIdExsists(serverSocket))" << serverlist << std::endl;
         }
         else

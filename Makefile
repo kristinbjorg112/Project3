@@ -2,7 +2,7 @@ all:
 		rm -f *o server
 		rm -f *o client	
 		g++ -std=c++17 client.cpp -lpthread -o client
-		g++ -std=c++17 server.cpp -lpthread -o server
+		g++ -std=c++11 tsamgroup20.cpp -lpthread -o server
 client: 
 		g++ -std=c++11 client.cpp -lpthread -o client
 rmclient:

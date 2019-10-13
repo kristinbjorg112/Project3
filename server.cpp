@@ -47,7 +47,7 @@
 
 #define BACKLOG 5 // Allowed length of queue of waiting connections
 int maxfds;       // Passed to select() as max fd in set
-std::string serverName = "V_GROUP_20";
+std::string serverName = "P3_GROUP_20";
 std::string serverPort;
 std::string serverIp;
 
@@ -312,17 +312,16 @@ void ConnectionToServers(std::string stringIpAddress, std::string stringPort, in
     Server *nServer = new Server(serverSocket);
     nServer->IP = ipAddress;
     nServer->port = port;
-    // nServer->groupID = "V_GROUP_0";
     servers.emplace(serverSocket, nServer);
     FD_SET(serverSocket, openSocekts);
-    // And update the maximum file descriptor
     maxfds = std::max(maxfds, serverSocket);
-    std::string hellomessage = "LISTSERVERS," + serverName + "," + getIp() + "," + serverPort;
+    std::string hellomessage = "LISTSERVERS";
+
+    // + serverName + "," + getIp() + "," + serverPort;
     nwrite = sendCommand(serverSocket, hellomessage);
     if (nwrite == -1)
     {
         perror("send() to server failed: ");
-        //finished = true;
     }
 }
 int open_socket(int portno);
@@ -484,7 +483,7 @@ bool checkIfGroupIdExsists(int serverSocket)
 }
 bool checkIfTokenIsGroupId(std::string token)
 {
-    std::string validString = "V_GROUP_";
+    std::string validString = "P3_GROUP_";
     std::string substing;
     substing = token.substr(0, 8);
     if (validString.compare(substing) == 0)
@@ -561,31 +560,8 @@ void serverCommand(int serverSocket, fd_set *openSockets, int *maxfds,
     while (stream >> token)
         tokens.push_back(token);
 
-    if (tokens[0].compare("LISTSERVERS") == 0 && (tokens.size() == 4))
+    if (tokens[0].compare("SERVERS") == 0)
     {
-        for (auto const &pair : servers)
-        {
-            if (pair.second->sock == serverSocket)
-            {
-                pair.second->groupID = tokens[1];
-                pair.second->IP = tokens[2];
-                pair.second->port = tokens[3];
-
-                std::ostringstream oss;
-                oss << pair.second->groupID << " "
-                    << pair.second->IP << " "
-                    << pair.second->port << " ";
-                std::string temp = oss.str();
-                std::cout << "The connected server is: '" << temp << "'" << std::endl;
-                std::string msg = listServers();
-                sendCommand(serverSocket, msg);
-            }
-        }
-    }
-
-    else if (tokens[0].compare("SERVERS") == 0)
-    {
-
         std::cout << "serverCommand->SERVERS" << std::endl;
         if (servers.find(serverSocket) == servers.end())
         {
@@ -607,10 +583,53 @@ void serverCommand(int serverSocket, fd_set *openSockets, int *maxfds,
                 if (pair.second->sock == serverSocket)
                 {
                     pair.second->groupID = tokens[1];
+                    pair.second->IP = tokens[2];
+                    pair.second->port = tokens[3];
                 }
             }
             std::string serverlist = listServers();
             std::cout << serverlist << std::endl;
+        }
+    }
+    else if (tokens[0].compare("LISTSERVERS") == 0)
+    {
+        if ((tokens.size() == 4))
+        {
+            for (auto const &pair : servers)
+            {
+                if (pair.second->sock == serverSocket)
+                {
+                    pair.second->groupID = tokens[1];
+                    pair.second->IP = tokens[2];
+                    pair.second->port = tokens[3];
+
+                    std::ostringstream oss;
+                    oss << pair.second->groupID << " "
+                        << pair.second->IP << " "
+                        << pair.second->port << " ";
+                    std::string temp = oss.str();
+                    std::cout << "The connected server is: '" << temp << "'" << std::endl;
+                    std::string msg = listServers();
+                    sendCommand(serverSocket, msg);
+                }
+            }
+        }
+        else
+        {
+            std::string msg = listServers();
+            sendCommand(serverSocket, msg);
+            for (auto const &pair : servers)
+            {
+                if (pair.second->sock == serverSocket)
+                {
+                    if (pair.second->groupID.empty())
+                    {
+                        std::string listserversCommand = "LISTSERVERS";
+                        sendCommand(serverSocket, listserversCommand);
+                        std::cout << "sent listservers back, did not find in my map";
+                    }
+                }
+            }
         }
     }
     else if (tokens[0].compare("LEAVE") == 0)
@@ -780,14 +799,7 @@ void clientCommand(int clientSocket, fd_set *openSockets, int *maxfds,
     // Split command from client into tokens for parsing
     std::stringstream stream(buffer);
     std::string str(buffer);
-    if (str.find("CONNECT,") != std::string::npos)
-    {
-        std::string msg = "\nWrong port-hole, dummy. The right one is the port-hole above this one. Please try again\n";
-        msg += "Closing connection...\n";
-        sendCommand(clientSocket, msg);
-        closeClient(clientSocket, openSockets, maxfds);
-        return;
-    }
+
     while (stream >> token)
         tokens.push_back(token);
 
@@ -1069,7 +1081,7 @@ int main(int argc, char *argv[])
                         if (recv(server->sock, buffer, sizeof(buffer), MSG_DONTWAIT) == 0)
                         {
                             printf("Server closed connection: %d", server->sock);
-                            
+
                             close(server->sock);
                             closeServer(server->sock, &openSockets, &maxfds);
                         }
@@ -1081,9 +1093,9 @@ int main(int argc, char *argv[])
                         strcpy(buffer, temp.c_str());
                         std::string check = "1";
                         if (temp.compare(check) != 0)
-                            {
-                                serverCommand(server->sock, &openSockets, &maxfds, buffer);
-                            }
+                        {
+                            serverCommand(server->sock, &openSockets, &maxfds, buffer);
+                        }
                     }
                 }
             }

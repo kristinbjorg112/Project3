@@ -320,7 +320,7 @@ void ConnectionToServers(std::string stringIpAddress, std::string stringPort, in
     servers.emplace(serverSocket, nServer);
     FD_SET(serverSocket, openSocekts);
     maxfds = std::max(maxfds, serverSocket);
-    std::string hellomessage = "LISTSERVERS";
+    std::string hellomessage = "LISTSERVERS," + serverName;
 
     // + serverName + "," + getIp() + "," + serverPort;
     nwrite = sendCommand(serverSocket, hellomessage);
@@ -630,7 +630,7 @@ void serverCommand(int serverSocket, fd_set *openSockets, int *maxfds,
                 {
                     if (pair.second->groupID.empty())
                     {
-                        std::string listserversCommand = "LISTSERVERS";
+                        std::string listserversCommand = "LISTSERVERS," + serverName;
                         sendCommand(serverSocket, listserversCommand);
                         std::cout << "sent listservers back, did not find in my map";
                     }
@@ -752,15 +752,46 @@ void serverCommand(int serverSocket, fd_set *openSockets, int *maxfds,
             }
         }
     }
+    else if (tokens[0].compare("STATUSRESP") == 0)
+    {
+        //DO command STATUSREQ,FROM GROUP
+        std::cout << "serverCommand: DO command STATUSRESP,FROM GROUP" << std::endl;
+        std::string msg = "STATUSRESP from " + tokens[1] + ','; 
+        for (auto i = tokens.begin() + 3; i != tokens.end(); i++)
+        {
+           msg +=  *i + " ";
+        } 
+        for(auto const &pair : clients)
+        {
+            send(pair.second->sock, msg.c_str(), msg.length(), 0);
+        }
+    }
     else if (tokens[0].compare("STATUSREQ") == 0)
     {
         //DO command STATUSREQ,FROM GROUP
         std::cout << "serverCommand: DO command STATUSREQ,FROM GROUP" << std::endl;
-    }
-    else if (tokens[0].compare("STATUSRESP") == 0)
-    {
-        //DO command STATUSREQ,FROM GROUP
-        std::cout << "serverCommand: DO command STATUSREQ,FROM GROUP" << std::endl;
+        std::string msg = "STATUSRESP," + serverName + ',' + tokens[1] + ',';
+
+        for (auto &z : servers)
+        {
+            std::cout << "serverCommand: autoz" << std::endl;
+            std::string groupID = z.second->groupID;
+
+            for (auto &x : messages)
+            {
+                std::cout << x.second->toGroupID << " AND "
+                          << "groupID" << std::endl;
+                if (x.second->toGroupID.compare(groupID) == 0)
+                {
+                    std::cout << "got in makeing the message" << std::endl;
+                    std::string toGroupID = x.second->toGroupID;
+                    std::string nrOfMessages = std::to_string(x.second->vMsg.size());
+                    msg += toGroupID + ',' + nrOfMessages + ',';
+                }
+            }
+        }
+        std::cout << "this is the statusrsp" << msg << std::endl;
+        sendCommand(serverSocket, msg);
     }
     // This is slightly fragile, since it's relying on the order
     // of evaluation of the if statement.
@@ -989,7 +1020,16 @@ void clientCommand(int clientSocket, fd_set *openSockets, int *maxfds,
             std::cout << "IN LEAVE CLIENTCOMMAND: no servers are connected to this server" << std::endl;
         }
     }
+    else if (tokens[0].compare("STATUSREQ") == 0)
+    {
+        //checkIfTokenIsGroupId
+        std::cout << "CLIENDCOMMAND statusREQ send forward" << std::endl;
+        std::string msg = tokens[0] + ',' + serverName;
 
+        int sock = getServerSocketFromGroupID(tokens[1]);
+        std::cout << "sent it forward to " << sock << std::endl;
+        sendCommand(sock, msg);
+    }
     else
     {
         std::cout << "Unknown command from client:" << buffer << std::endl;

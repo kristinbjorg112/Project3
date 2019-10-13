@@ -47,7 +47,7 @@
 
 #define BACKLOG 5 // Allowed length of queue of waiting connections
 int maxfds;       // Passed to select() as max fd in set
-std::string serverName = "P3_GROUP_20";
+std::string serverName = "P3_GROUP_100";
 std::string serverPort;
 std::string serverIp;
 
@@ -249,17 +249,20 @@ std::string getMessage(std::string groupId)
                 else
                 {
                     //Changed this from x.second->fromGroupID << std::endl;
-                    std::cout << "All messages to  : " << x.second->toGroupID << std::endl;
-                    std::cout << "All messages from: " << x.second->toGroupID << std::endl;
-                    oss << "All messages to  : " << x.second->toGroupID << std::endl;
-                    oss << "All messages from: " << x.second->toGroupID << std::endl;
-                    for (auto i = x.second->vMsg.begin(); i < x.second->vMsg.end(); i++)
-                    {
-                        std::cout << "Message: ";
-                        std::cout << *i << std::endl;
-                        oss << *i << std::endl;
-                        x.second->vMsg.pop_back();
-                    }
+                    std::cout << "Messages to  : " << x.second->toGroupID << std::endl;
+                    std::cout << "Messages from: " << x.second->fromGroupID << std::endl;
+                    oss << "Messages to  : " << x.second->toGroupID << std::endl;
+                    oss << "Messages from: " << x.second->fromGroupID << std::endl;
+                    oss << "Message fetched at " + getTimeStamp() << std::endl;
+                    oss << x.second->vMsg.front();
+                    x.second->vMsg.erase(x.second->vMsg.begin());
+                    // for (auto i = x.second->vMsg.begin(); i < x.second->vMsg.end(); i++)
+                    // {
+                    //     std::cout << "Message: ";
+                    //     std::cout << *i << std::endl;
+                    //     oss << *i << std::endl;
+                    //     x.second->vMsg.pop_back();
+                    // }
                 }
             }
         }
@@ -487,7 +490,7 @@ bool checkIfTokenIsGroupId(std::string token)
 {
     std::string validString = "P3_GROUP_";
     std::string substing;
-    substing = token.substr(0, 8);
+    substing = token.substr(0, 9);
     if (validString.compare(substing) == 0)
     {
         return true;
@@ -683,46 +686,69 @@ void serverCommand(int serverSocket, fd_set *openSockets, int *maxfds,
     }
     else if (tokens[0].compare("SEND_MSG") == 0)
     {
-        if (tokens[2] == serverName)
+        if (!checkIfServerWithThatGroupIdIsConnected(tokens[2]) || !clients.empty())
+        {
+            std::cout << "serverCommand->SEND_MSG: unable to send command, server with that groupID not connected or no client is connected. Adding to map" << std::endl;
+            if (messages.find(tokens[2]) == messages.end())
+            {
+                //make a new message map
+                Message *nMessage = new Message(tokens[2]);
+
+                std::string msg = "Server recived message at " + getTimeStamp();
+                for (auto i = tokens.begin() + 3; i != tokens.end(); i++)
+                {
+                    msg += *i + " ";
+                }
+                nMessage->toGroupID = tokens[2];
+                nMessage->vMsg.push_back(msg);
+                nMessage->fromGroupID = tokens[1];
+                messages.emplace(tokens[2], nMessage);
+            }
+            else
+            {
+                //if group already has a message add the message to the map
+                for (auto const &x : messages)
+                {
+                    if (x.second->toGroupID == tokens[2])
+                    {
+                        std::string msg = "Server recived message at " + getTimeStamp();
+                        for (auto i = tokens.begin() + 3; i != tokens.end(); i++)
+                        {
+                            msg += *i + " ";
+                        }
+                        x.second->vMsg.push_back(msg);
+                        x.second->fromGroupID = tokens[1];
+                    }
+                }
+            }
+            std::cout << "printing all messages in map" << std::endl;
+            for (auto const &x : messages)
+            {
+                std::cout << "To Group   :" << x.second->toGroupID << std::endl;
+                std::cout << "From Group :" << x.second->fromGroupID << std::endl;
+                for (auto i = x.second->vMsg.begin(); i != x.second->vMsg.end(); i++)
+                {
+                    std::cout << *i << std::endl;
+                }
+            }
+        }
+        else
         {
             std::cout << "serverCommand->SEND_MSG: Message from group: " << tokens[1] << std::endl;
-            std::string msg;
+            std::string msg = "New message from:" + token[1] + '\n';
+            msg += "Recived from: " + getTimeStamp() + '\n';
             for (auto i = tokens.begin() + 3; i != tokens.end(); i++)
             {
                 std::cout << *i << " ";
                 msg += *i + " ";
             }
-            //sending Message to connected client
+            //sending Message to all connected clients
             if (!clients.empty())
             {
                 for (auto const &pair : clients)
                 {
                     send(pair.second->sock, msg.c_str(), msg.length(), 0);
                 }
-            }
-        }
-        else
-        {
-            ///TODO crate a function
-            std::cout << "serverCommand->SEND_MSG->else" << std::endl;
-            Message *nMessage = new Message(tokens[1]);
-            std::string msg;
-            for (auto i = tokens.begin() + 3; i != tokens.end(); i++)
-            {
-                msg += *i + " ";
-            }
-            nMessage->toGroupID = tokens[1];
-            nMessage->vMsg.push_back(msg);
-            nMessage->fromGroupID = tokens[2];
-            messages.emplace(tokens[1], nMessage);
-            for (auto const &x : messages)
-            {
-                std::cout << "To Group   :" << x.second->toGroupID << std::endl;
-                for (auto i = x.second->vMsg.begin(); i != x.second->vMsg.end(); i++)
-                {
-                    std::cout << *i << std::endl;
-                }
-                std::cout << "From Group :" << x.second->fromGroupID << std::endl;
             }
         }
     }
@@ -862,26 +888,48 @@ void clientCommand(int clientSocket, fd_set *openSockets, int *maxfds,
             {
                 std::cout << "clientCommand->SENDMSG: unable to send command, no connected servers" << std::endl;
                 std::string error = "Unable to send command, no connected servers, adding to map";
-                send(clientSocket, error.c_str(), error.length() - 1, 0);
-                Message *nMessage = new Message(tokens[1]);
-
-                std::string msg;
-                for (auto i = tokens.begin() + 2; i != tokens.end(); i++)
+                if (messages.find(tokens[1]) == messages.end())
                 {
-                    msg += *i + " ";
+                    //make a new message map
+                    send(clientSocket, error.c_str(), error.length() - 1, 0);
+                    Message *nMessage = new Message(tokens[1]);
+
+                    std::string msg = "Server recived message at " + getTimeStamp();
+                    for (auto i = tokens.begin() + 2; i != tokens.end(); i++)
+                    {
+                        msg += *i + " ";
+                    }
+                    nMessage->toGroupID = tokens[1];
+                    nMessage->vMsg.push_back(msg);
+                    nMessage->fromGroupID = serverName;
+                    messages.emplace(tokens[1], nMessage);
                 }
-                nMessage->toGroupID = tokens[1];
-                nMessage->vMsg.push_back(msg);
-                nMessage->fromGroupID = serverName;
-                messages.emplace(tokens[1], nMessage);
+                else
+                {
+                    //if group already has a message add the message to the map
+                    for (auto const &x : messages)
+                    {
+                        if (x.second->toGroupID == tokens[1])
+                        {
+                            std::string msg = "Server recived message at " + getTimeStamp();
+                            for (auto i = tokens.begin() + 2; i != tokens.end(); i++)
+                            {
+                                msg += *i + " ";
+                            }
+                            x.second->vMsg.push_back(msg);
+                            x.second->fromGroupID = serverName;
+                        }
+                    }
+                }
+                std::cout << "printing all messages in map" << std::endl;
                 for (auto const &x : messages)
                 {
                     std::cout << "To Group   :" << x.second->toGroupID << std::endl;
+                    std::cout << "From Group :" << x.second->fromGroupID << std::endl;
                     for (auto i = x.second->vMsg.begin(); i != x.second->vMsg.end(); i++)
                     {
                         std::cout << *i << std::endl;
                     }
-                    std::cout << "From Group :" << x.second->fromGroupID << std::endl;
                 }
             }
             else

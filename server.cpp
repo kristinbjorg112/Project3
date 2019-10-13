@@ -42,6 +42,7 @@ int maxfds;       // Passed to select() as max fd in set
 std::string serverName = "P3_GROUP_20";
 std::string serverPort;
 std::string serverIp;
+int sentTime = time(0);
 
 // Help functions, are below main()
 std::string viewFiles();
@@ -188,6 +189,19 @@ std::string checkMessage(char *buffer)
         std::cout << "No padding on this message" << std::endl;
         std::string outcome = "1";
         return outcome;
+    }
+}
+void keepalive()
+{
+
+    if (time(0)-sentTime>=60) //one minute has elapsed
+    {
+        sentTime = time(0);
+        std::string msg = "KEEPALIVE";
+        for (auto &x : servers)
+        {
+            sendCommand(x.second->sock,msg);
+        }
     }
 }
 int writeToFile(char *buffer)
@@ -344,14 +358,13 @@ void ConnectionToServers(std::string stringIpAddress, std::string stringPort, in
     }
 
     Server *nServer = new Server(serverSocket);
+    nServer->sock = serverSocket;
     nServer->IP = ipAddress;
     nServer->port = port;
     servers.emplace(serverSocket, nServer);
     FD_SET(serverSocket, openSocekts);
     maxfds = std::max(maxfds, serverSocket);
     std::string hellomessage = "LISTSERVERS," + serverName;
-
-    // + serverName + "," + getIp() + "," + serverPort;
     nwrite = sendCommand(serverSocket, hellomessage);
     if (nwrite == -1)
     {
@@ -369,15 +382,19 @@ std::string listServers()
 
     for (auto const &x : servers)
     {
-        std::ostringstream oss;
-        oss << x.second->groupID
-            << ","
-            << x.second->IP
-            << ","
-            << x.second->port
-            << ";";
 
-        msg += oss.str();
+        if(!x.second->groupID.empty())
+        {
+            std::ostringstream oss;
+            oss << x.second->groupID
+                << ","
+                << x.second->IP
+                << ","
+                << x.second->port
+                << ";";
+
+            msg += oss.str();
+        }
     }
     return msg;
 }
@@ -442,27 +459,25 @@ void serverCommand(int serverSocket, fd_set *openSockets, int *maxfds,
         tokens.push_back(token);
 
     if (tokens[0].compare("SERVERS") == 0)
-
     {
         std::cout << "serverCommand->SERVERS" << std::endl;
-        if (servers.find(serverSocket) == servers.end())
+        if (servers.find(serverSocket) == servers.end() && (tokens[1].compare(serverName) != 0))
         {
             //add server to map
             Server *nServer = new Server(serverSocket);
-            std::cout << "tokens 1" << tokens[1] << std::endl;
+            nServer->sock = serverSocket;
             nServer->groupID = tokens[1];
             nServer->IP = tokens[2];
             nServer->port = tokens[3];
             servers.emplace(serverSocket, nServer);
             std::string serverlist = listServers();
-            std::cout << "serverCommand->SERVERS->if (!checkIfGroupIdExsists(serverSocket))" << serverlist << std::endl;
         }
         else
         {
             std::cout << "serverCommand->SERVERS->else" << std::endl;
             for (auto const &pair : servers)
             {
-                if (pair.second->sock == serverSocket)
+                if (pair.second->sock == serverSocket && (tokens[1].compare(serverName) != 0))
                 {
                     pair.second->groupID = tokens[1];
                     pair.second->IP = tokens[2];
@@ -475,41 +490,17 @@ void serverCommand(int serverSocket, fd_set *openSockets, int *maxfds,
     }
     else if (tokens[0].compare("LISTSERVERS") == 0)
     {
-        if ((tokens.size() == 4))
+        std::string msg = listServers();
+        sendCommand(serverSocket, msg);
+        for (auto const &pair : servers)
         {
-            for (auto const &pair : servers)
+            if (pair.second->sock == serverSocket)
             {
-                if (pair.second->sock == serverSocket)
+                if (pair.second->groupID.empty())
                 {
-                    pair.second->groupID = tokens[1];
-                    pair.second->IP = tokens[2];
-                    pair.second->port = tokens[3];
-
-                    std::ostringstream oss;
-                    oss << pair.second->groupID << " "
-                        << pair.second->IP << " "
-                        << pair.second->port << " ";
-                    std::string temp = oss.str();
-                    std::cout << "The connected server is: '" << temp << "'" << std::endl;
-                    std::string msg = listServers();
-                    sendCommand(serverSocket, msg);
-                }
-            }
-        }
-        else
-        {
-            std::string msg = listServers();
-            sendCommand(serverSocket, msg);
-            for (auto const &pair : servers)
-            {
-                if (pair.second->sock == serverSocket)
-                {
-                    if (pair.second->groupID.empty())
-                    {
-                        std::string listserversCommand = "LISTSERVERS," + serverName;
-                        sendCommand(serverSocket, listserversCommand);
-                        std::cout << "sent listservers back, did not find in my map";
-                    }
+                    std::string listserversCommand = "LISTSERVERS," + serverName;
+                    sendCommand(serverSocket, listserversCommand);
+                    std::cout << "sent listservers back, did not find in my map";
                 }
             }
         }
@@ -949,7 +940,7 @@ int main(int argc, char *argv[])
         memset(buffer, 0, sizeof(buffer));
         // Look at sockets and see which ones have something to be read()
         int n = select(maxfds + 1, &readSockets, NULL, &exceptSockets, NULL);
-
+        keepalive();
         if (n < 0)
         {
             perror("select failed - closing down\n");
@@ -999,6 +990,7 @@ int main(int argc, char *argv[])
             // Now check for commands from clients and server
             while (n-- > 0)
             {
+                keepalive();
                 for (auto const &pair : clients)
                 {
                     Client *client = pair.second;

@@ -991,14 +991,24 @@ int main(int argc, char *argv[])
                 // Add new server to the list of open sockets
                 FD_SET(serverSock, &openSockets);
 
-                // And update the maximum file descriptor  //Pæla þarf ég að tékka á öll??
+                // And update the maximum file descriptor
                 maxfds = std::max(maxfds, serverSock);
 
-                // create a new server to store information.
-                servers[serverSock] = new Server(serverSock);
-
-                // Decrement the number of sockets waiting to be dealt with
-                n--;
+                // If there are more than 5 servers connected.
+                if (servers.size() >= 5)
+                {
+                    // Close connection to a random connected server to make space
+                    // for a new connection
+                    int randomSocket = rand() % 4;
+                    closeServer(randomSocket, &openSockets, &maxfds);
+                    servers[serverSock] = new Server(serverSock);
+                }
+                else
+                {
+                    servers[serverSock] = new Server(serverSock);
+                    // Decrement the number of sockets waiting to be dealt with
+                    n--;
+                }
 
                 printf("server connected on server: %d\n", serverSock);
             }
@@ -1177,7 +1187,7 @@ void closeClient(int clientSocket, fd_set *openSockets, int *maxfds)
 void closeServer(int serverSocket, fd_set *openSockets, int *maxfds)
 {
     // Remove Server from the Server list
-    clients.erase(serverSocket);
+    servers.erase(serverSocket);
     // If this client's socket is maxfds then the next lowest
     // one has to be determined. Socket fd's can be reused by the Kernel,
     // so there aren't any nice ways to do this.

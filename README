@@ -1,26 +1,32 @@
 To compile:
 
-    g++ -std=c++17 client.cpp -lpthread -o client
-    g++ -std=c++17 tsamvgroup20.cpp -lpthread -o server
+	Use the command "make all" or the commands
+	g++ -std=c++11 client.cpp -lpthread -o client
+	g++ -std=c++11 server.cpp -o tsamvgroup20
 
 To run (on same machine):
 
-    ./server 10000
+    ./tsamvgroup20 10000
     ./client 127.0.0.1 10000
 
+##Features
+The botnet allowes a client to connect to a server and remotely control it. All messages
+between servers have 0x01 and 0x04 as start and end of message characters. The server will
+allow 5 connections to itself before randomly closing a connection to some connected server
+to make space for a new connection.
 
-Commands that client can send to server:
+##Commands that client can send to server:
 
-GETMSG <groupID> Get message from the server for the GROUP ID?????
-SENDMSG <groupID> Send a message to the server for this group
-LISTSERVERS:  List servers that our server is connected to
-SC <ip> <port>: Connects the server to a server with this IP and port.
+GETMSG <groupID> : Get message from the server with given GROUP ID
+SENDMSG <groupID> : Send a message to the server for this group
+LISTSERVERS : Lists all servers that our server is connected to
+SC <ip> <port> : Connects the server to a server with this IP and port.
 
 LEAVE <server_ip> <port> : Makes server to disconect to this server if it is connected to it.
 LEAVE <server_ip> <port> <groupID> : Makes the server send LEAVE command to another server.
 
 
-Commands that the server can send to another server:
+##Commands that the server can send to another server:
 We decided that the server sends LISTSERVERS when it connects to another server. 
 The client will tell the server to send the commands to another server.
 The server can send these commands to another server through client:
@@ -33,104 +39,10 @@ LEAVE <server_ip> <port>: The server disconects to the server with this ip and p
 SEND MSG,<FROM GROUP ID>,<TO GROUP ID>,<Message content>: The server checks if the message is for him
 if the it is so it will print it out. If the message is for a group that it is connected to it will forward it. 
 If it is not connected it will keep the message until someone will get it. 
+GETMSG,<GROUPID>
 
 
+Limitations:
 
 
-GitHub
-8 To get access to the project on your own computer you can use Terminal for Mac and Linux or Command Promt/Git Bash for windows. Go to the directory where you want to store the project and type in the following command: 9
-
-
-    $ git clone git@github.com:ArnarArnar/Project3.git
-
-List of common git commands:
-Creates and moves you to a new branch.
-
-    $ git checkout -b <Name of branch>
-shows which files have been updated since the last pull.
-
-    $ git status
-First step of adding the new changes to GitHub.
-
-    $ git add <Name of file>
-Second step is to commit the changes to the local repoitory.
-
-    $ git commit -m ”Good explanation of what was changed ”
-Third step is to push the changes to the master branch
-
-    $ git push: Updates the changes to GitHub.
-Gets the newest updates of code from GitHub.
-
-    $ git pull
-
-# From lecture:
-Sample code. Dose show us how to use Select() to get messages on several different sockets, how to read from those sockets, how to send messages between the server to a client
-
-##### Might be useful to use on the server: Message_peek
-Definition
-basic_socket::message_peek
-What it dose:
-Inherited from socket_base.
-Peek at incoming data without removing it from the input queue.
-	static const int message_peek = implementation_defined;
-
-(from lecture cont.)
-Very useful option (message_peek) for receiving a message on a socket. Allows us to read the message without removing it from the queue.
-The reason this is useful is that we are asked to make our own message segmentation. The way we are asked to used to do it is to have a start and an end character. That means there are two problems that have to be resolved.
-	1. Bitstuffing
-	2. The other is that when the network gets bigger and there is more traffic there may become a time where we only get a part of the message. We are either going to have to continue to read until the whole message is completed. Or just tu use message peak, look at the message buffer and wait until we´ve got the whole message and read that and only that.
-
-We can send messages with information that other servers can use. We have to resolve these problems.
-
-##### Some problems we could encounter when connecting servers on the school network
-We can run the servers on out own network. The problem we then have to solve is how we are going to get messages to others. Within the campus, we are able to connect to each other if  we are on different WIFI segments (NOT THE SAME). There is an restriction, if we are on the same wifi, we can't connect to the another laptop.
-
-
-##### If we use select for connections on our server (instead of a thread)
-If we use select: Pool all our servers, see if there is a message, then read it.
-
-##### Basic command flow for server
-	Read a message
-	Process that message
-	Deal with any side effect of that message.
-		Easy message: Just put it in the mailbox for that group
-		Hard message: Send another message in return
-And round and round.
-
-##### What we might want to do periodicity.
-	Check the mail boxes, see if there is anything for your client
-	Or rely on the client to request these messages
-		-Nothing stopping the server to do that automatically
-		
-##### If we get a list servers command
-We are have to reply with a list of the servers
-
-We need to know which group is on which socket and what mailboxes they have. Have to track that.
-
-#### How to start:
-	1. Get the server to successfully read and respond to a client
-	2. The server is able to connect to another server
-        Is able to replies to that server with the list servers command 
-
-# TO Do
-
-Message related:
-	Find some way to see new messages.
-	Mabey we just keep track of all messages that go through the server and send that file,
-	that way we don't have to keep track of "new" messages, we just have to go through all
-	the files to see if something has changed
-
-From the poject desciption:
-	"GET MSG,<GROUP ID> Get messages for the specied group. This may be for your
-	own group, or another group." Should be fairly easy to implement
-
-	We need to make a message check function that checks all incoming messages. Need to check
-	if they have SOH and EOT
-	if SOH and EOT, then remove that from the message
-	Then find out what kind of a message it is.
-		A command
-		message
-		connection from server and so on.
-	Also, we can't implement a send function that adds 0x01 and 0x03 to all outgoing messages
-	before we implement the receiving function or we get an "segment fault"
 

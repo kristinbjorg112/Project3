@@ -9,12 +9,32 @@ To run (on same machine):
     ./client 127.0.0.1 10000
 
 
-Commands on client:
+Commands that client can send to server:
 
-CONNECT <name>   : Connect to server as <name>
-WHO              : Show connections to server
-MSG <name> <message> : Send message to name
-MSG ALL <message>    : Send message to all connected
+GETMSG <groupID> Get message from the server for the GROUP ID?????
+SENDMSG <groupID> Send a message to the server for this group
+LISTSERVERS:  List servers that our server is connected to
+SC <ip> <port>: Connects the server to a server with this IP and port.
+
+LEAVE <server_ip> <port> : Makes server to disconect to this server if it is connected to it.
+LEAVE <server_ip> <port> <groupID> : Makes the server send LEAVE command to another server.
+
+
+Commands that the server can send to another server:
+We decided that the server sends LISTSERVERS when it connects to another server. 
+The client will tell the server to send the commands to another server.
+The server can send these commands to another server through client:
+
+LEAVE <server_ip> <port> <groupID> : Makes the server send 
+
+The server can recive theses commands from another servers :
+LISTSERVERS: it will respond with the servers that it is connected to.
+LEAVE <server_ip> <port>: The server disconects to the server with this ip and port.
+SEND MSG,<FROM GROUP ID>,<TO GROUP ID>,<Message content>: The server checks if the message is for him
+if the it is so it will print it out. If the message is for a group that it is connected to it will forward it. 
+If it is not connected it will keep the message until someone will get it. 
+
+
 
 
 GitHub

@@ -39,7 +39,7 @@
 
 #define BACKLOG 5 // Allowed length of queue of waiting connections
 int maxfds;       // Passed to select() as max fd in set
-std::string serverName = "P3_GROUP_20";
+std::string serverName = "P3_GROUP_100";
 std::string serverPort;
 std::string serverIp;
 
@@ -344,14 +344,13 @@ void ConnectionToServers(std::string stringIpAddress, std::string stringPort, in
     }
 
     Server *nServer = new Server(serverSocket);
+    nServer->sock = serverSocket;
     nServer->IP = ipAddress;
     nServer->port = port;
     servers.emplace(serverSocket, nServer);
     FD_SET(serverSocket, openSocekts);
     maxfds = std::max(maxfds, serverSocket);
     std::string hellomessage = "LISTSERVERS," + serverName;
-
-    // + serverName + "," + getIp() + "," + serverPort;
     nwrite = sendCommand(serverSocket, hellomessage);
     if (nwrite == -1)
     {
@@ -369,17 +368,20 @@ std::string listServers()
 
     for (auto const &x : servers)
     {
-        std::ostringstream oss;
-        oss << x.second->groupID
-            << ","
-            << x.second->IP
-            << ","
-            << x.second->port
-            << ";";
+        if(!x.second->groupID.empty()){
+            
+            std::ostringstream oss;
+            oss << x.second->groupID
+                << ","
+                << x.second->IP
+                << ","
+                << x.second->port
+                << ";";
 
-        msg += oss.str();
+            msg += oss.str();
+        }
+        return msg;
     }
-    return msg;
 }
 bool checkIfTokenIsGroupId(std::string token)
 {
@@ -445,11 +447,13 @@ void serverCommand(int serverSocket, fd_set *openSockets, int *maxfds,
 
     {
         std::cout << "serverCommand->SERVERS" << std::endl;
-        if (servers.find(serverSocket) == servers.end())
+        if (servers.find(serverSocket) == servers.end()
+        && (tokens[1].compare(serverName) != 0))
         {
             //add server to map
             Server *nServer = new Server(serverSocket);
-            std::cout << "tokens 1" << tokens[1] << std::endl;
+            nServer->sock = serverSocket;
+            
             nServer->groupID = tokens[1];
             nServer->IP = tokens[2];
             nServer->port = tokens[3];
@@ -468,7 +472,7 @@ void serverCommand(int serverSocket, fd_set *openSockets, int *maxfds,
             std::cout << "serverCommand->SERVERS->else" << std::endl;
             for (auto const &pair : servers)
             {
-                if (pair.second->sock == serverSocket)
+                if (pair.second->sock == serverSocket && (tokens[1].compare(serverName) != 0))
                 {
                     pair.second->groupID = tokens[1];
                     pair.second->IP = tokens[2];
@@ -479,43 +483,19 @@ void serverCommand(int serverSocket, fd_set *openSockets, int *maxfds,
             std::cout << serverlist << std::endl;
         }
     }
-    else if (tokens[0].compare("LISTSERVERS") == 0)
+else if (tokens[0].compare("LISTSERVERS") == 0)
     {
-        if ((tokens.size() == 4))
+        std::string msg = listServers();
+        sendCommand(serverSocket, msg);
+        for (auto const &pair : servers)
         {
-            for (auto const &pair : servers)
+            if (pair.second->sock == serverSocket)
             {
-                if (pair.second->sock == serverSocket)
+                if (pair.second->groupID.empty())
                 {
-                    pair.second->groupID = tokens[1];
-                    pair.second->IP = tokens[2];
-                    pair.second->port = tokens[3];
-
-                    std::ostringstream oss;
-                    oss << pair.second->groupID << " "
-                        << pair.second->IP << " "
-                        << pair.second->port << " ";
-                    std::string temp = oss.str();
-                    std::cout << "The connected server is: '" << temp << "'" << std::endl;
-                    std::string msg = listServers();
-                    sendCommand(serverSocket, msg);
-                }
-            }
-        }
-        else
-        {
-            std::string msg = listServers();
-            sendCommand(serverSocket, msg);
-            for (auto const &pair : servers)
-            {
-                if (pair.second->sock == serverSocket)
-                {
-                    if (pair.second->groupID.empty())
-                    {
-                        std::string listserversCommand = "LISTSERVERS," + serverName;
-                        sendCommand(serverSocket, listserversCommand);
-                        std::cout << "sent listservers back, did not find in my map";
-                    }
+                    std::string listserversCommand = "LISTSERVERS," + serverName;
+                    sendCommand(serverSocket, listserversCommand);
+                    std::cout << "sent listservers back, did not find in my map";
                 }
             }
         }

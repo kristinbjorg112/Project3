@@ -1,0 +1,3718 @@
+No.     Time           Source                Destination           Protocol Length Info
+     13 3.834732675    127.0.0.1             127.0.0.1             TCP      74     48184 → 10001 [SYN] Seq=0 Win=65495 Len=0 MSS=65495 SACK_PERM=1 TSval=3259702160 TSecr=0 WS=128
+
+Frame 13: 74 bytes on wire (592 bits), 74 bytes captured (592 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 48184, Dst Port: 10001, Seq: 0, Len: 0
+    Source Port: 48184
+    Destination Port: 10001
+    [Stream index: 0]
+    [TCP Segment Len: 0]
+    Sequence number: 0    (relative sequence number)
+    [Next sequence number: 0    (relative sequence number)]
+    Acknowledgment number: 0
+    1010 .... = Header Length: 40 bytes (10)
+    Flags: 0x002 (SYN)
+    Window size value: 65495
+    [Calculated window size: 65495]
+    Checksum: 0xfe30 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (20 bytes), Maximum segment size, SACK permitted, Timestamps, No-Operation (NOP), Window scale
+    [Timestamps]
+        [Time since first frame in this TCP stream: 0.000000000 seconds]
+        [Time since previous frame in this TCP stream: 0.000000000 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+     14 3.834761507    127.0.0.1             127.0.0.1             TCP      74     10001 → 48184 [SYN, ACK] Seq=0 Ack=1 Win=65483 Len=0 MSS=65495 SACK_PERM=1 TSval=3259702160 TSecr=3259702160 WS=128
+
+Frame 14: 74 bytes on wire (592 bits), 74 bytes captured (592 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10001, Dst Port: 48184, Seq: 0, Ack: 1, Len: 0
+    Source Port: 10001
+    Destination Port: 48184
+    [Stream index: 0]
+    [TCP Segment Len: 0]
+    Sequence number: 0    (relative sequence number)
+    [Next sequence number: 0    (relative sequence number)]
+    Acknowledgment number: 1    (relative ack number)
+    1010 .... = Header Length: 40 bytes (10)
+    Flags: 0x012 (SYN, ACK)
+    Window size value: 65483
+    [Calculated window size: 65483]
+    Checksum: 0xfe30 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (20 bytes), Maximum segment size, SACK permitted, Timestamps, No-Operation (NOP), Window scale
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 0.000028832 seconds]
+        [Time since previous frame in this TCP stream: 0.000028832 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+     15 3.834786810    127.0.0.1             127.0.0.1             TCP      66     48184 → 10001 [ACK] Seq=1 Ack=1 Win=65536 Len=0 TSval=3259702160 TSecr=3259702160
+
+Frame 15: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 48184, Dst Port: 10001, Seq: 1, Ack: 1, Len: 0
+    Source Port: 48184
+    Destination Port: 10001
+    [Stream index: 0]
+    [TCP Segment Len: 0]
+    Sequence number: 1    (relative sequence number)
+    [Next sequence number: 1    (relative sequence number)]
+    Acknowledgment number: 1    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 0.000054135 seconds]
+        [Time since previous frame in this TCP stream: 0.000025303 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+     56 108.498569021  127.0.0.1             127.0.0.1             TCP      72     48184 → 10001 [PSH, ACK] Seq=1 Ack=1 Win=65536 Len=6 TSval=3259806824 TSecr=3259702160
+
+Frame 56: 72 bytes on wire (576 bits), 72 bytes captured (576 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 48184, Dst Port: 10001, Seq: 1, Ack: 1, Len: 6
+    Source Port: 48184
+    Destination Port: 10001
+    [Stream index: 0]
+    [TCP Segment Len: 6]
+    Sequence number: 1    (relative sequence number)
+    [Next sequence number: 7    (relative sequence number)]
+    Acknowledgment number: 1    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe2e [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 104.663836346 seconds]
+        [Time since previous frame in this TCP stream: 104.663782211 seconds]
+    TCP payload (6 bytes)
+Data (6 bytes)
+
+0000  51 43 20 30 32 0a                                 QC 02.
+    Data: 51432030320a
+    [Length: 6]
+
+No.     Time           Source                Destination           Protocol Length Info
+     57 108.498602017  127.0.0.1             127.0.0.1             TCP      66     10001 → 48184 [ACK] Seq=1 Ack=7 Win=65536 Len=0 TSval=3259806824 TSecr=3259806824
+
+Frame 57: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10001, Dst Port: 48184, Seq: 1, Ack: 7, Len: 0
+    Source Port: 10001
+    Destination Port: 48184
+    [Stream index: 0]
+    [TCP Segment Len: 0]
+    Sequence number: 1    (relative sequence number)
+    [Next sequence number: 1    (relative sequence number)]
+    Acknowledgment number: 7    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 104.663869342 seconds]
+        [Time since previous frame in this TCP stream: 0.000032996 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+     58 108.498768175  127.0.0.1             127.0.0.1             TCP      74     38534 → 10002 [SYN] Seq=0 Win=65495 Len=0 MSS=65495 SACK_PERM=1 TSval=3259806824 TSecr=0 WS=128
+
+Frame 58: 74 bytes on wire (592 bits), 74 bytes captured (592 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 38534, Dst Port: 10002, Seq: 0, Len: 0
+    Source Port: 38534
+    Destination Port: 10002
+    [Stream index: 1]
+    [TCP Segment Len: 0]
+    Sequence number: 0    (relative sequence number)
+    [Next sequence number: 0    (relative sequence number)]
+    Acknowledgment number: 0
+    1010 .... = Header Length: 40 bytes (10)
+    Flags: 0x002 (SYN)
+    Window size value: 65495
+    [Calculated window size: 65495]
+    Checksum: 0xfe30 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (20 bytes), Maximum segment size, SACK permitted, Timestamps, No-Operation (NOP), Window scale
+    [Timestamps]
+        [Time since first frame in this TCP stream: 0.000000000 seconds]
+        [Time since previous frame in this TCP stream: 0.000000000 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+     59 108.498788119  127.0.0.1             127.0.0.1             TCP      74     10002 → 38534 [SYN, ACK] Seq=0 Ack=1 Win=65483 Len=0 MSS=65495 SACK_PERM=1 TSval=3259806824 TSecr=3259806824 WS=128
+
+Frame 59: 74 bytes on wire (592 bits), 74 bytes captured (592 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10002, Dst Port: 38534, Seq: 0, Ack: 1, Len: 0
+    Source Port: 10002
+    Destination Port: 38534
+    [Stream index: 1]
+    [TCP Segment Len: 0]
+    Sequence number: 0    (relative sequence number)
+    [Next sequence number: 0    (relative sequence number)]
+    Acknowledgment number: 1    (relative ack number)
+    1010 .... = Header Length: 40 bytes (10)
+    Flags: 0x012 (SYN, ACK)
+    Window size value: 65483
+    [Calculated window size: 65483]
+    Checksum: 0xfe30 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (20 bytes), Maximum segment size, SACK permitted, Timestamps, No-Operation (NOP), Window scale
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 0.000019944 seconds]
+        [Time since previous frame in this TCP stream: 0.000019944 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+     60 108.498807593  127.0.0.1             127.0.0.1             TCP      66     38534 → 10002 [ACK] Seq=1 Ack=1 Win=65536 Len=0 TSval=3259806824 TSecr=3259806824
+
+Frame 60: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 38534, Dst Port: 10002, Seq: 1, Ack: 1, Len: 0
+    Source Port: 38534
+    Destination Port: 10002
+    [Stream index: 1]
+    [TCP Segment Len: 0]
+    Sequence number: 1    (relative sequence number)
+    [Next sequence number: 1    (relative sequence number)]
+    Acknowledgment number: 1    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 0.000039418 seconds]
+        [Time since previous frame in this TCP stream: 0.000019474 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+     61 108.498882593  127.0.0.1             127.0.0.1             TCP      91     38534 → 10002 [PSH, ACK] Seq=1 Ack=1 Win=65536 Len=25 TSval=3259806824 TSecr=3259806824
+
+Frame 61: 91 bytes on wire (728 bits), 91 bytes captured (728 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 38534, Dst Port: 10002, Seq: 1, Ack: 1, Len: 25
+    Source Port: 38534
+    Destination Port: 10002
+    [Stream index: 1]
+    [TCP Segment Len: 25]
+    Sequence number: 1    (relative sequence number)
+    [Next sequence number: 26    (relative sequence number)]
+    Acknowledgment number: 1    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe41 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 0.000114418 seconds]
+        [Time since previous frame in this TCP stream: 0.000075000 seconds]
+    TCP payload (25 bytes)
+Data (25 bytes)
+
+0000  01 4c 49 53 54 53 45 52 56 45 52 53 2c 50 33 5f   .LISTSERVERS,P3_
+0010  47 52 4f 55 50 5f 32 30 04                        GROUP_20.
+    Data: 014c495354534552564552532c50335f47524f55505f3230...
+    [Length: 25]
+
+No.     Time           Source                Destination           Protocol Length Info
+     62 108.498890946  127.0.0.1             127.0.0.1             TCP      66     10002 → 38534 [ACK] Seq=1 Ack=26 Win=65536 Len=0 TSval=3259806824 TSecr=3259806824
+
+Frame 62: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10002, Dst Port: 38534, Seq: 1, Ack: 26, Len: 0
+    Source Port: 10002
+    Destination Port: 38534
+    [Stream index: 1]
+    [TCP Segment Len: 0]
+    Sequence number: 1    (relative sequence number)
+    [Next sequence number: 1    (relative sequence number)]
+    Acknowledgment number: 26    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 0.000122771 seconds]
+        [Time since previous frame in this TCP stream: 0.000008353 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+     63 108.499704396  127.0.0.1             127.0.0.1             TCP      107    10002 → 38534 [PSH, ACK] Seq=1 Ack=26 Win=65536 Len=41 TSval=3259806825 TSecr=3259806824
+
+Frame 63: 107 bytes on wire (856 bits), 107 bytes captured (856 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10002, Dst Port: 38534, Seq: 1, Ack: 26, Len: 41
+    Source Port: 10002
+    Destination Port: 38534
+    [Stream index: 1]
+    [TCP Segment Len: 41]
+    Sequence number: 1    (relative sequence number)
+    [Next sequence number: 42    (relative sequence number)]
+    Acknowledgment number: 26    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe51 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 0.000936221 seconds]
+        [Time since previous frame in this TCP stream: 0.000813450 seconds]
+    TCP payload (41 bytes)
+Data (41 bytes)
+
+0000  01 53 45 52 56 45 52 53 2c 50 33 5f 47 52 4f 55   .SERVERS,P3_GROU
+0010  50 5f 31 30 30 2c 31 30 2e 33 2e 31 37 2e 31 34   P_100,10.3.17.14
+0020  31 2c 31 30 30 30 32 3b 04                        1,10002;.
+    Data: 01534552564552532c50335f47524f55505f3130302c3130...
+    [Length: 41]
+
+No.     Time           Source                Destination           Protocol Length Info
+     64 108.499716345  127.0.0.1             127.0.0.1             TCP      66     38534 → 10002 [ACK] Seq=26 Ack=42 Win=65536 Len=0 TSval=3259806825 TSecr=3259806825
+
+Frame 64: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 38534, Dst Port: 10002, Seq: 26, Ack: 42, Len: 0
+    Source Port: 38534
+    Destination Port: 10002
+    [Stream index: 1]
+    [TCP Segment Len: 0]
+    Sequence number: 26    (relative sequence number)
+    [Next sequence number: 26    (relative sequence number)]
+    Acknowledgment number: 42    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 0.000948170 seconds]
+        [Time since previous frame in this TCP stream: 0.000011949 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+     65 108.499768504  127.0.0.1             127.0.0.1             TCP      92     10002 → 38534 [PSH, ACK] Seq=42 Ack=26 Win=65536 Len=26 TSval=3259806825 TSecr=3259806825
+
+Frame 65: 92 bytes on wire (736 bits), 92 bytes captured (736 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10002, Dst Port: 38534, Seq: 42, Ack: 26, Len: 26
+    Source Port: 10002
+    Destination Port: 38534
+    [Stream index: 1]
+    [TCP Segment Len: 26]
+    Sequence number: 42    (relative sequence number)
+    [Next sequence number: 68    (relative sequence number)]
+    Acknowledgment number: 26    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe42 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 0.001000329 seconds]
+        [Time since previous frame in this TCP stream: 0.000052159 seconds]
+    TCP payload (26 bytes)
+Data (26 bytes)
+
+0000  01 4c 49 53 54 53 45 52 56 45 52 53 2c 50 33 5f   .LISTSERVERS,P3_
+0010  47 52 4f 55 50 5f 31 30 30 04                     GROUP_100.
+    Data: 014c495354534552564552532c50335f47524f55505f3130...
+    [Length: 26]
+
+No.     Time           Source                Destination           Protocol Length Info
+     66 108.499779400  127.0.0.1             127.0.0.1             TCP      66     38534 → 10002 [ACK] Seq=26 Ack=68 Win=65536 Len=0 TSval=3259806825 TSecr=3259806825
+
+Frame 66: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 38534, Dst Port: 10002, Seq: 26, Ack: 68, Len: 0
+    Source Port: 38534
+    Destination Port: 10002
+    [Stream index: 1]
+    [TCP Segment Len: 0]
+    Sequence number: 26    (relative sequence number)
+    [Next sequence number: 26    (relative sequence number)]
+    Acknowledgment number: 68    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 0.001011225 seconds]
+        [Time since previous frame in this TCP stream: 0.000010896 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+     75 168.090568461  127.0.0.1             127.0.0.1             TCP      113    48184 → 10001 [PSH, ACK] Seq=7 Ack=1 Win=65536 Len=47 TSval=3259866416 TSecr=3259806824
+
+Frame 75: 113 bytes on wire (904 bits), 113 bytes captured (904 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 48184, Dst Port: 10001, Seq: 7, Ack: 1, Len: 47
+    Source Port: 48184
+    Destination Port: 10001
+    [Stream index: 0]
+    [TCP Segment Len: 47]
+    Sequence number: 7    (relative sequence number)
+    [Next sequence number: 54    (relative sequence number)]
+    Acknowledgment number: 1    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe57 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 164.255835786 seconds]
+        [Time since previous frame in this TCP stream: 59.591966444 seconds]
+    TCP payload (47 bytes)
+Data (47 bytes)
+
+0000  53 45 4e 44 4d 53 47 20 50 33 5f 47 52 4f 55 50   SENDMSG P3_GROUP
+0010  5f 31 30 30 20 74 65 73 74 20 6d 65 73 73 61 67   _100 test messag
+0020  65 20 66 6f 72 20 67 72 6f 75 70 31 30 30 0a      e for group100.
+    Data: 53454e444d53472050335f47524f55505f31303020746573...
+    [Length: 47]
+
+No.     Time           Source                Destination           Protocol Length Info
+     76 168.090588767  127.0.0.1             127.0.0.1             TCP      66     10001 → 48184 [ACK] Seq=1 Ack=54 Win=65536 Len=0 TSval=3259866416 TSecr=3259866416
+
+Frame 76: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10001, Dst Port: 48184, Seq: 1, Ack: 54, Len: 0
+    Source Port: 10001
+    Destination Port: 48184
+    [Stream index: 0]
+    [TCP Segment Len: 0]
+    Sequence number: 1    (relative sequence number)
+    [Next sequence number: 1    (relative sequence number)]
+    Acknowledgment number: 54    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 164.255856092 seconds]
+        [Time since previous frame in this TCP stream: 0.000020306 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+     77 168.090810703  127.0.0.1             127.0.0.1             TCP      128    38534 → 10002 [PSH, ACK] Seq=26 Ack=68 Win=65536 Len=62 TSval=3259866416 TSecr=3259806825
+
+Frame 77: 128 bytes on wire (1024 bits), 128 bytes captured (1024 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 38534, Dst Port: 10002, Seq: 26, Ack: 68, Len: 62
+    Source Port: 38534
+    Destination Port: 10002
+    [Stream index: 1]
+    [TCP Segment Len: 62]
+    Sequence number: 26    (relative sequence number)
+    [Next sequence number: 88    (relative sequence number)]
+    Acknowledgment number: 68    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe66 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 59.592042528 seconds]
+        [Time since previous frame in this TCP stream: 59.591031303 seconds]
+    TCP payload (62 bytes)
+Data (62 bytes)
+
+0000  01 53 45 4e 44 5f 4d 53 47 2c 50 33 5f 47 52 4f   .SEND_MSG,P3_GRO
+0010  55 50 5f 32 30 2c 50 33 5f 47 52 4f 55 50 5f 31   UP_20,P3_GROUP_1
+0020  30 30 2c 74 65 73 74 20 6d 65 73 73 61 67 65 20   00,test message 
+0030  66 6f 72 20 67 72 6f 75 70 31 30 30 20 04         for group100 .
+    Data: 0153454e445f4d53472c50335f47524f55505f32302c5033...
+    [Length: 62]
+
+No.     Time           Source                Destination           Protocol Length Info
+     78 168.091294384  127.0.0.1             127.0.0.1             TCP      141    10003 → 45686 [PSH, ACK] Seq=1 Ack=1 Win=512 Len=75 TSval=3259866417 TSecr=3259622451
+
+Frame 78: 141 bytes on wire (1128 bits), 141 bytes captured (1128 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10003, Dst Port: 45686, Seq: 1, Ack: 1, Len: 75
+    Source Port: 10003
+    Destination Port: 45686
+    [Stream index: 2]
+    [TCP Segment Len: 75]
+    Sequence number: 1    (relative sequence number)
+    [Next sequence number: 76    (relative sequence number)]
+    Acknowledgment number: 1    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 512]
+    [Window size scaling factor: -1 (unknown)]
+    Checksum: 0xfe73 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 0.000000000 seconds]
+        [Time since previous frame in this TCP stream: 0.000000000 seconds]
+    TCP payload (75 bytes)
+Data (75 bytes)
+
+0000  53 50 2c 46 52 4f 4d 20 47 52 4f 55 50 52 65 63   SP,FROM GROUPRec
+0010  69 76 65 64 20 66 72 6f 6d 3a 20 32 30 31 39 2f   ived from: 2019/
+0020  31 30 2f 31 34 2f 31 35 2d 31 32 2d 33 36 3a 20   10/14/15-12-36: 
+0030  0a 74 65 73 74 20 6d 65 73 73 61 67 65 20 66 6f   .test message fo
+0040  72 20 67 72 6f 75 70 31 30 30 20                  r group100 
+    Data: 53502c46524f4d2047524f5550526563697665642066726f...
+    [Length: 75]
+
+No.     Time           Source                Destination           Protocol Length Info
+     79 168.091316637  127.0.0.1             127.0.0.1             TCP      66     45686 → 10003 [ACK] Seq=1 Ack=76 Win=512 Len=0 TSval=3259866417 TSecr=3259866417
+
+Frame 79: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 45686, Dst Port: 10003, Seq: 1, Ack: 76, Len: 0
+    Source Port: 45686
+    Destination Port: 10003
+    [Stream index: 2]
+    [TCP Segment Len: 0]
+    Sequence number: 1    (relative sequence number)
+    [Next sequence number: 1    (relative sequence number)]
+    Acknowledgment number: 76    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 512]
+    [Window size scaling factor: -1 (unknown)]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 0.000022253 seconds]
+        [Time since previous frame in this TCP stream: 0.000022253 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+     80 168.137529567  127.0.0.1             127.0.0.1             TCP      66     10002 → 38534 [ACK] Seq=68 Ack=88 Win=65536 Len=0 TSval=3259866463 TSecr=3259866416
+
+Frame 80: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10002, Dst Port: 38534, Seq: 68, Ack: 88, Len: 0
+    Source Port: 10002
+    Destination Port: 38534
+    [Stream index: 1]
+    [TCP Segment Len: 0]
+    Sequence number: 68    (relative sequence number)
+    [Next sequence number: 68    (relative sequence number)]
+    Acknowledgment number: 88    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 59.638761392 seconds]
+        [Time since previous frame in this TCP stream: 0.046718864 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    117 248.549583680  127.0.0.1             127.0.0.1             TCP      86     48184 → 10001 [PSH, ACK] Seq=54 Ack=1 Win=65536 Len=20 TSval=3259946875 TSecr=3259866416
+
+Frame 117: 86 bytes on wire (688 bits), 86 bytes captured (688 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 48184, Dst Port: 10001, Seq: 54, Ack: 1, Len: 20
+    Source Port: 48184
+    Destination Port: 10001
+    [Stream index: 0]
+    [TCP Segment Len: 20]
+    Sequence number: 54    (relative sequence number)
+    [Next sequence number: 74    (relative sequence number)]
+    Acknowledgment number: 1    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe3c [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 244.714851005 seconds]
+        [Time since previous frame in this TCP stream: 80.458994913 seconds]
+    TCP payload (20 bytes)
+Data (20 bytes)
+
+0000  53 45 4e 44 4d 53 47 20 50 33 5f 47 52 4f 55 50   SENDMSG P3_GROUP
+0010  5f 35 30 0a                                       _50.
+    Data: 53454e444d53472050335f47524f55505f35300a
+    [Length: 20]
+
+No.     Time           Source                Destination           Protocol Length Info
+    118 248.549603535  127.0.0.1             127.0.0.1             TCP      66     10001 → 48184 [ACK] Seq=1 Ack=74 Win=65536 Len=0 TSval=3259946875 TSecr=3259946875
+
+Frame 118: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10001, Dst Port: 48184, Seq: 1, Ack: 74, Len: 0
+    Source Port: 10001
+    Destination Port: 48184
+    [Stream index: 0]
+    [TCP Segment Len: 0]
+    Sequence number: 1    (relative sequence number)
+    [Next sequence number: 1    (relative sequence number)]
+    Acknowledgment number: 74    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 244.714870860 seconds]
+        [Time since previous frame in this TCP stream: 0.000019855 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    119 248.549846656  127.0.0.1             127.0.0.1             TCP      124    10001 → 48184 [PSH, ACK] Seq=1 Ack=74 Win=65536 Len=58 TSval=3259946875 TSecr=3259946875
+
+Frame 119: 124 bytes on wire (992 bits), 124 bytes captured (992 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10001, Dst Port: 48184, Seq: 1, Ack: 74, Len: 58
+    Source Port: 10001
+    Destination Port: 48184
+    [Stream index: 0]
+    [TCP Segment Len: 58]
+    Sequence number: 1    (relative sequence number)
+    [Next sequence number: 59    (relative sequence number)]
+    Acknowledgment number: 74    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe62 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 244.715113981 seconds]
+        [Time since previous frame in this TCP stream: 0.000243121 seconds]
+    TCP payload (58 bytes)
+Data (58 bytes)
+
+0000  55 6e 61 62 6c 65 20 74 6f 20 73 65 6e 64 20 63   Unable to send c
+0010  6f 6d 6d 61 6e 64 2c 20 6e 6f 20 63 6f 6e 6e 65   ommand, no conne
+0020  63 74 65 64 20 73 65 72 76 65 72 73 2c 20 61 64   cted servers, ad
+0030  64 69 6e 67 20 74 6f 20 6d 61                     ding to ma
+    Data: 556e61626c6520746f2073656e6420636f6d6d616e642c20...
+    [Length: 58]
+
+No.     Time           Source                Destination           Protocol Length Info
+    120 248.549867024  127.0.0.1             127.0.0.1             TCP      66     48184 → 10001 [ACK] Seq=74 Ack=59 Win=65536 Len=0 TSval=3259946875 TSecr=3259946875
+
+Frame 120: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 48184, Dst Port: 10001, Seq: 74, Ack: 59, Len: 0
+    Source Port: 48184
+    Destination Port: 10001
+    [Stream index: 0]
+    [TCP Segment Len: 0]
+    Sequence number: 74    (relative sequence number)
+    [Next sequence number: 74    (relative sequence number)]
+    Acknowledgment number: 59    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 244.715134349 seconds]
+        [Time since previous frame in this TCP stream: 0.000020368 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    135 275.668724474  127.0.0.1             127.0.0.1             TCP      85     48184 → 10001 [PSH, ACK] Seq=74 Ack=59 Win=65536 Len=19 TSval=3259973994 TSecr=3259946875
+
+Frame 135: 85 bytes on wire (680 bits), 85 bytes captured (680 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 48184, Dst Port: 10001, Seq: 74, Ack: 59, Len: 19
+    Source Port: 48184
+    Destination Port: 10001
+    [Stream index: 0]
+    [TCP Segment Len: 19]
+    Sequence number: 74    (relative sequence number)
+    [Next sequence number: 93    (relative sequence number)]
+    Acknowledgment number: 59    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe3b [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 271.833991799 seconds]
+        [Time since previous frame in this TCP stream: 27.118857450 seconds]
+    TCP payload (19 bytes)
+Data (19 bytes)
+
+0000  47 45 54 4d 53 47 20 50 33 5f 47 52 4f 55 50 5f   GETMSG P3_GROUP_
+0010  35 30 0a                                          50.
+    Data: 4745544d53472050335f47524f55505f35300a
+    [Length: 19]
+
+No.     Time           Source                Destination           Protocol Length Info
+    136 275.669037712  127.0.0.1             127.0.0.1             TCP      208    10001 → 48184 [PSH, ACK] Seq=59 Ack=93 Win=65536 Len=142 TSval=3259973994 TSecr=3259973994
+
+Frame 136: 208 bytes on wire (1664 bits), 208 bytes captured (1664 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10001, Dst Port: 48184, Seq: 59, Ack: 93, Len: 142
+    Source Port: 10001
+    Destination Port: 48184
+    [Stream index: 0]
+    [TCP Segment Len: 142]
+    Sequence number: 59    (relative sequence number)
+    [Next sequence number: 201    (relative sequence number)]
+    Acknowledgment number: 93    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfeb6 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 271.834305037 seconds]
+        [Time since previous frame in this TCP stream: 0.000313238 seconds]
+    TCP payload (142 bytes)
+Data (142 bytes)
+
+0000  4d 65 73 73 61 67 65 73 20 74 6f 20 20 3a 20 50   Messages to  : P
+0010  33 5f 47 52 4f 55 50 5f 35 30 0a 4d 65 73 73 61   3_GROUP_50.Messa
+0020  67 65 73 20 66 72 6f 6d 3a 20 50 33 5f 47 52 4f   ges from: P3_GRO
+0030  55 50 5f 32 30 0a 4d 65 73 73 61 67 65 20 66 65   UP_20.Message fe
+0040  74 63 68 65 64 20 61 74 20 32 30 31 39 2f 31 30   tched at 2019/10
+0050  2f 31 34 2f 31 35 2d 31 34 2d 32 34 3a 20 0a 53   /14/15-14-24: .S
+0060  65 72 76 65 72 20 72 65 63 69 76 65 64 20 6d 65   erver recived me
+0070  73 73 61 67 65 20 61 74 20 32 30 31 39 2f 31 30   ssage at 2019/10
+0080  2f 31 34 2f 31 35 2d 31 33 2d 35 37 3a 20         /14/15-13-57: 
+    Data: 4d6573736167657320746f20203a2050335f47524f55505f...
+    [Length: 142]
+
+No.     Time           Source                Destination           Protocol Length Info
+    137 275.669063460  127.0.0.1             127.0.0.1             TCP      66     48184 → 10001 [ACK] Seq=93 Ack=201 Win=65408 Len=0 TSval=3259973994 TSecr=3259973994
+
+Frame 137: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 48184, Dst Port: 10001, Seq: 93, Ack: 201, Len: 0
+    Source Port: 48184
+    Destination Port: 10001
+    [Stream index: 0]
+    [TCP Segment Len: 0]
+    Sequence number: 93    (relative sequence number)
+    [Next sequence number: 93    (relative sequence number)]
+    Acknowledgment number: 201    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 511
+    [Calculated window size: 65408]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 271.834330785 seconds]
+        [Time since previous frame in this TCP stream: 0.000025748 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    155 325.195865270  127.0.0.1             127.0.0.1             TCP      119    45686 → 10003 [PSH, ACK] Seq=1 Ack=76 Win=512 Len=53 TSval=3260023521 TSecr=3259866417
+
+Frame 155: 119 bytes on wire (952 bits), 119 bytes captured (952 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 45686, Dst Port: 10003, Seq: 1, Ack: 76, Len: 53
+    Source Port: 45686
+    Destination Port: 10003
+    [Stream index: 2]
+    [TCP Segment Len: 53]
+    Sequence number: 1    (relative sequence number)
+    [Next sequence number: 54    (relative sequence number)]
+    Acknowledgment number: 76    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 512]
+    [Window size scaling factor: -1 (unknown)]
+    Checksum: 0xfe5d [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 157.104570886 seconds]
+        [Time since previous frame in this TCP stream: 157.104548633 seconds]
+    TCP payload (53 bytes)
+Data (53 bytes)
+
+0000  53 45 4e 44 4d 53 47 20 50 33 5f 47 52 4f 55 50   SENDMSG P3_GROUP
+0010  5f 32 30 20 74 65 73 74 20 6d 65 73 73 61 67 65   _20 test message
+0020  20 66 72 6f 6d 20 74 65 73 74 20 67 72 6f 75 70    from test group
+0030  20 31 30 30 0a                                     100.
+    Data: 53454e444d53472050335f47524f55505f32302074657374...
+    [Length: 53]
+
+No.     Time           Source                Destination           Protocol Length Info
+    156 325.195904201  127.0.0.1             127.0.0.1             TCP      66     10003 → 45686 [ACK] Seq=76 Ack=54 Win=512 Len=0 TSval=3260023521 TSecr=3260023521
+
+Frame 156: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10003, Dst Port: 45686, Seq: 76, Ack: 54, Len: 0
+    Source Port: 10003
+    Destination Port: 45686
+    [Stream index: 2]
+    [TCP Segment Len: 0]
+    Sequence number: 76    (relative sequence number)
+    [Next sequence number: 76    (relative sequence number)]
+    Acknowledgment number: 54    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 512]
+    [Window size scaling factor: -1 (unknown)]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 157.104609817 seconds]
+        [Time since previous frame in this TCP stream: 0.000038931 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    157 325.196122803  127.0.0.1             127.0.0.1             TCP      124    10003 → 45686 [PSH, ACK] Seq=76 Ack=54 Win=512 Len=58 TSval=3260023522 TSecr=3260023521
+
+Frame 157: 124 bytes on wire (992 bits), 124 bytes captured (992 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10003, Dst Port: 45686, Seq: 76, Ack: 54, Len: 58
+    Source Port: 10003
+    Destination Port: 45686
+    [Stream index: 2]
+    [TCP Segment Len: 58]
+    Sequence number: 76    (relative sequence number)
+    [Next sequence number: 134    (relative sequence number)]
+    Acknowledgment number: 54    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 512]
+    [Window size scaling factor: -1 (unknown)]
+    Checksum: 0xfe62 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 157.104828419 seconds]
+        [Time since previous frame in this TCP stream: 0.000218602 seconds]
+    TCP payload (58 bytes)
+Data (58 bytes)
+
+0000  55 6e 61 62 6c 65 20 74 6f 20 73 65 6e 64 20 63   Unable to send c
+0010  6f 6d 6d 61 6e 64 2c 20 6e 6f 20 63 6f 6e 6e 65   ommand, no conne
+0020  63 74 65 64 20 73 65 72 76 65 72 73 2c 20 61 64   cted servers, ad
+0030  64 69 6e 67 20 74 6f 20 6d 61                     ding to ma
+    Data: 556e61626c6520746f2073656e6420636f6d6d616e642c20...
+    [Length: 58]
+
+No.     Time           Source                Destination           Protocol Length Info
+    158 325.196148288  127.0.0.1             127.0.0.1             TCP      66     45686 → 10003 [ACK] Seq=54 Ack=134 Win=512 Len=0 TSval=3260023522 TSecr=3260023522
+
+Frame 158: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 45686, Dst Port: 10003, Seq: 54, Ack: 134, Len: 0
+    Source Port: 45686
+    Destination Port: 10003
+    [Stream index: 2]
+    [TCP Segment Len: 0]
+    Sequence number: 54    (relative sequence number)
+    [Next sequence number: 54    (relative sequence number)]
+    Acknowledgment number: 134    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 512]
+    [Window size scaling factor: -1 (unknown)]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 157.104853904 seconds]
+        [Time since previous frame in this TCP stream: 0.000025485 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    187 391.284181583  127.0.0.1             127.0.0.1             TCP      107    48184 → 10001 [PSH, ACK] Seq=93 Ack=201 Win=65536 Len=41 TSval=3260089610 TSecr=3259973994
+
+Frame 187: 107 bytes on wire (856 bits), 107 bytes captured (856 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 48184, Dst Port: 10001, Seq: 93, Ack: 201, Len: 41
+    Source Port: 48184
+    Destination Port: 10001
+    [Stream index: 0]
+    [TCP Segment Len: 41]
+    Sequence number: 93    (relative sequence number)
+    [Next sequence number: 134    (relative sequence number)]
+    Acknowledgment number: 201    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe51 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 387.449448908 seconds]
+        [Time since previous frame in this TCP stream: 115.615118123 seconds]
+    TCP payload (41 bytes)
+Data (41 bytes)
+
+0000  53 45 4e 44 4d 53 47 20 50 33 5f 47 52 4f 55 50   SENDMSG P3_GROUP
+0010  5f 31 30 30 20 47 45 54 5f 4d 53 47 20 50 33 5f   _100 GET_MSG P3_
+0020  47 52 4f 55 50 5f 32 30 0a                        GROUP_20.
+    Data: 53454e444d53472050335f47524f55505f31303020474554...
+    [Length: 41]
+
+No.     Time           Source                Destination           Protocol Length Info
+    188 391.284447908  127.0.0.1             127.0.0.1             TCP      122    38534 → 10002 [PSH, ACK] Seq=88 Ack=68 Win=65536 Len=56 TSval=3260089610 TSecr=3259866463
+
+Frame 188: 122 bytes on wire (976 bits), 122 bytes captured (976 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 38534, Dst Port: 10002, Seq: 88, Ack: 68, Len: 56
+    Source Port: 38534
+    Destination Port: 10002
+    [Stream index: 1]
+    [TCP Segment Len: 56]
+    Sequence number: 88    (relative sequence number)
+    [Next sequence number: 144    (relative sequence number)]
+    Acknowledgment number: 68    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe60 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 282.785679733 seconds]
+        [Time since previous frame in this TCP stream: 223.146918341 seconds]
+    TCP payload (56 bytes)
+Data (56 bytes)
+
+0000  01 53 45 4e 44 5f 4d 53 47 2c 50 33 5f 47 52 4f   .SEND_MSG,P3_GRO
+0010  55 50 5f 32 30 2c 50 33 5f 47 52 4f 55 50 5f 31   UP_20,P3_GROUP_1
+0020  30 30 2c 47 45 54 5f 4d 53 47 20 50 33 5f 47 52   00,GET_MSG P3_GR
+0030  4f 55 50 5f 32 30 20 04                           OUP_20 .
+    Data: 0153454e445f4d53472c50335f47524f55505f32302c5033...
+    [Length: 56]
+
+No.     Time           Source                Destination           Protocol Length Info
+    189 391.284471558  127.0.0.1             127.0.0.1             TCP      66     10002 → 38534 [ACK] Seq=68 Ack=144 Win=65536 Len=0 TSval=3260089610 TSecr=3260089610
+
+Frame 189: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10002, Dst Port: 38534, Seq: 68, Ack: 144, Len: 0
+    Source Port: 10002
+    Destination Port: 38534
+    [Stream index: 1]
+    [TCP Segment Len: 0]
+    Sequence number: 68    (relative sequence number)
+    [Next sequence number: 68    (relative sequence number)]
+    Acknowledgment number: 144    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 282.785703383 seconds]
+        [Time since previous frame in this TCP stream: 0.000023650 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    190 391.284811659  127.0.0.1             127.0.0.1             TCP      135    10003 → 45686 [PSH, ACK] Seq=134 Ack=54 Win=512 Len=69 TSval=3260089610 TSecr=3260023522
+
+Frame 190: 135 bytes on wire (1080 bits), 135 bytes captured (1080 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10003, Dst Port: 45686, Seq: 134, Ack: 54, Len: 69
+    Source Port: 10003
+    Destination Port: 45686
+    [Stream index: 2]
+    [TCP Segment Len: 69]
+    Sequence number: 134    (relative sequence number)
+    [Next sequence number: 203    (relative sequence number)]
+    Acknowledgment number: 54    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 512]
+    [Window size scaling factor: -1 (unknown)]
+    Checksum: 0xfe6d [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 223.193517275 seconds]
+        [Time since previous frame in this TCP stream: 66.088663371 seconds]
+    TCP payload (69 bytes)
+Data (69 bytes)
+
+0000  76 61 6c 69 64 20 67 72 6f 75 70 49 44 52 65 63   valid groupIDRec
+0010  69 76 65 64 20 66 72 6f 6d 3a 20 32 30 31 39 2f   ived from: 2019/
+0020  31 30 2f 31 34 2f 31 35 2d 31 36 2d 32 30 3a 20   10/14/15-16-20: 
+0030  0a 47 45 54 5f 4d 53 47 20 50 33 5f 47 52 4f 55   .GET_MSG P3_GROU
+0040  50 5f 32 30 20                                    P_20 
+    Data: 76616c69642067726f75704944526563697665642066726f...
+    [Length: 69]
+
+No.     Time           Source                Destination           Protocol Length Info
+    191 391.284837555  127.0.0.1             127.0.0.1             TCP      66     45686 → 10003 [ACK] Seq=54 Ack=203 Win=512 Len=0 TSval=3260089610 TSecr=3260089610
+
+Frame 191: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 45686, Dst Port: 10003, Seq: 54, Ack: 203, Len: 0
+    Source Port: 45686
+    Destination Port: 10003
+    [Stream index: 2]
+    [TCP Segment Len: 0]
+    Sequence number: 54    (relative sequence number)
+    [Next sequence number: 54    (relative sequence number)]
+    Acknowledgment number: 203    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 512]
+    [Window size scaling factor: -1 (unknown)]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 223.193543171 seconds]
+        [Time since previous frame in this TCP stream: 0.000025896 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    192 391.284923304  127.0.0.1             127.0.0.1             TCP      245    10002 → 38534 [PSH, ACK] Seq=68 Ack=144 Win=65536 Len=179 TSval=3260089610 TSecr=3260089610
+
+Frame 192: 245 bytes on wire (1960 bits), 245 bytes captured (1960 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10002, Dst Port: 38534, Seq: 68, Ack: 144, Len: 179
+    Source Port: 10002
+    Destination Port: 38534
+    [Stream index: 1]
+    [TCP Segment Len: 179]
+    Sequence number: 68    (relative sequence number)
+    [Next sequence number: 247    (relative sequence number)]
+    Acknowledgment number: 144    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfedb [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 282.786155129 seconds]
+        [Time since previous frame in this TCP stream: 0.000451746 seconds]
+    TCP payload (179 bytes)
+Data (179 bytes)
+
+0000  01 4d 65 73 73 61 67 65 73 20 74 6f 20 20 3a 20   .Messages to  : 
+0010  50 33 5f 47 52 4f 55 50 5f 32 30 0a 4d 65 73 73   P3_GROUP_20.Mess
+0020  61 67 65 73 20 66 72 6f 6d 3a 20 50 33 5f 47 52   ages from: P3_GR
+0030  4f 55 50 5f 31 30 30 0a 4d 65 73 73 61 67 65 20   OUP_100.Message 
+0040  66 65 74 63 68 65 64 20 61 74 20 32 30 31 39 2f   fetched at 2019/
+0050  31 30 2f 31 34 2f 31 35 2d 31 36 2d 32 30 3a 20   10/14/15-16-20: 
+0060  0a 53 65 72 76 65 72 20 72 65 63 69 76 65 64 20   .Server recived 
+0070  6d 65 73 73 61 67 65 20 61 74 20 32 30 31 39 2f   message at 2019/
+0080  31 30 2f 31 34 2f 31 35 2d 31 35 2d 31 34 3a 20   10/14/15-15-14: 
+0090  74 65 73 74 20 6d 65 73 73 61 67 65 20 66 72 6f   test message fro
+00a0  6d 20 74 65 73 74 20 67 72 6f 75 70 20 31 30 30   m test group 100
+00b0  20 0a 04                                           ..
+    Data: 014d6573736167657320746f20203a2050335f47524f5550...
+    [Length: 179]
+
+No.     Time           Source                Destination           Protocol Length Info
+    193 391.284930507  127.0.0.1             127.0.0.1             TCP      66     38534 → 10002 [ACK] Seq=144 Ack=247 Win=65408 Len=0 TSval=3260089610 TSecr=3260089610
+
+Frame 193: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 38534, Dst Port: 10002, Seq: 144, Ack: 247, Len: 0
+    Source Port: 38534
+    Destination Port: 10002
+    [Stream index: 1]
+    [TCP Segment Len: 0]
+    Sequence number: 144    (relative sequence number)
+    [Next sequence number: 144    (relative sequence number)]
+    Acknowledgment number: 247    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 511
+    [Calculated window size: 65408]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 282.786162332 seconds]
+        [Time since previous frame in this TCP stream: 0.000007203 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    194 391.329716517  127.0.0.1             127.0.0.1             TCP      66     10001 → 48184 [ACK] Seq=201 Ack=134 Win=65536 Len=0 TSval=3260089655 TSecr=3260089610
+
+Frame 194: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10001, Dst Port: 48184, Seq: 201, Ack: 134, Len: 0
+    Source Port: 10001
+    Destination Port: 48184
+    [Stream index: 0]
+    [TCP Segment Len: 0]
+    Sequence number: 201    (relative sequence number)
+    [Next sequence number: 201    (relative sequence number)]
+    Acknowledgment number: 134    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 387.494983842 seconds]
+        [Time since previous frame in this TCP stream: 0.045534934 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    219 479.042061148  127.0.0.1             127.0.0.1             TCP      78     48184 → 10001 [PSH, ACK] Seq=134 Ack=201 Win=65536 Len=12 TSval=3260177367 TSecr=3260089655
+
+Frame 219: 78 bytes on wire (624 bits), 78 bytes captured (624 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 48184, Dst Port: 10001, Seq: 134, Ack: 201, Len: 12
+    Source Port: 48184
+    Destination Port: 10001
+    [Stream index: 0]
+    [TCP Segment Len: 12]
+    Sequence number: 134    (relative sequence number)
+    [Next sequence number: 146    (relative sequence number)]
+    Acknowledgment number: 201    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe34 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 475.207328473 seconds]
+        [Time since previous frame in this TCP stream: 87.712344631 seconds]
+    TCP payload (12 bytes)
+Data (12 bytes)
+
+0000  4c 49 53 54 53 45 52 56 45 52 53 0a               LISTSERVERS.
+    Data: 4c495354534552564552530a
+    [Length: 12]
+
+No.     Time           Source                Destination           Protocol Length Info
+    220 479.042081339  127.0.0.1             127.0.0.1             TCP      66     10001 → 48184 [ACK] Seq=201 Ack=146 Win=65536 Len=0 TSval=3260177367 TSecr=3260177367
+
+Frame 220: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10001, Dst Port: 48184, Seq: 201, Ack: 146, Len: 0
+    Source Port: 10001
+    Destination Port: 48184
+    [Stream index: 0]
+    [TCP Segment Len: 0]
+    Sequence number: 201    (relative sequence number)
+    [Next sequence number: 201    (relative sequence number)]
+    Acknowledgment number: 146    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 475.207348664 seconds]
+        [Time since previous frame in this TCP stream: 0.000020191 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    221 479.042450250  127.0.0.1             127.0.0.1             TCP      148    10001 → 48184 [PSH, ACK] Seq=201 Ack=146 Win=65536 Len=82 TSval=3260177368 TSecr=3260177367
+
+Frame 221: 148 bytes on wire (1184 bits), 148 bytes captured (1184 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10001, Dst Port: 48184, Seq: 201, Ack: 146, Len: 82
+    Source Port: 10001
+    Destination Port: 48184
+    [Stream index: 0]
+    [TCP Segment Len: 82]
+    Sequence number: 201    (relative sequence number)
+    [Next sequence number: 283    (relative sequence number)]
+    Acknowledgment number: 146    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe7a [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 475.207717575 seconds]
+        [Time since previous frame in this TCP stream: 0.000368911 seconds]
+    TCP payload (82 bytes)
+Data (82 bytes)
+
+0000  53 45 52 56 45 52 53 2c 50 33 5f 47 52 4f 55 50   SERVERS,P3_GROUP
+0010  5f 32 30 2c 31 30 2e 33 2e 31 37 2e 31 34 31 2c   _20,10.3.17.141,
+0020  31 30 30 30 30 3b 50 33 5f 47 52 4f 55 50 5f 31   10000;P3_GROUP_1
+0030  30 30 2c 31 30 2e 33 2e 31 37 2e 31 34 31 2c 31   00,10.3.17.141,1
+0040  30 30 30 32 3b 04 01 4c 49 53 54 53 45 52 56 45   0002;..LISTSERVE
+0050  52 53                                             RS
+    Data: 534552564552532c50335f47524f55505f32302c31302e33...
+    [Length: 82]
+
+No.     Time           Source                Destination           Protocol Length Info
+    222 479.042457357  127.0.0.1             127.0.0.1             TCP      66     48184 → 10001 [ACK] Seq=146 Ack=283 Win=65536 Len=0 TSval=3260177368 TSecr=3260177368
+
+Frame 222: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 48184, Dst Port: 10001, Seq: 146, Ack: 283, Len: 0
+    Source Port: 48184
+    Destination Port: 10001
+    [Stream index: 0]
+    [TCP Segment Len: 0]
+    Sequence number: 146    (relative sequence number)
+    [Next sequence number: 146    (relative sequence number)]
+    Acknowledgment number: 283    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 475.207724682 seconds]
+        [Time since previous frame in this TCP stream: 0.000007107 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    235 510.038041093  127.0.0.1             127.0.0.1             TCP      89     48184 → 10001 [PSH, ACK] Seq=146 Ack=283 Win=65536 Len=23 TSval=3260208363 TSecr=3260177368
+
+Frame 235: 89 bytes on wire (712 bits), 89 bytes captured (712 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 48184, Dst Port: 10001, Seq: 146, Ack: 283, Len: 23
+    Source Port: 48184
+    Destination Port: 10001
+    [Stream index: 0]
+    [TCP Segment Len: 23]
+    Sequence number: 146    (relative sequence number)
+    [Next sequence number: 169    (relative sequence number)]
+    Acknowledgment number: 283    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe3f [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 506.203308418 seconds]
+        [Time since previous frame in this TCP stream: 30.995583736 seconds]
+    TCP payload (23 bytes)
+Data (23 bytes)
+
+0000  53 54 41 54 55 53 52 45 51 20 50 33 5f 47 52 4f   STATUSREQ P3_GRO
+0010  55 50 5f 31 30 30 0a                              UP_100.
+    Data: 5354415455535245512050335f47524f55505f3130300a
+    [Length: 23]
+
+No.     Time           Source                Destination           Protocol Length Info
+    236 510.038305042  127.0.0.1             127.0.0.1             TCP      89     38534 → 10002 [PSH, ACK] Seq=144 Ack=247 Win=65536 Len=23 TSval=3260208364 TSecr=3260089610
+
+Frame 236: 89 bytes on wire (712 bits), 89 bytes captured (712 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 38534, Dst Port: 10002, Seq: 144, Ack: 247, Len: 23
+    Source Port: 38534
+    Destination Port: 10002
+    [Stream index: 1]
+    [TCP Segment Len: 23]
+    Sequence number: 144    (relative sequence number)
+    [Next sequence number: 167    (relative sequence number)]
+    Acknowledgment number: 247    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe3f [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 401.539536867 seconds]
+        [Time since previous frame in this TCP stream: 118.753374535 seconds]
+    TCP payload (23 bytes)
+Data (23 bytes)
+
+0000  01 53 54 41 54 55 53 52 45 51 2c 50 33 5f 47 52   .STATUSREQ,P3_GR
+0010  4f 55 50 5f 32 30 04                              OUP_20.
+    Data: 015354415455535245512c50335f47524f55505f323004
+    [Length: 23]
+
+No.     Time           Source                Destination           Protocol Length Info
+    237 510.038685181  127.0.0.1             127.0.0.1             TCP      104    10002 → 38534 [PSH, ACK] Seq=247 Ack=167 Win=65536 Len=38 TSval=3260208364 TSecr=3260208364
+
+Frame 237: 104 bytes on wire (832 bits), 104 bytes captured (832 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10002, Dst Port: 38534, Seq: 247, Ack: 167, Len: 38
+    Source Port: 10002
+    Destination Port: 38534
+    [Stream index: 1]
+    [TCP Segment Len: 38]
+    Sequence number: 247    (relative sequence number)
+    [Next sequence number: 285    (relative sequence number)]
+    Acknowledgment number: 167    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe4e [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 401.539917006 seconds]
+        [Time since previous frame in this TCP stream: 0.000380139 seconds]
+    TCP payload (38 bytes)
+Data (38 bytes)
+
+0000  01 53 54 41 54 55 53 52 45 53 50 2c 50 33 5f 47   .STATUSRESP,P3_G
+0010  52 4f 55 50 5f 31 30 30 2c 50 33 5f 47 52 4f 55   ROUP_100,P3_GROU
+0020  50 5f 32 30 2c 04                                 P_20,.
+    Data: 01535441545553524553502c50335f47524f55505f313030...
+    [Length: 38]
+
+No.     Time           Source                Destination           Protocol Length Info
+    238 510.038707816  127.0.0.1             127.0.0.1             TCP      66     38534 → 10002 [ACK] Seq=167 Ack=285 Win=65536 Len=0 TSval=3260208364 TSecr=3260208364
+
+Frame 238: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 38534, Dst Port: 10002, Seq: 167, Ack: 285, Len: 0
+    Source Port: 38534
+    Destination Port: 10002
+    [Stream index: 1]
+    [TCP Segment Len: 0]
+    Sequence number: 167    (relative sequence number)
+    [Next sequence number: 167    (relative sequence number)]
+    Acknowledgment number: 285    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 401.539939641 seconds]
+        [Time since previous frame in this TCP stream: 0.000022635 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    239 510.039004407  127.0.0.1             127.0.0.1             TCP      95     10001 → 48184 [PSH, ACK] Seq=283 Ack=169 Win=65536 Len=29 TSval=3260208364 TSecr=3260208363
+
+Frame 239: 95 bytes on wire (760 bits), 95 bytes captured (760 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10001, Dst Port: 48184, Seq: 283, Ack: 169, Len: 29
+    Source Port: 10001
+    Destination Port: 48184
+    [Stream index: 0]
+    [TCP Segment Len: 29]
+    Sequence number: 283    (relative sequence number)
+    [Next sequence number: 312    (relative sequence number)]
+    Acknowledgment number: 169    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe45 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 506.204271732 seconds]
+        [Time since previous frame in this TCP stream: 0.000963314 seconds]
+    TCP payload (29 bytes)
+Data (29 bytes)
+
+0000  53 54 41 54 55 53 52 45 53 50 20 66 72 6f 6d 20   STATUSRESP from 
+0010  50 33 5f 47 52 4f 55 50 5f 31 30 30 2c            P3_GROUP_100,
+    Data: 535441545553524553502066726f6d2050335f47524f5550...
+    [Length: 29]
+
+No.     Time           Source                Destination           Protocol Length Info
+    240 510.039029439  127.0.0.1             127.0.0.1             TCP      66     48184 → 10001 [ACK] Seq=169 Ack=312 Win=65536 Len=0 TSval=3260208364 TSecr=3260208364
+
+Frame 240: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 48184, Dst Port: 10001, Seq: 169, Ack: 312, Len: 0
+    Source Port: 48184
+    Destination Port: 10001
+    [Stream index: 0]
+    [TCP Segment Len: 0]
+    Sequence number: 169    (relative sequence number)
+    [Next sequence number: 169    (relative sequence number)]
+    Acknowledgment number: 312    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 506.204296764 seconds]
+        [Time since previous frame in this TCP stream: 0.000025032 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    245 536.513006991  127.0.0.1             127.0.0.1             TCP      66     45686 → 10003 [FIN, ACK] Seq=54 Ack=203 Win=512 Len=0 TSval=3260234838 TSecr=3260089610
+
+Frame 245: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 45686, Dst Port: 10003, Seq: 54, Ack: 203, Len: 0
+    Source Port: 45686
+    Destination Port: 10003
+    [Stream index: 2]
+    [TCP Segment Len: 0]
+    Sequence number: 54    (relative sequence number)
+    [Next sequence number: 54    (relative sequence number)]
+    Acknowledgment number: 203    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x011 (FIN, ACK)
+    Window size value: 512
+    [Calculated window size: 512]
+    [Window size scaling factor: -1 (unknown)]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [Timestamps]
+        [Time since first frame in this TCP stream: 368.421712607 seconds]
+        [Time since previous frame in this TCP stream: 145.228169436 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    246 536.513143694  127.0.0.1             127.0.0.1             TCP      66     10003 → 45686 [FIN, ACK] Seq=203 Ack=55 Win=512 Len=0 TSval=3260234839 TSecr=3260234838
+
+Frame 246: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10003, Dst Port: 45686, Seq: 203, Ack: 55, Len: 0
+    Source Port: 10003
+    Destination Port: 45686
+    [Stream index: 2]
+    [TCP Segment Len: 0]
+    Sequence number: 203    (relative sequence number)
+    [Next sequence number: 203    (relative sequence number)]
+    Acknowledgment number: 55    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x011 (FIN, ACK)
+    Window size value: 512
+    [Calculated window size: 512]
+    [Window size scaling factor: -1 (unknown)]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 368.421849310 seconds]
+        [Time since previous frame in this TCP stream: 0.000136703 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    247 536.513160998  127.0.0.1             127.0.0.1             TCP      66     45686 → 10003 [ACK] Seq=55 Ack=204 Win=512 Len=0 TSval=3260234839 TSecr=3260234839
+
+Frame 247: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 45686, Dst Port: 10003, Seq: 55, Ack: 204, Len: 0
+    Source Port: 45686
+    Destination Port: 10003
+    [Stream index: 2]
+    [TCP Segment Len: 0]
+    Sequence number: 55    (relative sequence number)
+    [Next sequence number: 55    (relative sequence number)]
+    Acknowledgment number: 204    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 512]
+    [Window size scaling factor: -1 (unknown)]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 368.421866614 seconds]
+        [Time since previous frame in this TCP stream: 0.000017304 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    248 540.424672214  127.0.0.1             127.0.0.1             TCP      74     45722 → 10003 [SYN] Seq=0 Win=65495 Len=0 MSS=65495 SACK_PERM=1 TSval=3260238750 TSecr=0 WS=128
+
+Frame 248: 74 bytes on wire (592 bits), 74 bytes captured (592 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 45722, Dst Port: 10003, Seq: 0, Len: 0
+    Source Port: 45722
+    Destination Port: 10003
+    [Stream index: 3]
+    [TCP Segment Len: 0]
+    Sequence number: 0    (relative sequence number)
+    [Next sequence number: 0    (relative sequence number)]
+    Acknowledgment number: 0
+    1010 .... = Header Length: 40 bytes (10)
+    Flags: 0x002 (SYN)
+    Window size value: 65495
+    [Calculated window size: 65495]
+    Checksum: 0xfe30 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (20 bytes), Maximum segment size, SACK permitted, Timestamps, No-Operation (NOP), Window scale
+    [Timestamps]
+        [Time since first frame in this TCP stream: 0.000000000 seconds]
+        [Time since previous frame in this TCP stream: 0.000000000 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    249 540.424698105  127.0.0.1             127.0.0.1             TCP      74     10003 → 45722 [SYN, ACK] Seq=0 Ack=1 Win=65483 Len=0 MSS=65495 SACK_PERM=1 TSval=3260238750 TSecr=3260238750 WS=128
+
+Frame 249: 74 bytes on wire (592 bits), 74 bytes captured (592 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10003, Dst Port: 45722, Seq: 0, Ack: 1, Len: 0
+    Source Port: 10003
+    Destination Port: 45722
+    [Stream index: 3]
+    [TCP Segment Len: 0]
+    Sequence number: 0    (relative sequence number)
+    [Next sequence number: 0    (relative sequence number)]
+    Acknowledgment number: 1    (relative ack number)
+    1010 .... = Header Length: 40 bytes (10)
+    Flags: 0x012 (SYN, ACK)
+    Window size value: 65483
+    [Calculated window size: 65483]
+    Checksum: 0xfe30 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (20 bytes), Maximum segment size, SACK permitted, Timestamps, No-Operation (NOP), Window scale
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 0.000025891 seconds]
+        [Time since previous frame in this TCP stream: 0.000025891 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    250 540.424720186  127.0.0.1             127.0.0.1             TCP      66     45722 → 10003 [ACK] Seq=1 Ack=1 Win=65536 Len=0 TSval=3260238750 TSecr=3260238750
+
+Frame 250: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 45722, Dst Port: 10003, Seq: 1, Ack: 1, Len: 0
+    Source Port: 45722
+    Destination Port: 10003
+    [Stream index: 3]
+    [TCP Segment Len: 0]
+    Sequence number: 1    (relative sequence number)
+    [Next sequence number: 1    (relative sequence number)]
+    Acknowledgment number: 1    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 0.000047972 seconds]
+        [Time since previous frame in this TCP stream: 0.000022081 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    251 543.703998222  127.0.0.1             127.0.0.1             TCP      114    45722 → 10003 [PSH, ACK] Seq=1 Ack=1 Win=65536 Len=48 TSval=3260242029 TSecr=3260238750
+
+Frame 251: 114 bytes on wire (912 bits), 114 bytes captured (912 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 45722, Dst Port: 10003, Seq: 1, Ack: 1, Len: 48
+    Source Port: 45722
+    Destination Port: 10003
+    [Stream index: 3]
+    [TCP Segment Len: 48]
+    Sequence number: 1    (relative sequence number)
+    [Next sequence number: 49    (relative sequence number)]
+    Acknowledgment number: 1    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe58 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 3.279326008 seconds]
+        [Time since previous frame in this TCP stream: 3.279278036 seconds]
+    TCP payload (48 bytes)
+Data (48 bytes)
+
+0000  65 6c 73 65 20 69 66 20 28 74 6f 6b 65 6e 73 5b   else if (tokens[
+0010  30 5d 2e 63 6f 6d 70 61 72 65 28 22 4c 49 53 54   0].compare("LIST
+0020  53 45 52 56 45 52 53 22 29 20 3d 3d 20 30 29 0a   SERVERS") == 0).
+    Data: 656c73652069662028746f6b656e735b305d2e636f6d7061...
+    [Length: 48]
+
+No.     Time           Source                Destination           Protocol Length Info
+    252 543.704031265  127.0.0.1             127.0.0.1             TCP      66     10003 → 45722 [ACK] Seq=1 Ack=49 Win=65536 Len=0 TSval=3260242029 TSecr=3260242029
+
+Frame 252: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10003, Dst Port: 45722, Seq: 1, Ack: 49, Len: 0
+    Source Port: 10003
+    Destination Port: 45722
+    [Stream index: 3]
+    [TCP Segment Len: 0]
+    Sequence number: 1    (relative sequence number)
+    [Next sequence number: 1    (relative sequence number)]
+    Acknowledgment number: 49    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 3.279359051 seconds]
+        [Time since previous frame in this TCP stream: 0.000033043 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    253 543.704065626  127.0.0.1             127.0.0.1             TCP      72     45722 → 10003 [PSH, ACK] Seq=49 Ack=1 Win=65536 Len=6 TSval=3260242029 TSecr=3260242029
+
+Frame 253: 72 bytes on wire (576 bits), 72 bytes captured (576 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 45722, Dst Port: 10003, Seq: 49, Ack: 1, Len: 6
+    Source Port: 45722
+    Destination Port: 10003
+    [Stream index: 3]
+    [TCP Segment Len: 6]
+    Sequence number: 49    (relative sequence number)
+    [Next sequence number: 55    (relative sequence number)]
+    Acknowledgment number: 1    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe2e [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 3.279393412 seconds]
+        [Time since previous frame in this TCP stream: 0.000034361 seconds]
+    TCP payload (6 bytes)
+Data (6 bytes)
+
+0000  20 20 20 20 7b 0a                                     {.
+    Data: 202020207b0a
+    [Length: 6]
+
+No.     Time           Source                Destination           Protocol Length Info
+    254 543.704071685  127.0.0.1             127.0.0.1             TCP      66     10003 → 45722 [ACK] Seq=1 Ack=55 Win=65536 Len=0 TSval=3260242029 TSecr=3260242029
+
+Frame 254: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10003, Dst Port: 45722, Seq: 1, Ack: 55, Len: 0
+    Source Port: 10003
+    Destination Port: 45722
+    [Stream index: 3]
+    [TCP Segment Len: 0]
+    Sequence number: 1    (relative sequence number)
+    [Next sequence number: 1    (relative sequence number)]
+    Acknowledgment number: 55    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 3.279399471 seconds]
+        [Time since previous frame in this TCP stream: 0.000006059 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    255 543.704088226  127.0.0.1             127.0.0.1             TCP      107    45722 → 10003 [PSH, ACK] Seq=55 Ack=1 Win=65536 Len=41 TSval=3260242029 TSecr=3260242029
+
+Frame 255: 107 bytes on wire (856 bits), 107 bytes captured (856 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 45722, Dst Port: 10003, Seq: 55, Ack: 1, Len: 41
+    Source Port: 45722
+    Destination Port: 10003
+    [Stream index: 3]
+    [TCP Segment Len: 41]
+    Sequence number: 55    (relative sequence number)
+    [Next sequence number: 96    (relative sequence number)]
+    Acknowledgment number: 1    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe51 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 3.279416012 seconds]
+        [Time since previous frame in this TCP stream: 0.000016541 seconds]
+    TCP payload (41 bytes)
+Data (41 bytes)
+
+0000  20 20 20 20 20 20 20 20 73 74 64 3a 3a 73 74 72           std::str
+0010  69 6e 67 20 6d 73 67 20 3d 20 6c 69 73 74 53 65   ing msg = listSe
+0020  72 76 65 72 73 28 29 3b 0a                        rvers();.
+    Data: 20202020202020207374643a3a737472696e67206d736720...
+    [Length: 41]
+
+No.     Time           Source                Destination           Protocol Length Info
+    256 543.704096104  127.0.0.1             127.0.0.1             TCP      66     10003 → 45722 [ACK] Seq=1 Ack=96 Win=65536 Len=0 TSval=3260242030 TSecr=3260242029
+
+Frame 256: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10003, Dst Port: 45722, Seq: 1, Ack: 96, Len: 0
+    Source Port: 10003
+    Destination Port: 45722
+    [Stream index: 3]
+    [TCP Segment Len: 0]
+    Sequence number: 1    (relative sequence number)
+    [Next sequence number: 1    (relative sequence number)]
+    Acknowledgment number: 96    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 3.279423890 seconds]
+        [Time since previous frame in this TCP stream: 0.000007878 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    257 543.704110938  127.0.0.1             127.0.0.1             TCP      106    45722 → 10003 [PSH, ACK] Seq=96 Ack=1 Win=65536 Len=40 TSval=3260242030 TSecr=3260242030
+
+Frame 257: 106 bytes on wire (848 bits), 106 bytes captured (848 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 45722, Dst Port: 10003, Seq: 96, Ack: 1, Len: 40
+    Source Port: 45722
+    Destination Port: 10003
+    [Stream index: 3]
+    [TCP Segment Len: 40]
+    Sequence number: 96    (relative sequence number)
+    [Next sequence number: 136    (relative sequence number)]
+    Acknowledgment number: 1    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe50 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 3.279438724 seconds]
+        [Time since previous frame in this TCP stream: 0.000014834 seconds]
+    TCP payload (40 bytes)
+Data (40 bytes)
+
+0000  20 20 20 20 20 20 20 20 73 65 6e 64 43 6f 6d 6d           sendComm
+0010  61 6e 64 28 73 65 72 76 65 72 53 6f 63 6b 65 74   and(serverSocket
+0020  2c 20 6d 73 67 29 3b 0a                           , msg);.
+    Data: 202020202020202073656e64436f6d6d616e642873657276...
+    [Length: 40]
+
+No.     Time           Source                Destination           Protocol Length Info
+    258 543.704116182  127.0.0.1             127.0.0.1             TCP      66     10003 → 45722 [ACK] Seq=1 Ack=136 Win=65536 Len=0 TSval=3260242030 TSecr=3260242030
+
+Frame 258: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10003, Dst Port: 45722, Seq: 1, Ack: 136, Len: 0
+    Source Port: 10003
+    Destination Port: 45722
+    [Stream index: 3]
+    [TCP Segment Len: 0]
+    Sequence number: 1    (relative sequence number)
+    [Next sequence number: 1    (relative sequence number)]
+    Acknowledgment number: 136    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 3.279443968 seconds]
+        [Time since previous frame in this TCP stream: 0.000005244 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    259 543.704130606  127.0.0.1             127.0.0.1             TCP      107    45722 → 10003 [PSH, ACK] Seq=136 Ack=1 Win=65536 Len=41 TSval=3260242030 TSecr=3260242030
+
+Frame 259: 107 bytes on wire (856 bits), 107 bytes captured (856 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 45722, Dst Port: 10003, Seq: 136, Ack: 1, Len: 41
+    Source Port: 45722
+    Destination Port: 10003
+    [Stream index: 3]
+    [TCP Segment Len: 41]
+    Sequence number: 136    (relative sequence number)
+    [Next sequence number: 177    (relative sequence number)]
+    Acknowledgment number: 1    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe51 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 3.279458392 seconds]
+        [Time since previous frame in this TCP stream: 0.000014424 seconds]
+    TCP payload (41 bytes)
+Data (41 bytes)
+
+0000  20 20 20 20 20 20 20 20 66 6f 72 20 28 61 75 74           for (aut
+0010  6f 20 63 6f 6e 73 74 20 26 70 61 69 72 20 3a 20   o const &pair : 
+0020  73 65 72 76 65 72 73 29 0a                        servers).
+    Data: 2020202020202020666f7220286175746f20636f6e737420...
+    [Length: 41]
+
+No.     Time           Source                Destination           Protocol Length Info
+    260 543.704135440  127.0.0.1             127.0.0.1             TCP      66     10003 → 45722 [ACK] Seq=1 Ack=177 Win=65536 Len=0 TSval=3260242030 TSecr=3260242030
+
+Frame 260: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10003, Dst Port: 45722, Seq: 1, Ack: 177, Len: 0
+    Source Port: 10003
+    Destination Port: 45722
+    [Stream index: 3]
+    [TCP Segment Len: 0]
+    Sequence number: 1    (relative sequence number)
+    [Next sequence number: 1    (relative sequence number)]
+    Acknowledgment number: 177    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 3.279463226 seconds]
+        [Time since previous frame in this TCP stream: 0.000004834 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    261 543.704149876  127.0.0.1             127.0.0.1             TCP      76     45722 → 10003 [PSH, ACK] Seq=177 Ack=1 Win=65536 Len=10 TSval=3260242030 TSecr=3260242030
+
+Frame 261: 76 bytes on wire (608 bits), 76 bytes captured (608 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 45722, Dst Port: 10003, Seq: 177, Ack: 1, Len: 10
+    Source Port: 45722
+    Destination Port: 10003
+    [Stream index: 3]
+    [TCP Segment Len: 10]
+    Sequence number: 177    (relative sequence number)
+    [Next sequence number: 187    (relative sequence number)]
+    Acknowledgment number: 1    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe32 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 3.279477662 seconds]
+        [Time since previous frame in this TCP stream: 0.000014436 seconds]
+    TCP payload (10 bytes)
+Data (10 bytes)
+
+0000  20 20 20 20 20 20 20 20 7b 0a                             {.
+    Data: 20202020202020207b0a
+    [Length: 10]
+
+No.     Time           Source                Destination           Protocol Length Info
+    262 543.704154860  127.0.0.1             127.0.0.1             TCP      66     10003 → 45722 [ACK] Seq=1 Ack=187 Win=65536 Len=0 TSval=3260242030 TSecr=3260242030
+
+Frame 262: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10003, Dst Port: 45722, Seq: 1, Ack: 187, Len: 0
+    Source Port: 10003
+    Destination Port: 45722
+    [Stream index: 3]
+    [TCP Segment Len: 0]
+    Sequence number: 1    (relative sequence number)
+    [Next sequence number: 1    (relative sequence number)]
+    Acknowledgment number: 187    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 3.279482646 seconds]
+        [Time since previous frame in this TCP stream: 0.000004984 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    263 543.704170083  127.0.0.1             127.0.0.1             TCP      117    45722 → 10003 [PSH, ACK] Seq=187 Ack=1 Win=65536 Len=51 TSval=3260242030 TSecr=3260242030
+
+Frame 263: 117 bytes on wire (936 bits), 117 bytes captured (936 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 45722, Dst Port: 10003, Seq: 187, Ack: 1, Len: 51
+    Source Port: 45722
+    Destination Port: 10003
+    [Stream index: 3]
+    [TCP Segment Len: 51]
+    Sequence number: 187    (relative sequence number)
+    [Next sequence number: 238    (relative sequence number)]
+    Acknowledgment number: 1    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe5b [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 3.279497869 seconds]
+        [Time since previous frame in this TCP stream: 0.000015223 seconds]
+    TCP payload (51 bytes)
+Data (51 bytes)
+
+0000  20 20 20 20 20 20 20 20 20 20 20 20 69 66 20 28               if (
+0010  70 61 69 72 2e 73 65 63 6f 6e 64 2d 3e 73 6f 63   pair.second->soc
+0020  6b 20 3d 3d 20 73 65 72 76 65 72 53 6f 63 6b 65   k == serverSocke
+0030  74 29 0a                                          t).
+    Data: 20202020202020202020202069662028706169722e736563...
+    [Length: 51]
+
+No.     Time           Source                Destination           Protocol Length Info
+    264 543.704176090  127.0.0.1             127.0.0.1             TCP      66     10003 → 45722 [ACK] Seq=1 Ack=238 Win=65536 Len=0 TSval=3260242030 TSecr=3260242030
+
+Frame 264: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10003, Dst Port: 45722, Seq: 1, Ack: 238, Len: 0
+    Source Port: 10003
+    Destination Port: 45722
+    [Stream index: 3]
+    [TCP Segment Len: 0]
+    Sequence number: 1    (relative sequence number)
+    [Next sequence number: 1    (relative sequence number)]
+    Acknowledgment number: 238    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 3.279503876 seconds]
+        [Time since previous frame in this TCP stream: 0.000006007 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    265 543.704190635  127.0.0.1             127.0.0.1             TCP      80     45722 → 10003 [PSH, ACK] Seq=238 Ack=1 Win=65536 Len=14 TSval=3260242030 TSecr=3260242030
+
+Frame 265: 80 bytes on wire (640 bits), 80 bytes captured (640 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 45722, Dst Port: 10003, Seq: 238, Ack: 1, Len: 14
+    Source Port: 45722
+    Destination Port: 10003
+    [Stream index: 3]
+    [TCP Segment Len: 14]
+    Sequence number: 238    (relative sequence number)
+    [Next sequence number: 252    (relative sequence number)]
+    Acknowledgment number: 1    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe36 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 3.279518421 seconds]
+        [Time since previous frame in this TCP stream: 0.000014545 seconds]
+    TCP payload (14 bytes)
+Data (14 bytes)
+
+0000  20 20 20 20 20 20 20 20 20 20 20 20 7b 0a                     {.
+    Data: 2020202020202020202020207b0a
+    [Length: 14]
+
+No.     Time           Source                Destination           Protocol Length Info
+    266 543.704195964  127.0.0.1             127.0.0.1             TCP      66     10003 → 45722 [ACK] Seq=1 Ack=252 Win=65536 Len=0 TSval=3260242030 TSecr=3260242030
+
+Frame 266: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10003, Dst Port: 45722, Seq: 1, Ack: 252, Len: 0
+    Source Port: 10003
+    Destination Port: 45722
+    [Stream index: 3]
+    [TCP Segment Len: 0]
+    Sequence number: 1    (relative sequence number)
+    [Next sequence number: 1    (relative sequence number)]
+    Acknowledgment number: 252    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 3.279523750 seconds]
+        [Time since previous frame in this TCP stream: 0.000005329 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    267 543.704210972  127.0.0.1             127.0.0.1             TCP      116    45722 → 10003 [PSH, ACK] Seq=252 Ack=1 Win=65536 Len=50 TSval=3260242030 TSecr=3260242030
+
+Frame 267: 116 bytes on wire (928 bits), 116 bytes captured (928 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 45722, Dst Port: 10003, Seq: 252, Ack: 1, Len: 50
+    Source Port: 45722
+    Destination Port: 10003
+    [Stream index: 3]
+    [TCP Segment Len: 50]
+    Sequence number: 252    (relative sequence number)
+    [Next sequence number: 302    (relative sequence number)]
+    Acknowledgment number: 1    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe5a [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 3.279538758 seconds]
+        [Time since previous frame in this TCP stream: 0.000015008 seconds]
+    TCP payload (50 bytes)
+Data (50 bytes)
+
+0000  20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20                   
+0010  69 66 20 28 70 61 69 72 2e 73 65 63 6f 6e 64 2d   if (pair.second-
+0020  3e 67 72 6f 75 70 49 44 2e 65 6d 70 74 79 28 29   >groupID.empty()
+0030  29 0a                                             ).
+    Data: 202020202020202020202020202020206966202870616972...
+    [Length: 50]
+
+No.     Time           Source                Destination           Protocol Length Info
+    268 543.704216121  127.0.0.1             127.0.0.1             TCP      66     10003 → 45722 [ACK] Seq=1 Ack=302 Win=65536 Len=0 TSval=3260242030 TSecr=3260242030
+
+Frame 268: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10003, Dst Port: 45722, Seq: 1, Ack: 302, Len: 0
+    Source Port: 10003
+    Destination Port: 45722
+    [Stream index: 3]
+    [TCP Segment Len: 0]
+    Sequence number: 1    (relative sequence number)
+    [Next sequence number: 1    (relative sequence number)]
+    Acknowledgment number: 302    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 3.279543907 seconds]
+        [Time since previous frame in this TCP stream: 0.000005149 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    269 543.704231215  127.0.0.1             127.0.0.1             TCP      84     45722 → 10003 [PSH, ACK] Seq=302 Ack=1 Win=65536 Len=18 TSval=3260242030 TSecr=3260242030
+
+Frame 269: 84 bytes on wire (672 bits), 84 bytes captured (672 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 45722, Dst Port: 10003, Seq: 302, Ack: 1, Len: 18
+    Source Port: 45722
+    Destination Port: 10003
+    [Stream index: 3]
+    [TCP Segment Len: 18]
+    Sequence number: 302    (relative sequence number)
+    [Next sequence number: 320    (relative sequence number)]
+    Acknowledgment number: 1    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe3a [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 3.279559001 seconds]
+        [Time since previous frame in this TCP stream: 0.000015094 seconds]
+    TCP payload (18 bytes)
+Data (18 bytes)
+
+0000  20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20                   
+0010  7b 0a                                             {.
+    Data: 202020202020202020202020202020207b0a
+    [Length: 18]
+
+No.     Time           Source                Destination           Protocol Length Info
+    270 543.704237134  127.0.0.1             127.0.0.1             TCP      66     10003 → 45722 [ACK] Seq=1 Ack=320 Win=65536 Len=0 TSval=3260242030 TSecr=3260242030
+
+Frame 270: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10003, Dst Port: 45722, Seq: 1, Ack: 320, Len: 0
+    Source Port: 10003
+    Destination Port: 45722
+    [Stream index: 3]
+    [TCP Segment Len: 0]
+    Sequence number: 1    (relative sequence number)
+    [Next sequence number: 1    (relative sequence number)]
+    Acknowledgment number: 320    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 3.279564920 seconds]
+        [Time since previous frame in this TCP stream: 0.000005919 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    271 543.704251646  127.0.0.1             127.0.0.1             TCP      148    45722 → 10003 [PSH, ACK] Seq=320 Ack=1 Win=65536 Len=82 TSval=3260242030 TSecr=3260242030
+
+Frame 271: 148 bytes on wire (1184 bits), 148 bytes captured (1184 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 45722, Dst Port: 10003, Seq: 320, Ack: 1, Len: 82
+    Source Port: 45722
+    Destination Port: 10003
+    [Stream index: 3]
+    [TCP Segment Len: 82]
+    Sequence number: 320    (relative sequence number)
+    [Next sequence number: 402    (relative sequence number)]
+    Acknowledgment number: 1    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe7a [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 3.279579432 seconds]
+        [Time since previous frame in this TCP stream: 0.000014512 seconds]
+    TCP payload (82 bytes)
+Data (82 bytes)
+
+0000  20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20                   
+0010  20 20 20 20 73 74 64 3a 3a 73 74 72 69 6e 67 20       std::string 
+0020  6c 69 73 74 73 65 72 76 65 72 73 43 6f 6d 6d 61   listserversComma
+0030  6e 64 20 3d 20 22 4c 49 53 54 53 45 52 56 45 52   nd = "LISTSERVER
+0040  53 2c 22 20 2b 20 73 65 72 76 65 72 4e 61 6d 65   S," + serverName
+0050  3b 0a                                             ;.
+    Data: 20202020202020202020202020202020202020207374643a...
+    [Length: 82]
+
+No.     Time           Source                Destination           Protocol Length Info
+    272 543.704256647  127.0.0.1             127.0.0.1             TCP      66     10003 → 45722 [ACK] Seq=1 Ack=402 Win=65536 Len=0 TSval=3260242030 TSecr=3260242030
+
+Frame 272: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10003, Dst Port: 45722, Seq: 1, Ack: 402, Len: 0
+    Source Port: 10003
+    Destination Port: 45722
+    [Stream index: 3]
+    [TCP Segment Len: 0]
+    Sequence number: 1    (relative sequence number)
+    [Next sequence number: 1    (relative sequence number)]
+    Acknowledgment number: 402    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 3.279584433 seconds]
+        [Time since previous frame in this TCP stream: 0.000005001 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    273 543.704272447  127.0.0.1             127.0.0.1             TCP      133    45722 → 10003 [PSH, ACK] Seq=402 Ack=1 Win=65536 Len=67 TSval=3260242030 TSecr=3260242030
+
+Frame 273: 133 bytes on wire (1064 bits), 133 bytes captured (1064 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 45722, Dst Port: 10003, Seq: 402, Ack: 1, Len: 67
+    Source Port: 45722
+    Destination Port: 10003
+    [Stream index: 3]
+    [TCP Segment Len: 67]
+    Sequence number: 402    (relative sequence number)
+    [Next sequence number: 469    (relative sequence number)]
+    Acknowledgment number: 1    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe6b [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 3.279600233 seconds]
+        [Time since previous frame in this TCP stream: 0.000015800 seconds]
+    TCP payload (67 bytes)
+Data (67 bytes)
+
+0000  20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20                   
+0010  20 20 20 20 73 65 6e 64 43 6f 6d 6d 61 6e 64 28       sendCommand(
+0020  73 65 72 76 65 72 53 6f 63 6b 65 74 2c 20 6c 69   serverSocket, li
+0030  73 74 73 65 72 76 65 72 73 43 6f 6d 6d 61 6e 64   stserversCommand
+0040  29 3b 0a                                          );.
+    Data: 202020202020202020202020202020202020202073656e64...
+    [Length: 67]
+
+No.     Time           Source                Destination           Protocol Length Info
+    274 543.704277992  127.0.0.1             127.0.0.1             TCP      66     10003 → 45722 [ACK] Seq=1 Ack=469 Win=65536 Len=0 TSval=3260242030 TSecr=3260242030
+
+Frame 274: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10003, Dst Port: 45722, Seq: 1, Ack: 469, Len: 0
+    Source Port: 10003
+    Destination Port: 45722
+    [Stream index: 3]
+    [TCP Segment Len: 0]
+    Sequence number: 1    (relative sequence number)
+    [Next sequence number: 1    (relative sequence number)]
+    Acknowledgment number: 469    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 3.279605778 seconds]
+        [Time since previous frame in this TCP stream: 0.000005545 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    275 543.704292642  127.0.0.1             127.0.0.1             TCP      148    45722 → 10003 [PSH, ACK] Seq=469 Ack=1 Win=65536 Len=82 TSval=3260242030 TSecr=3260242030
+
+Frame 275: 148 bytes on wire (1184 bits), 148 bytes captured (1184 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 45722, Dst Port: 10003, Seq: 469, Ack: 1, Len: 82
+    Source Port: 45722
+    Destination Port: 10003
+    [Stream index: 3]
+    [TCP Segment Len: 82]
+    Sequence number: 469    (relative sequence number)
+    [Next sequence number: 551    (relative sequence number)]
+    Acknowledgment number: 1    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe7a [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 3.279620428 seconds]
+        [Time since previous frame in this TCP stream: 0.000014650 seconds]
+    TCP payload (82 bytes)
+Data (82 bytes)
+
+0000  20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20                   
+0010  20 20 20 20 73 74 64 3a 3a 63 6f 75 74 20 3c 3c       std::cout <<
+0020  20 22 73 65 6e 74 20 6c 69 73 74 73 65 72 76 65    "sent listserve
+0030  72 73 20 62 61 63 6b 2c 20 64 69 64 20 6e 6f 74   rs back, did not
+0040  20 66 69 6e 64 20 69 6e 20 6d 79 20 6d 61 70 22    find in my map"
+0050  3b 0a                                             ;.
+    Data: 20202020202020202020202020202020202020207374643a...
+    [Length: 82]
+
+No.     Time           Source                Destination           Protocol Length Info
+    276 543.704321052  127.0.0.1             127.0.0.1             TCP      179    10003 → 45722 [PSH, ACK] Seq=1 Ack=469 Win=65536 Len=113 TSval=3260242030 TSecr=3260242030
+
+Frame 276: 179 bytes on wire (1432 bits), 179 bytes captured (1432 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10003, Dst Port: 45722, Seq: 1, Ack: 469, Len: 113
+    Source Port: 10003
+    Destination Port: 45722
+    [Stream index: 3]
+    [TCP Segment Len: 113]
+    Sequence number: 1    (relative sequence number)
+    [Next sequence number: 114    (relative sequence number)]
+    Acknowledgment number: 469    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe99 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 3.279648838 seconds]
+        [Time since previous frame in this TCP stream: 0.000028410 seconds]
+    TCP payload (113 bytes)
+Data (113 bytes)
+
+0000  01 0a 57 72 6f 6e 67 20 70 6f 72 74 2d 68 6f 6c   ..Wrong port-hol
+0010  65 2c 20 64 75 6d 6d 79 2e 20 54 68 65 20 72 69   e, dummy. The ri
+0020  67 68 74 20 6f 6e 65 20 69 73 20 74 68 65 20 70   ght one is the p
+0030  6f 72 74 2d 68 6f 6c 65 20 61 62 6f 76 65 20 74   ort-hole above t
+0040  68 69 73 20 6f 6e 65 2e 20 50 6c 65 61 73 65 20   his one. Please 
+0050  74 72 79 20 61 67 61 69 6e 0a 43 6c 6f 73 69 6e   try again.Closin
+0060  67 20 63 6f 6e 6e 65 63 74 69 6f 6e 2e 2e 2e 0a   g connection....
+0070  04                                                .
+    Data: 010a57726f6e6720706f72742d686f6c652c2064756d6d79...
+    [Length: 113]
+
+No.     Time           Source                Destination           Protocol Length Info
+    277 543.704357446  127.0.0.1             127.0.0.1             TCP      66     45722 → 10003 [ACK] Seq=551 Ack=114 Win=65536 Len=0 TSval=3260242030 TSecr=3260242030
+
+Frame 277: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 45722, Dst Port: 10003, Seq: 551, Ack: 114, Len: 0
+    Source Port: 45722
+    Destination Port: 10003
+    [Stream index: 3]
+    [TCP Segment Len: 0]
+    Sequence number: 551    (relative sequence number)
+    [Next sequence number: 551    (relative sequence number)]
+    Acknowledgment number: 114    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 3.279685232 seconds]
+        [Time since previous frame in this TCP stream: 0.000036394 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    278 543.745680998  127.0.0.1             127.0.0.1             TCP      66     10003 → 45722 [ACK] Seq=114 Ack=551 Win=65536 Len=0 TSval=3260242071 TSecr=3260242030
+
+Frame 278: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10003, Dst Port: 45722, Seq: 114, Ack: 551, Len: 0
+    Source Port: 10003
+    Destination Port: 45722
+    [Stream index: 3]
+    [TCP Segment Len: 0]
+    Sequence number: 114    (relative sequence number)
+    [Next sequence number: 114    (relative sequence number)]
+    Acknowledgment number: 551    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 3.321008784 seconds]
+        [Time since previous frame in this TCP stream: 0.041323552 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    279 543.745780148  127.0.0.1             127.0.0.1             TCP      108    45722 → 10003 [PSH, ACK] Seq=551 Ack=114 Win=65536 Len=42 TSval=3260242071 TSecr=3260242071
+
+Frame 279: 108 bytes on wire (864 bits), 108 bytes captured (864 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 45722, Dst Port: 10003, Seq: 551, Ack: 114, Len: 42
+    Source Port: 45722
+    Destination Port: 10003
+    [Stream index: 3]
+    [TCP Segment Len: 42]
+    Sequence number: 551    (relative sequence number)
+    [Next sequence number: 593    (relative sequence number)]
+    Acknowledgment number: 114    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe52 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 3.321107934 seconds]
+        [Time since previous frame in this TCP stream: 0.000099150 seconds]
+    TCP payload (42 bytes)
+Data (42 bytes)
+
+0000  20 20 20 20 20 20 20 20 20 20 20 20 20 20 20 20                   
+0010  7d 0a 20 20 20 20 20 20 20 20 20 20 20 20 7d 0a   }.            }.
+0020  20 20 20 20 20 20 20 20 7d 0a                             }.
+    Data: 202020202020202020202020202020207d0a202020202020...
+    [Length: 42]
+
+No.     Time           Source                Destination           Protocol Length Info
+    280 543.745795775  127.0.0.1             127.0.0.1             TCP      66     10003 → 45722 [ACK] Seq=114 Ack=593 Win=65536 Len=0 TSval=3260242071 TSecr=3260242071
+
+Frame 280: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10003, Dst Port: 45722, Seq: 114, Ack: 593, Len: 0
+    Source Port: 10003
+    Destination Port: 45722
+    [Stream index: 3]
+    [TCP Segment Len: 0]
+    Sequence number: 114    (relative sequence number)
+    [Next sequence number: 114    (relative sequence number)]
+    Acknowledgment number: 593    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 3.321123561 seconds]
+        [Time since previous frame in this TCP stream: 0.000015627 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    311 564.576675300  127.0.0.1             127.0.0.1             TCP      66     10002 → 38534 [FIN, ACK] Seq=285 Ack=167 Win=65536 Len=0 TSval=3260262902 TSecr=3260208364
+
+Frame 311: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10002, Dst Port: 38534, Seq: 285, Ack: 167, Len: 0
+    Source Port: 10002
+    Destination Port: 38534
+    [Stream index: 1]
+    [TCP Segment Len: 0]
+    Sequence number: 285    (relative sequence number)
+    [Next sequence number: 285    (relative sequence number)]
+    Acknowledgment number: 167    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x011 (FIN, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [Timestamps]
+        [Time since first frame in this TCP stream: 456.077907125 seconds]
+        [Time since previous frame in this TCP stream: 54.537967484 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    312 564.576742994  127.0.0.1             127.0.0.1             TCP      66     10003 → 45722 [RST, ACK] Seq=114 Ack=593 Win=65536 Len=0 TSval=3260262902 TSecr=3260242071
+
+Frame 312: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10003, Dst Port: 45722, Seq: 114, Ack: 593, Len: 0
+    Source Port: 10003
+    Destination Port: 45722
+    [Stream index: 3]
+    [TCP Segment Len: 0]
+    Sequence number: 114    (relative sequence number)
+    [Next sequence number: 114    (relative sequence number)]
+    Acknowledgment number: 593    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x014 (RST, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [Timestamps]
+        [Time since first frame in this TCP stream: 24.152070780 seconds]
+        [Time since previous frame in this TCP stream: 20.830947219 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    313 564.576785756  127.0.0.1             127.0.0.1             TCP      66     38534 → 10002 [FIN, ACK] Seq=167 Ack=286 Win=65536 Len=0 TSval=3260262902 TSecr=3260262902
+
+Frame 313: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 38534, Dst Port: 10002, Seq: 167, Ack: 286, Len: 0
+    Source Port: 38534
+    Destination Port: 10002
+    [Stream index: 1]
+    [TCP Segment Len: 0]
+    Sequence number: 167    (relative sequence number)
+    [Next sequence number: 167    (relative sequence number)]
+    Acknowledgment number: 286    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x011 (FIN, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 456.078017581 seconds]
+        [Time since previous frame in this TCP stream: 0.000110456 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    314 564.576820321  127.0.0.1             127.0.0.1             TCP      66     10002 → 38534 [ACK] Seq=286 Ack=168 Win=65536 Len=0 TSval=3260262902 TSecr=3260262902
+
+Frame 314: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10002, Dst Port: 38534, Seq: 286, Ack: 168, Len: 0
+    Source Port: 10002
+    Destination Port: 38534
+    [Stream index: 1]
+    [TCP Segment Len: 0]
+    Sequence number: 286    (relative sequence number)
+    [Next sequence number: 286    (relative sequence number)]
+    Acknowledgment number: 168    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 456.078052146 seconds]
+        [Time since previous frame in this TCP stream: 0.000034565 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    315 577.764517075  127.0.0.1             127.0.0.1             TCP      74     45736 → 10003 [SYN] Seq=0 Win=65495 Len=0 MSS=65495 SACK_PERM=1 TSval=3260276090 TSecr=0 WS=128
+
+Frame 315: 74 bytes on wire (592 bits), 74 bytes captured (592 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 45736, Dst Port: 10003, Seq: 0, Len: 0
+    Source Port: 45736
+    Destination Port: 10003
+    [Stream index: 4]
+    [TCP Segment Len: 0]
+    Sequence number: 0    (relative sequence number)
+    [Next sequence number: 0    (relative sequence number)]
+    Acknowledgment number: 0
+    1010 .... = Header Length: 40 bytes (10)
+    Flags: 0x002 (SYN)
+    Window size value: 65495
+    [Calculated window size: 65495]
+    Checksum: 0xfe30 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (20 bytes), Maximum segment size, SACK permitted, Timestamps, No-Operation (NOP), Window scale
+    [Timestamps]
+        [Time since first frame in this TCP stream: 0.000000000 seconds]
+        [Time since previous frame in this TCP stream: 0.000000000 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    316 577.764544879  127.0.0.1             127.0.0.1             TCP      74     10003 → 45736 [SYN, ACK] Seq=0 Ack=1 Win=65483 Len=0 MSS=65495 SACK_PERM=1 TSval=3260276090 TSecr=3260276090 WS=128
+
+Frame 316: 74 bytes on wire (592 bits), 74 bytes captured (592 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10003, Dst Port: 45736, Seq: 0, Ack: 1, Len: 0
+    Source Port: 10003
+    Destination Port: 45736
+    [Stream index: 4]
+    [TCP Segment Len: 0]
+    Sequence number: 0    (relative sequence number)
+    [Next sequence number: 0    (relative sequence number)]
+    Acknowledgment number: 1    (relative ack number)
+    1010 .... = Header Length: 40 bytes (10)
+    Flags: 0x012 (SYN, ACK)
+    Window size value: 65483
+    [Calculated window size: 65483]
+    Checksum: 0xfe30 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (20 bytes), Maximum segment size, SACK permitted, Timestamps, No-Operation (NOP), Window scale
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 0.000027804 seconds]
+        [Time since previous frame in this TCP stream: 0.000027804 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    317 577.764569944  127.0.0.1             127.0.0.1             TCP      66     45736 → 10003 [ACK] Seq=1 Ack=1 Win=65536 Len=0 TSval=3260276090 TSecr=3260276090
+
+Frame 317: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 45736, Dst Port: 10003, Seq: 1, Ack: 1, Len: 0
+    Source Port: 45736
+    Destination Port: 10003
+    [Stream index: 4]
+    [TCP Segment Len: 0]
+    Sequence number: 1    (relative sequence number)
+    [Next sequence number: 1    (relative sequence number)]
+    Acknowledgment number: 1    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 0.000052869 seconds]
+        [Time since previous frame in this TCP stream: 0.000025065 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    318 604.047229788  127.0.0.1             127.0.0.1             TCP      113    45736 → 10003 [PSH, ACK] Seq=1 Ack=1 Win=65536 Len=47 TSval=3260302373 TSecr=3260276090
+
+Frame 318: 113 bytes on wire (904 bits), 113 bytes captured (904 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 45736, Dst Port: 10003, Seq: 1, Ack: 1, Len: 47
+    Source Port: 45736
+    Destination Port: 10003
+    [Stream index: 4]
+    [TCP Segment Len: 47]
+    Sequence number: 1    (relative sequence number)
+    [Next sequence number: 48    (relative sequence number)]
+    Acknowledgment number: 1    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe57 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 26.282712713 seconds]
+        [Time since previous frame in this TCP stream: 26.282659844 seconds]
+    TCP payload (47 bytes)
+Data (47 bytes)
+
+0000  53 45 4e 44 4d 53 47 20 50 33 5f 47 52 4f 50 5f   SENDMSG P3_GROP_
+0010  32 30 20 54 65 73 74 20 6d 65 73 73 61 67 65 20   20 Test message 
+0020  66 72 6f 6d 20 67 72 6f 75 70 20 31 30 30 0a      from group 100.
+    Data: 53454e444d53472050335f47524f505f3230205465737420...
+    [Length: 47]
+
+No.     Time           Source                Destination           Protocol Length Info
+    319 604.047262243  127.0.0.1             127.0.0.1             TCP      66     10003 → 45736 [ACK] Seq=1 Ack=48 Win=65536 Len=0 TSval=3260302373 TSecr=3260302373
+
+Frame 319: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10003, Dst Port: 45736, Seq: 1, Ack: 48, Len: 0
+    Source Port: 10003
+    Destination Port: 45736
+    [Stream index: 4]
+    [TCP Segment Len: 0]
+    Sequence number: 1    (relative sequence number)
+    [Next sequence number: 1    (relative sequence number)]
+    Acknowledgment number: 48    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 26.282745168 seconds]
+        [Time since previous frame in this TCP stream: 0.000032455 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    328 614.751430470  127.0.0.1             127.0.0.1             TCP      72     48184 → 10001 [PSH, ACK] Seq=169 Ack=312 Win=65536 Len=6 TSval=3260313077 TSecr=3260208364
+
+Frame 328: 72 bytes on wire (576 bits), 72 bytes captured (576 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 48184, Dst Port: 10001, Seq: 169, Ack: 312, Len: 6
+    Source Port: 48184
+    Destination Port: 10001
+    [Stream index: 0]
+    [TCP Segment Len: 6]
+    Sequence number: 169    (relative sequence number)
+    [Next sequence number: 175    (relative sequence number)]
+    Acknowledgment number: 312    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe2e [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 610.916697795 seconds]
+        [Time since previous frame in this TCP stream: 104.712401031 seconds]
+    TCP payload (6 bytes)
+Data (6 bytes)
+
+0000  51 43 20 30 32 0a                                 QC 02.
+    Data: 51432030320a
+    [Length: 6]
+
+No.     Time           Source                Destination           Protocol Length Info
+    329 614.751682749  127.0.0.1             127.0.0.1             TCP      74     38574 → 10002 [SYN] Seq=0 Win=65495 Len=0 MSS=65495 SACK_PERM=1 TSval=3260313077 TSecr=0 WS=128
+
+Frame 329: 74 bytes on wire (592 bits), 74 bytes captured (592 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 38574, Dst Port: 10002, Seq: 0, Len: 0
+    Source Port: 38574
+    Destination Port: 10002
+    [Stream index: 5]
+    [TCP Segment Len: 0]
+    Sequence number: 0    (relative sequence number)
+    [Next sequence number: 0    (relative sequence number)]
+    Acknowledgment number: 0
+    1010 .... = Header Length: 40 bytes (10)
+    Flags: 0x002 (SYN)
+    Window size value: 65495
+    [Calculated window size: 65495]
+    Checksum: 0xfe30 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (20 bytes), Maximum segment size, SACK permitted, Timestamps, No-Operation (NOP), Window scale
+    [Timestamps]
+        [Time since first frame in this TCP stream: 0.000000000 seconds]
+        [Time since previous frame in this TCP stream: 0.000000000 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    330 614.751715523  127.0.0.1             127.0.0.1             TCP      74     10002 → 38574 [SYN, ACK] Seq=0 Ack=1 Win=65483 Len=0 MSS=65495 SACK_PERM=1 TSval=3260313077 TSecr=3260313077 WS=128
+
+Frame 330: 74 bytes on wire (592 bits), 74 bytes captured (592 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10002, Dst Port: 38574, Seq: 0, Ack: 1, Len: 0
+    Source Port: 10002
+    Destination Port: 38574
+    [Stream index: 5]
+    [TCP Segment Len: 0]
+    Sequence number: 0    (relative sequence number)
+    [Next sequence number: 0    (relative sequence number)]
+    Acknowledgment number: 1    (relative ack number)
+    1010 .... = Header Length: 40 bytes (10)
+    Flags: 0x012 (SYN, ACK)
+    Window size value: 65483
+    [Calculated window size: 65483]
+    Checksum: 0xfe30 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (20 bytes), Maximum segment size, SACK permitted, Timestamps, No-Operation (NOP), Window scale
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 0.000032774 seconds]
+        [Time since previous frame in this TCP stream: 0.000032774 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    331 614.751742025  127.0.0.1             127.0.0.1             TCP      66     38574 → 10002 [ACK] Seq=1 Ack=1 Win=65536 Len=0 TSval=3260313077 TSecr=3260313077
+
+Frame 331: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 38574, Dst Port: 10002, Seq: 1, Ack: 1, Len: 0
+    Source Port: 38574
+    Destination Port: 10002
+    [Stream index: 5]
+    [TCP Segment Len: 0]
+    Sequence number: 1    (relative sequence number)
+    [Next sequence number: 1    (relative sequence number)]
+    Acknowledgment number: 1    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 0.000059276 seconds]
+        [Time since previous frame in this TCP stream: 0.000026502 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    332 614.751823372  127.0.0.1             127.0.0.1             TCP      91     38574 → 10002 [PSH, ACK] Seq=1 Ack=1 Win=65536 Len=25 TSval=3260313077 TSecr=3260313077
+
+Frame 332: 91 bytes on wire (728 bits), 91 bytes captured (728 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 38574, Dst Port: 10002, Seq: 1, Ack: 1, Len: 25
+    Source Port: 38574
+    Destination Port: 10002
+    [Stream index: 5]
+    [TCP Segment Len: 25]
+    Sequence number: 1    (relative sequence number)
+    [Next sequence number: 26    (relative sequence number)]
+    Acknowledgment number: 1    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe41 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 0.000140623 seconds]
+        [Time since previous frame in this TCP stream: 0.000081347 seconds]
+    TCP payload (25 bytes)
+Data (25 bytes)
+
+0000  01 4c 49 53 54 53 45 52 56 45 52 53 2c 50 33 5f   .LISTSERVERS,P3_
+0010  47 52 4f 55 50 5f 32 30 04                        GROUP_20.
+    Data: 014c495354534552564552532c50335f47524f55505f3230...
+    [Length: 25]
+
+No.     Time           Source                Destination           Protocol Length Info
+    333 614.751833983  127.0.0.1             127.0.0.1             TCP      66     10002 → 38574 [ACK] Seq=1 Ack=26 Win=65536 Len=0 TSval=3260313077 TSecr=3260313077
+
+Frame 333: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10002, Dst Port: 38574, Seq: 1, Ack: 26, Len: 0
+    Source Port: 10002
+    Destination Port: 38574
+    [Stream index: 5]
+    [TCP Segment Len: 0]
+    Sequence number: 1    (relative sequence number)
+    [Next sequence number: 1    (relative sequence number)]
+    Acknowledgment number: 26    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 0.000151234 seconds]
+        [Time since previous frame in this TCP stream: 0.000010611 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    334 614.752592770  127.0.0.1             127.0.0.1             TCP      107    10002 → 38574 [PSH, ACK] Seq=1 Ack=26 Win=65536 Len=41 TSval=3260313078 TSecr=3260313077
+
+Frame 334: 107 bytes on wire (856 bits), 107 bytes captured (856 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10002, Dst Port: 38574, Seq: 1, Ack: 26, Len: 41
+    Source Port: 10002
+    Destination Port: 38574
+    [Stream index: 5]
+    [TCP Segment Len: 41]
+    Sequence number: 1    (relative sequence number)
+    [Next sequence number: 42    (relative sequence number)]
+    Acknowledgment number: 26    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe51 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 0.000910021 seconds]
+        [Time since previous frame in this TCP stream: 0.000758787 seconds]
+    TCP payload (41 bytes)
+Data (41 bytes)
+
+0000  01 53 45 52 56 45 52 53 2c 50 33 5f 47 52 4f 55   .SERVERS,P3_GROU
+0010  50 5f 31 30 30 2c 31 30 2e 33 2e 31 37 2e 31 34   P_100,10.3.17.14
+0020  31 2c 31 30 30 30 32 3b 04                        1,10002;.
+    Data: 01534552564552532c50335f47524f55505f3130302c3130...
+    [Length: 41]
+
+No.     Time           Source                Destination           Protocol Length Info
+    335 614.752604227  127.0.0.1             127.0.0.1             TCP      66     38574 → 10002 [ACK] Seq=26 Ack=42 Win=65536 Len=0 TSval=3260313078 TSecr=3260313078
+
+Frame 335: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 38574, Dst Port: 10002, Seq: 26, Ack: 42, Len: 0
+    Source Port: 38574
+    Destination Port: 10002
+    [Stream index: 5]
+    [TCP Segment Len: 0]
+    Sequence number: 26    (relative sequence number)
+    [Next sequence number: 26    (relative sequence number)]
+    Acknowledgment number: 42    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 0.000921478 seconds]
+        [Time since previous frame in this TCP stream: 0.000011457 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    336 614.752647417  127.0.0.1             127.0.0.1             TCP      92     10002 → 38574 [PSH, ACK] Seq=42 Ack=26 Win=65536 Len=26 TSval=3260313078 TSecr=3260313078
+
+Frame 336: 92 bytes on wire (736 bits), 92 bytes captured (736 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10002, Dst Port: 38574, Seq: 42, Ack: 26, Len: 26
+    Source Port: 10002
+    Destination Port: 38574
+    [Stream index: 5]
+    [TCP Segment Len: 26]
+    Sequence number: 42    (relative sequence number)
+    [Next sequence number: 68    (relative sequence number)]
+    Acknowledgment number: 26    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe42 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 0.000964668 seconds]
+        [Time since previous frame in this TCP stream: 0.000043190 seconds]
+    TCP payload (26 bytes)
+Data (26 bytes)
+
+0000  01 4c 49 53 54 53 45 52 56 45 52 53 2c 50 33 5f   .LISTSERVERS,P3_
+0010  47 52 4f 55 50 5f 31 30 30 04                     GROUP_100.
+    Data: 014c495354534552564552532c50335f47524f55505f3130...
+    [Length: 26]
+
+No.     Time           Source                Destination           Protocol Length Info
+    337 614.752658688  127.0.0.1             127.0.0.1             TCP      66     38574 → 10002 [ACK] Seq=26 Ack=68 Win=65536 Len=0 TSval=3260313078 TSecr=3260313078
+
+Frame 337: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 38574, Dst Port: 10002, Seq: 26, Ack: 68, Len: 0
+    Source Port: 38574
+    Destination Port: 10002
+    [Stream index: 5]
+    [TCP Segment Len: 0]
+    Sequence number: 26    (relative sequence number)
+    [Next sequence number: 26    (relative sequence number)]
+    Acknowledgment number: 68    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 0.000975939 seconds]
+        [Time since previous frame in this TCP stream: 0.000011271 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    338 614.793535368  127.0.0.1             127.0.0.1             TCP      66     10001 → 48184 [ACK] Seq=312 Ack=175 Win=65536 Len=0 TSval=3260313119 TSecr=3260313077
+
+Frame 338: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10001, Dst Port: 48184, Seq: 312, Ack: 175, Len: 0
+    Source Port: 10001
+    Destination Port: 48184
+    [Stream index: 0]
+    [TCP Segment Len: 0]
+    Sequence number: 312    (relative sequence number)
+    [Next sequence number: 312    (relative sequence number)]
+    Acknowledgment number: 175    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 610.958802693 seconds]
+        [Time since previous frame in this TCP stream: 0.042104898 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    339 635.323551932  127.0.0.1             127.0.0.1             TCP      89     48184 → 10001 [PSH, ACK] Seq=175 Ack=312 Win=65536 Len=23 TSval=3260333649 TSecr=3260313119
+
+Frame 339: 89 bytes on wire (712 bits), 89 bytes captured (712 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 48184, Dst Port: 10001, Seq: 175, Ack: 312, Len: 23
+    Source Port: 48184
+    Destination Port: 10001
+    [Stream index: 0]
+    [TCP Segment Len: 23]
+    Sequence number: 175    (relative sequence number)
+    [Next sequence number: 198    (relative sequence number)]
+    Acknowledgment number: 312    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe3f [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 631.488819257 seconds]
+        [Time since previous frame in this TCP stream: 20.530016564 seconds]
+    TCP payload (23 bytes)
+Data (23 bytes)
+
+0000  53 54 41 54 55 53 52 45 51 20 50 33 5f 47 52 4f   STATUSREQ P3_GRO
+0010  55 50 5f 31 30 30 0a                              UP_100.
+    Data: 5354415455535245512050335f47524f55505f3130300a
+    [Length: 23]
+
+No.     Time           Source                Destination           Protocol Length Info
+    340 635.323574082  127.0.0.1             127.0.0.1             TCP      66     10001 → 48184 [ACK] Seq=312 Ack=198 Win=65536 Len=0 TSval=3260333649 TSecr=3260333649
+
+Frame 340: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10001, Dst Port: 48184, Seq: 312, Ack: 198, Len: 0
+    Source Port: 10001
+    Destination Port: 48184
+    [Stream index: 0]
+    [TCP Segment Len: 0]
+    Sequence number: 312    (relative sequence number)
+    [Next sequence number: 312    (relative sequence number)]
+    Acknowledgment number: 198    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 631.488841407 seconds]
+        [Time since previous frame in this TCP stream: 0.000022150 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    341 635.323767543  127.0.0.1             127.0.0.1             TCP      89     38574 → 10002 [PSH, ACK] Seq=26 Ack=68 Win=65536 Len=23 TSval=3260333649 TSecr=3260313078
+
+Frame 341: 89 bytes on wire (712 bits), 89 bytes captured (712 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 38574, Dst Port: 10002, Seq: 26, Ack: 68, Len: 23
+    Source Port: 38574
+    Destination Port: 10002
+    [Stream index: 5]
+    [TCP Segment Len: 23]
+    Sequence number: 26    (relative sequence number)
+    [Next sequence number: 49    (relative sequence number)]
+    Acknowledgment number: 68    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe3f [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 20.572084794 seconds]
+        [Time since previous frame in this TCP stream: 20.571108855 seconds]
+    TCP payload (23 bytes)
+Data (23 bytes)
+
+0000  01 53 54 41 54 55 53 52 45 51 2c 50 33 5f 47 52   .STATUSREQ,P3_GR
+0010  4f 55 50 5f 32 30 04                              OUP_20.
+    Data: 015354415455535245512c50335f47524f55505f323004
+    [Length: 23]
+
+No.     Time           Source                Destination           Protocol Length Info
+    342 635.324186822  127.0.0.1             127.0.0.1             TCP      104    10002 → 38574 [PSH, ACK] Seq=68 Ack=49 Win=65536 Len=38 TSval=3260333650 TSecr=3260333649
+
+Frame 342: 104 bytes on wire (832 bits), 104 bytes captured (832 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10002, Dst Port: 38574, Seq: 68, Ack: 49, Len: 38
+    Source Port: 10002
+    Destination Port: 38574
+    [Stream index: 5]
+    [TCP Segment Len: 38]
+    Sequence number: 68    (relative sequence number)
+    [Next sequence number: 106    (relative sequence number)]
+    Acknowledgment number: 49    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe4e [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 20.572504073 seconds]
+        [Time since previous frame in this TCP stream: 0.000419279 seconds]
+    TCP payload (38 bytes)
+Data (38 bytes)
+
+0000  01 53 54 41 54 55 53 52 45 53 50 2c 50 33 5f 47   .STATUSRESP,P3_G
+0010  52 4f 55 50 5f 31 30 30 2c 50 33 5f 47 52 4f 55   ROUP_100,P3_GROU
+0020  50 5f 32 30 2c 04                                 P_20,.
+    Data: 01535441545553524553502c50335f47524f55505f313030...
+    [Length: 38]
+
+No.     Time           Source                Destination           Protocol Length Info
+    343 635.324208720  127.0.0.1             127.0.0.1             TCP      66     38574 → 10002 [ACK] Seq=49 Ack=106 Win=65536 Len=0 TSval=3260333650 TSecr=3260333650
+
+Frame 343: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 38574, Dst Port: 10002, Seq: 49, Ack: 106, Len: 0
+    Source Port: 38574
+    Destination Port: 10002
+    [Stream index: 5]
+    [TCP Segment Len: 0]
+    Sequence number: 49    (relative sequence number)
+    [Next sequence number: 49    (relative sequence number)]
+    Acknowledgment number: 106    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 20.572525971 seconds]
+        [Time since previous frame in this TCP stream: 0.000021898 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    344 635.324412412  127.0.0.1             127.0.0.1             TCP      95     10001 → 48184 [PSH, ACK] Seq=312 Ack=198 Win=65536 Len=29 TSval=3260333650 TSecr=3260333649
+
+Frame 344: 95 bytes on wire (760 bits), 95 bytes captured (760 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10001, Dst Port: 48184, Seq: 312, Ack: 198, Len: 29
+    Source Port: 10001
+    Destination Port: 48184
+    [Stream index: 0]
+    [TCP Segment Len: 29]
+    Sequence number: 312    (relative sequence number)
+    [Next sequence number: 341    (relative sequence number)]
+    Acknowledgment number: 198    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe45 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 631.489679737 seconds]
+        [Time since previous frame in this TCP stream: 0.000838330 seconds]
+    TCP payload (29 bytes)
+Data (29 bytes)
+
+0000  53 54 41 54 55 53 52 45 53 50 20 66 72 6f 6d 20   STATUSRESP from 
+0010  50 33 5f 47 52 4f 55 50 5f 31 30 30 2c            P3_GROUP_100,
+    Data: 535441545553524553502066726f6d2050335f47524f5550...
+    [Length: 29]
+
+No.     Time           Source                Destination           Protocol Length Info
+    345 635.324420564  127.0.0.1             127.0.0.1             TCP      66     48184 → 10001 [ACK] Seq=198 Ack=341 Win=65536 Len=0 TSval=3260333650 TSecr=3260333650
+
+Frame 345: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 48184, Dst Port: 10001, Seq: 198, Ack: 341, Len: 0
+    Source Port: 48184
+    Destination Port: 10001
+    [Stream index: 0]
+    [TCP Segment Len: 0]
+    Sequence number: 198    (relative sequence number)
+    [Next sequence number: 198    (relative sequence number)]
+    Acknowledgment number: 341    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 631.489687889 seconds]
+        [Time since previous frame in this TCP stream: 0.000008152 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    388 739.670410445  127.0.0.1             127.0.0.1             TCP      90     48184 → 10001 [PSH, ACK] Seq=198 Ack=341 Win=65536 Len=24 TSval=3260437996 TSecr=3260333650
+
+Frame 388: 90 bytes on wire (720 bits), 90 bytes captured (720 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 48184, Dst Port: 10001, Seq: 198, Ack: 341, Len: 24
+    Source Port: 48184
+    Destination Port: 10001
+    [Stream index: 0]
+    [TCP Segment Len: 24]
+    Sequence number: 198    (relative sequence number)
+    [Next sequence number: 222    (relative sequence number)]
+    Acknowledgment number: 341    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe40 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 735.835677770 seconds]
+        [Time since previous frame in this TCP stream: 104.345989881 seconds]
+    TCP payload (24 bytes)
+Data (24 bytes)
+
+0000  4c 45 41 56 45 20 31 30 2e 33 2e 31 37 2e 31 34   LEAVE 10.3.17.14
+0010  31 20 31 30 30 30 32 0a                           1 10002.
+    Data: 4c454156452031302e332e31372e3134312031303030320a
+    [Length: 24]
+
+No.     Time           Source                Destination           Protocol Length Info
+    389 739.670573882  127.0.0.1             127.0.0.1             TCP      66     38574 → 10002 [FIN, ACK] Seq=49 Ack=106 Win=65536 Len=0 TSval=3260437996 TSecr=3260333650
+
+Frame 389: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 38574, Dst Port: 10002, Seq: 49, Ack: 106, Len: 0
+    Source Port: 38574
+    Destination Port: 10002
+    [Stream index: 5]
+    [TCP Segment Len: 0]
+    Sequence number: 49    (relative sequence number)
+    [Next sequence number: 49    (relative sequence number)]
+    Acknowledgment number: 106    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x011 (FIN, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [Timestamps]
+        [Time since first frame in this TCP stream: 124.918891133 seconds]
+        [Time since previous frame in this TCP stream: 104.346365162 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    390 739.670668746  127.0.0.1             127.0.0.1             TCP      66     10002 → 38574 [FIN, ACK] Seq=106 Ack=50 Win=65536 Len=0 TSval=3260437996 TSecr=3260437996
+
+Frame 390: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10002, Dst Port: 38574, Seq: 106, Ack: 50, Len: 0
+    Source Port: 10002
+    Destination Port: 38574
+    [Stream index: 5]
+    [TCP Segment Len: 0]
+    Sequence number: 106    (relative sequence number)
+    [Next sequence number: 106    (relative sequence number)]
+    Acknowledgment number: 50    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x011 (FIN, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 124.918985997 seconds]
+        [Time since previous frame in this TCP stream: 0.000094864 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    391 739.670684053  127.0.0.1             127.0.0.1             TCP      66     38574 → 10002 [ACK] Seq=50 Ack=107 Win=65536 Len=0 TSval=3260437996 TSecr=3260437996
+
+Frame 391: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 38574, Dst Port: 10002, Seq: 50, Ack: 107, Len: 0
+    Source Port: 38574
+    Destination Port: 10002
+    [Stream index: 5]
+    [TCP Segment Len: 0]
+    Sequence number: 50    (relative sequence number)
+    [Next sequence number: 50    (relative sequence number)]
+    Acknowledgment number: 107    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 124.919001304 seconds]
+        [Time since previous frame in this TCP stream: 0.000015307 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    392 739.713592156  127.0.0.1             127.0.0.1             TCP      66     10001 → 48184 [ACK] Seq=341 Ack=222 Win=65536 Len=0 TSval=3260438039 TSecr=3260437996
+
+Frame 392: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10001, Dst Port: 48184, Seq: 341, Ack: 222, Len: 0
+    Source Port: 10001
+    Destination Port: 48184
+    [Stream index: 0]
+    [TCP Segment Len: 0]
+    Sequence number: 341    (relative sequence number)
+    [Next sequence number: 341    (relative sequence number)]
+    Acknowledgment number: 222    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 735.878859481 seconds]
+        [Time since previous frame in this TCP stream: 0.043181711 seconds]
+
+No.     Time           Source                Destination           Protocol Length Info
+    401 755.514484980  127.0.0.1             127.0.0.1             TCP      72     48184 → 10001 [PSH, ACK] Seq=222 Ack=341 Win=65536 Len=6 TSval=3260453840 TSecr=3260438039
+
+Frame 401: 72 bytes on wire (576 bits), 72 bytes captured (576 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 48184, Dst Port: 10001, Seq: 222, Ack: 341, Len: 6
+    Source Port: 48184
+    Destination Port: 10001
+    [Stream index: 0]
+    [TCP Segment Len: 6]
+    Sequence number: 222    (relative sequence number)
+    [Next sequence number: 228    (relative sequence number)]
+    Acknowledgment number: 341    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x018 (PSH, ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe2e [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 751.679752305 seconds]
+        [Time since previous frame in this TCP stream: 15.800892824 seconds]
+    TCP payload (6 bytes)
+Data (6 bytes)
+
+0000  4c 45 41 56 45 0a                                 LEAVE.
+    Data: 4c454156450a
+    [Length: 6]
+
+No.     Time           Source                Destination           Protocol Length Info
+    402 755.514502795  127.0.0.1             127.0.0.1             TCP      66     10001 → 48184 [ACK] Seq=341 Ack=228 Win=65536 Len=0 TSval=3260453840 TSecr=3260453840
+
+Frame 402: 66 bytes on wire (528 bits), 66 bytes captured (528 bits) on interface 0
+Ethernet II, Src: 00:00:00_00:00:00 (00:00:00:00:00:00), Dst: 00:00:00_00:00:00 (00:00:00:00:00:00)
+Internet Protocol Version 4, Src: 127.0.0.1, Dst: 127.0.0.1
+Transmission Control Protocol, Src Port: 10001, Dst Port: 48184, Seq: 341, Ack: 228, Len: 0
+    Source Port: 10001
+    Destination Port: 48184
+    [Stream index: 0]
+    [TCP Segment Len: 0]
+    Sequence number: 341    (relative sequence number)
+    [Next sequence number: 341    (relative sequence number)]
+    Acknowledgment number: 228    (relative ack number)
+    1000 .... = Header Length: 32 bytes (8)
+    Flags: 0x010 (ACK)
+    Window size value: 512
+    [Calculated window size: 65536]
+    [Window size scaling factor: 128]
+    Checksum: 0xfe28 [unverified]
+    [Checksum Status: Unverified]
+    Urgent pointer: 0
+    Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+    [SEQ/ACK analysis]
+    [Timestamps]
+        [Time since first frame in this TCP stream: 751.679770120 seconds]
+        [Time since previous frame in this TCP stream: 0.000017815 seconds]

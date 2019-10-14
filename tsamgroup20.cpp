@@ -107,6 +107,7 @@ int sendCommand(int clientSocket, std::string msg)
     //     std::cout << std::hex << (size_t)temp.at(i - 1) << ((i % 16 == 0) ? "\n" : " ");
     // }
     std::cout << "Padding finished, sending message:" << buffer << std::endl;
+    writeToFile(buffer);
     return send(clientSocket, buffer, sizeof(buffer), 0);
 }
 
